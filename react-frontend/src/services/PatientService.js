@@ -19,7 +19,7 @@ class PatientService {
         return axios.put("http://localhost:8080/api/v1/edit-patient" + '/' + employeeId, employee);
     }
 
-    // deleteEmployee(employeeId){
+    // deletePatient(employeeId){
     //     return axios.delete(EMPLOYEE_API_BASE_URL + '/' + employeeId);
     // }
 }

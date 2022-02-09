@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PatientService from '../services/PatientService'
 
-class ListEmployeeComponent extends Component {
+class ListPatientComponent extends Component {
     constructor(props) {
         super(props)
 
@@ -11,11 +11,11 @@ class ListEmployeeComponent extends Component {
         this.addPatient = this.addPatient.bind(this);
         this.editPatient = this.editPatient.bind(this);
         this.viewPatient = this.viewPatient.bind(this);
-        // this.deleteEmployee = this.deleteEmployee.bind(this);
+        // this.deletePatient  = this.deletePatient.bind(this);
     }
 
-    // deleteEmployee(id){
-    //     PatientService.deleteEmployee(id).then( res => {
+    // deletePatient(id){
+    //     PatientService.deletePatient (id).then( res => {
     //         this.setState({employees: this.state.employees.filter(employee => employee.id !== id)});
     //     });
     // }
@@ -70,7 +70,7 @@ class ListEmployeeComponent extends Component {
                                              <td> {patient.uhid}</td>
                                              <td>
                                                  <button onClick={ () => this.editPatient(patient.uhid)} className="btn btn-info">Update </button>
-                                                 {/* <button style={{marginLeft: "10px"}} onClick={ () => this.deleteEmployee(employee.id)} className="btn btn-danger">Delete </button> */}
+                                                 {/* <button style={{marginLeft: "10px"}} onClick={ () => this.deletePatient (employee.id)} className="btn btn-danger">Delete </button> */}
                                                  <button style={{marginLeft: "10px"}} onClick={ () => this.viewPatient(patient.uhid)} className="btn btn-info">View </button>
                                              </td>
                                         </tr>
@@ -86,4 +86,4 @@ class ListEmployeeComponent extends Component {
     }
 }
 
-export default ListEmployeeComponent
+export default ListPatientComponent

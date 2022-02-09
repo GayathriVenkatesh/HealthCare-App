@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PatientService from '../services/PatientService';
 
-class CreateEmployeeComponent extends Component {
+class CreatePatientComponent extends Component {
     constructor(props) {
         super(props)
 
@@ -213,4 +213,4 @@ class CreateEmployeeComponent extends Component {
     }
 }
 
-export default CreateEmployeeComponent
+export default CreatePatientComponent
