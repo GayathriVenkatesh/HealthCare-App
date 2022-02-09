@@ -2,11 +2,21 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-DemoApplication<demo>",
+            "name": "Spring Boot-SpringbootBackendApplication<springboot-backend>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
-            "mainClass": "com.example.demo.DemoApplication",
+            "mainClass": "net.javaguides.springboot.SpringbootBackendApplication",
+            "projectName": "springboot-backend",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringbootBackendApplication<demo>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "net.javaguides.springboot.SpringbootBackendApplication",
             "projectName": "demo",
             "args": ""
         }
