@@ -28,9 +28,30 @@ class ListPatientComponent extends Component {
     }
 
     componentDidMount(){
-        PatientService.getPatients().then((res) => {
-            this.setState({ patients: res.data});
-        });
+        
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        var name = urlParams.get('name')
+        var address = urlParams.get('address')
+        var religion = urlParams.get('religion')
+        var uhid = urlParams.get('uhid')
+        var rch = urlParams.get('rch')
+        var sam = urlParams.get('sam')
+
+        if (!(name || address || religion || uhid || sam || rch)) {
+            PatientService.getPatients().then((res) => {
+                this.setState({ patients: res.data});
+                console.log("NOW IS", res.data)
+            });
+        }
+        else{
+            console.log("keyword", window.location.href);
+            PatientService.getByKeyword(name, address, religion, uhid, rch, sam).then( res => {
+                this.setState({patients: res.data});
+            })
+        }
+    
     }
 
     addPatient(){
@@ -40,9 +61,10 @@ class ListPatientComponent extends Component {
     render() {
         return (
             <div>
+                <br></br>
                  <h2 className="text-center">Patients List</h2>
                  <div className = "row">
-                    <button className="btn btn-primary" onClick={this.addPatient}> Add Patient</button>
+                    <button className="btn btn-success" onClick={this.addPatient}> Add Patient</button>
                  </div>
                  <br></br>
                  <div className = "row">
@@ -50,11 +72,16 @@ class ListPatientComponent extends Component {
 
                             <thead>
                                 <tr>
-                                    <th> Patient Name</th>
-                                    <th> Contact Number</th>
+                                    <th> UHID </th>
+                                    <th> Name</th>
+                                    <th> Contact </th>
                                     <th> Date of Birth</th>
                                     <th> Religion</th>
-                                    <th>UHID</th>
+                                    <th> SAM ID </th> 
+                                    <th> RCH ID </th>   
+                                    <th> Gender </th>
+                                    <th> BPL </th>
+                                    <th> Caste </th>
                                     <th> Actions</th>
                                 </tr>
                             </thead>
@@ -63,11 +90,17 @@ class ListPatientComponent extends Component {
                                     this.state.patients.map(
                                         patient => 
                                         <tr key = {patient.uhid}>
+                                             <td> {patient.uhid}</td>
                                              <td> {patient.name} </td>   
                                              <td> {patient.contact_no}</td>
                                              <td> {patient.dob}</td>
                                              <td> {patient.religion}</td>
-                                             <td> {patient.uhid}</td>
+
+                                             <td> {patient.sam_id} </td> 
+                                             <td> {patient.rch_id}</td>  
+                                             <td> {patient.gender}</td>
+                                             <td> {patient.bpl}</td>
+                                             <td> {patient.caste}</td>
                                              <td>
                                                  <button onClick={ () => this.editPatient(patient.uhid)} className="btn btn-info">Update </button>
                                                  {/* <button style={{marginLeft: "10px"}} onClick={ () => this.deletePatient (employee.id)} className="btn btn-danger">Delete </button> */}

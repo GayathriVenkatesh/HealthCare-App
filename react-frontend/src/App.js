@@ -16,7 +16,8 @@ function App() {
               <HeaderComponent />
                 <div className="container">
                     <Switch> 
-                          <Route path = "/" exact component = {ListPatientComponent}></Route>
+                    <Route path = "/" exact component = {ListPatientComponent}></Route>
+                          <Route path = "/search" component = {ListPatientComponent}></Route>
                           <Route path = "/view-patients" component = {ListPatientComponent}></Route>
                           <Route path = "/add-patient" component = {CreatePatientComponent}></Route>
                           <Route path = "/view-patient/:uhid" component = {ViewPatientComponent} id="1"></Route>

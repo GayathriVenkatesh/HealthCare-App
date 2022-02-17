@@ -36,12 +36,36 @@ class ViewPatientComponent extends Component {
                             <div> { this.state.patient.name }</div>
                         </div>
                         <div className = "row">
+                            <label> SAM ID: </label>
+                            <div> { this.state.patient.sam_id }</div>
+                        </div>
+                        <div className = "row">
+                            <label> UHID: </label>
+                            <div> { this.state.patient.uhid }</div>
+                        </div>
+                        <div className = "row">
                             <label> Contact Number: </label>
                             <div> { this.state.patient.contact_no }</div>
                         </div>
                         <div className = "row">
                             <label> Address: </label>
                             <div> { this.state.patient.address }</div>
+                        </div>
+                        <div className = "row">
+                            <label> Religion: </label>
+                            <div> { this.state.patient.religion }</div>
+                        </div>
+                        <div className = "row">
+                            <label> Gender: </label>
+                            <div> { this.state.patient.gender }</div>
+                        </div>
+                        <div className = "row">
+                            <label> BPL: </label>
+                            <div> { this.state.patient.bpl }</div>
+                        </div>
+                        <div className = "row">
+                            <label> Date of Birth: </label>
+                            <div> { this.state.patient.dob }</div>
                         </div>
                     </div>
 
