@@ -1,0 +1,15 @@
+
+# GET http://localhost:8080/api/v1/view-patient/1
+
+# POST http://localhost:8080/api/v1/view-patients
+# Content-Type: application/json
+
+# {"name":"Gayathri Venkatesh","UHID":0,"SAM_ID":0,"RCH_ID":0,"dob":"1998-09-08","gender":"M","bpl":true,"address":"#05, Mayur Paradise, Rama Temple Road, New Tippasandra, Bangalore","religion":"Hindu","caste":"Brahmin","relationship":"","symptoms":"","referred_by":"","contact_no":"+917022029113"}
+# ?religion=Sikh&name=Masala
+
+# PUT http://localhost:8080/api/v1/edit-patient/1
+# Content-Type: application/json
+
+# {"name":"Masala Madras","UHID":1,"SAM_ID":22,"RCH_ID":0,"dob":"1998-09-08","gender":"F","bpl":true,"address":"#05, Mayur Paradise, Rama Temple Road, New Tippasandra, Bangalore","religion":"Hindu","caste":"Brahmin","relationship":"","symptoms":"","referred_by":"","contact_no":"+917022029113"}
+
+GET http://localhost:8080/api/v1/search?name=Aru&address=an&religion=in&uhid=1&rch=4&sam=1

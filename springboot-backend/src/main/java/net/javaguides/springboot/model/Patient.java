@@ -32,8 +32,8 @@ public class Patient implements Serializable {
 		generator = "patient_sequence"
 	)
 	@Id
-	private Long UHID;
-	private Long SAM_ID, RCH_ID;
+	private Long uhid;
+	private Long sam_id, rch_id;
 	private String name;
 	private LocalDate dob;
 	@Transient  
@@ -47,12 +47,12 @@ public class Patient implements Serializable {
 
 	public Patient() {}
 	
-	public Patient(Long UHID, Long SAM_ID, Long RCH_ID, String name, LocalDate dob, String contact_no,
+	public Patient(Long UHID, Long sam_id, Long rch_id, String name, LocalDate dob, String contact_no,
 	Character gender, Boolean bpl, String addr, String religion, String caste, String relationship, 
 	String symptoms, String refer, List<Double> health) {
-		this.UHID = UHID;
-		this.SAM_ID = SAM_ID;
-		this.RCH_ID = RCH_ID;
+		this.uhid = UHID;
+		this.sam_id = sam_id;
+		this.rch_id = sam_id;
 		this.bpl = bpl;
 		this.name = name;
 		this.dob = dob;
@@ -72,11 +72,11 @@ public class Patient implements Serializable {
 		this.health_params.put("growth_status", health.get(3));
 	}
 
-	public Patient(Long UHID, Long SAM_ID, Long RCH_ID, String name, LocalDate dob, String contact_no,
+	public Patient(Long UHID, Long sam_id, Long rch_id, String name, LocalDate dob, String contact_no,
 	Character gender, Boolean bpl, String addr, String religion, String symptoms, List<Double> health) {
-		this.UHID = UHID;
-		this.SAM_ID = SAM_ID;
-		this.RCH_ID = RCH_ID;
+		this.uhid = UHID;
+		this.sam_id = sam_id;
+		this.rch_id = rch_id;
 		this.bpl = bpl;
 		this.name = name;
 		this.dob = dob;
@@ -92,12 +92,12 @@ public class Patient implements Serializable {
 		this.health_params.put("growth_status", health.get(3));
 	}
 
-	public Long getUHId() { return this.UHID; }
-	public void setUHId(Long id) { this.UHID = id; }
-	public Long getSAMId() { return this.SAM_ID; }
-	public void setSAMId(Long id) { this.SAM_ID = id; }
-	public Long getRCHId() { return this.RCH_ID; }
-	public void setRCHId(Long id) { this.RCH_ID = id; }
+	public Long getUhid() { return this.uhid; }
+	public void setUhid(Long id) { this.uhid = id; }
+	public Long getSam_id() { return this.sam_id; }
+	public void setSam_id(Long id) { this.sam_id = id; }
+	public Long getRch_id() { return this.rch_id; }
+	public void setRch_id(Long id) { this.rch_id = id; }
 
 	public Character getGender() { return this.gender; }
 	public void setGender(Character g) { this.gender = g; }

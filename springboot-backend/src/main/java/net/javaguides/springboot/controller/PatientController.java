@@ -1,10 +1,5 @@
 package net.javaguides.springboot.controller;
 
-// @RequestMapping("/api/v1/")
-
-// package com.example.demo.patient;
-
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.javaguides.springboot.model.Patient;
@@ -35,9 +31,29 @@ public class PatientController {
     }
 
     @GetMapping("/view-patients")
-	public List<Patient> getPatients() {
-		return patientService.getPatients();
-	}
+    public List<Patient> getPatients() { 
+        System.out.print("INSIDE THIS FUNC"); 
+        return patientService.getPatients();
+    }
+    
+	// @GetMapping("/search/{keyword}")
+    // public ResponseEntity<List<Patient>> search(@PathVariable String keyword) {
+    //     List<Patient> p = patientService.getByKeyword(keyword);    
+    //     return ResponseEntity.ok(p); 
+    // }
+
+    @RequestMapping(value = "/search")
+    @ResponseBody
+    public List<Patient> search(@RequestParam("name") String name, 
+                                @RequestParam("address") String address,
+                                @RequestParam("religion") String religion,
+                                @RequestParam("uhid") String uhid,
+                                @RequestParam("rch") String rch,
+                                @RequestParam("sam") String sam
+                            ) {
+        List<Patient> p = patientService.getByKeyword(name, address, religion, uhid, rch, sam);    
+        return p; 
+    }
 
     @GetMapping("/view-patient/{uhid}")
 	public ResponseEntity<Patient> getPatientById(@PathVariable Long uhid) {
@@ -57,8 +73,12 @@ public class PatientController {
         Patient patient = patientService.getPatientById(uhid);
         patient.setName(p.getName());
         patient.setReligion(p.getReligion());
-        // patient.setName(p.getName());
-        // patient.setName(p.getName());
+        patient.setBpl(p.getBpl());
+        patient.setGender(p.getGender());
+        patient.setCaste(p.getCaste());
+        patient.setRch_id(p.getRch_id());
+        patient.setSam_id(p.getSam_id());
+        patient.setAddress(p.getAddress());
         // LIKE THIS WRITE FOR ALL
 
         patientService.addPatient(patient);
