@@ -50,7 +50,7 @@ class DischargeDetails extends Component {
         }
         else{
             console.log("keyword", window.location.href);
-            PatientService.getByKeyword(name, address, religion, uhid, rch, sam).then( res => {
+            PatientService.getByKeyword(name, address, religion, uhid, sam).then( res => {
                 this.setState({patients: res.data});
             })
         }
@@ -63,6 +63,9 @@ class DischargeDetails extends Component {
 
     render() {
         return (
+            <div class="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
+                <div class="wrapper">   
+                    <SideBarComponent/>
             <section class="content">
                 <div class="card">
                     <div class="card-header">
@@ -168,6 +171,7 @@ class DischargeDetails extends Component {
                 </div>
 
                 </section>
+            </div></div>
         )
     }
 }

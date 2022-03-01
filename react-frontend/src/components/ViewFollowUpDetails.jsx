@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PatientService from '../services/PatientService'
+import SideBarComponent from './SideBarComponent'
 
 class ViewFollowUpDetails extends Component {
     constructor(props) {
@@ -26,6 +27,9 @@ class ViewFollowUpDetails extends Component {
 
     render() {
         return (
+            <div class="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
+                <div class="wrapper">   
+                    <SideBarComponent/>
           <section class="content">
 
           <div class="card" style={{width: "60%"}}>
@@ -135,6 +139,8 @@ class ViewFollowUpDetails extends Component {
               <a href="followup.html" class="btn btn-sm btn-info">Back</a>
           </div>
         </section>
+        </div>
+        </div>
         )
     }
 }

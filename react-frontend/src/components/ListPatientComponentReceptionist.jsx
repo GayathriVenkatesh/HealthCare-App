@@ -7,8 +7,9 @@ import SideBarComponent from './SideBarComponent';
 import "./plugins/fontawesome-free/css/all.min.css";
 import "./dist/css/adminlte.min.css"
 import SearchFilterComponent from './SearchFilterComponent';
+import SideBarComponentReceptionist from './SideBarComponentReceptionist';
 
-class ListPatientComponent extends Component {
+class ListPatientComponentReceptionist extends Component {
     constructor(props) {
         super(props)
 
@@ -27,7 +28,7 @@ class ListPatientComponent extends Component {
         });
     }
     viewPatient(uhid){
-        this.props.history.push(`/view/${uhid}`);
+        this.props.history.push(`/view-receptionist/${uhid}`);
     }
     editPatient(uhid){
         console.log("CURRENT UHID", uhid);
@@ -69,7 +70,7 @@ class ListPatientComponent extends Component {
         return ( 
             <div class="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
                 <div class="wrapper">   
-                    <SideBarComponent/>
+                    <SideBarComponentReceptionist/>
 
         <section class="content" >
             <div class="card" >
@@ -177,4 +178,4 @@ class ListPatientComponent extends Component {
     }
 }
 
-export default ListPatientComponent
+export default ListPatientComponentReceptionist

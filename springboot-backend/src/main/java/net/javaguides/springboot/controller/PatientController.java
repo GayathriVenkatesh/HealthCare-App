@@ -1,5 +1,6 @@
 package net.javaguides.springboot.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,19 @@ public class PatientController {
         System.out.print("INSIDE THIS FUNC"); 
         return patientService.getPatients();
     }
+
+    @GetMapping("/delete-patient/{uhid}")
+    public List<Patient> deletePatient(@PathVariable Long uhid) { 
+        System.out.print("INSIDE THIS FUNC"); 
+        List<Patient> p = patientService.getPatients();
+        List<Patient> ans = new ArrayList<Patient>();
+        for (Patient patient: p) {
+            if(patient.getUhid() != uhid) {
+                ans.add(patient);
+            }
+        }
+        return ans;
+    }
     
 	// @GetMapping("/search/{keyword}")
     // public ResponseEntity<List<Patient>> search(@PathVariable String keyword) {
@@ -48,10 +62,10 @@ public class PatientController {
                                 @RequestParam("address") String address,
                                 @RequestParam("religion") String religion,
                                 @RequestParam("uhid") String uhid,
-                                @RequestParam("rch") String rch,
+                                // @RequestParam("rch") String rch,
                                 @RequestParam("sam") String sam
                             ) {
-        List<Patient> p = patientService.getByKeyword(name, address, religion, uhid, rch, sam);    
+        List<Patient> p = patientService.getByKeyword(name, address, religion, uhid, sam);    
         return p; 
     }
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PatientService from '../services/PatientService'
 import FollowUpDoctor from './FollowUpDoctor'
+import SideBarComponent from './SideBarComponent'
+import SideBarComponentReceptionist from './SideBarComponentReceptionist'
 
 class ViewComponentReceptionist extends Component {
     constructor(props) {
@@ -27,6 +29,9 @@ class ViewComponentReceptionist extends Component {
 
     render() {
         return (
+          <div class="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
+                <div class="wrapper">   
+                    <SideBarComponentReceptionist />
             <section class="content">
             <div class="card">
               
@@ -35,7 +40,7 @@ class ViewComponentReceptionist extends Component {
                 <div class="col-12">
                   <div class="card">
                     
-                    <div class="card-body table-responsive p-0" style={{height: "300px"}}>
+                    <div class="card-body table-responsive p-0">
                       <table class="table table-head-fixed text-nowrap">
                         <thead>
                           
@@ -93,15 +98,17 @@ class ViewComponentReceptionist extends Component {
                 </div>
               </div>
       
-              <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-                <div class="text-center mt-5 mb-3">
-                  <a href="/followup-doctor" class="btn btn-sm btn-primary">View follow up schedule</a>
+              <div class="col-12 col-md-12 col-lg-12 order-1 order-md-2">
+                <div class="row">
+                  <a href="/followup-receptionist" class="btn btn-sm btn-primary">View follow up schedule</a>
                   {/* <a href="/discharge-history" class="btn btn-sm btn-warning">View discharge history</a> */}
                 </div>
               </div>
               {/* </div> */}
         
               </section>
+            </div>
+            </div>
             
         )
     }

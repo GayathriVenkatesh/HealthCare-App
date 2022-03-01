@@ -32,29 +32,7 @@
     <div id="root"></div>
     <html xmlns:th="www.thymeleaf.org">
 
-      <form th:action="@{/search}">
-        Name: <input type="text" name="name" id="name" size="50" th:value="${name}" />
-        <!-- &nbsp; -->
-  
-        Address: <input type="text" name="address" id="address" size="50" th:value="${address}" />
-        <!-- &nbsp; -->
-  
-        Religion: <input type="text" name="religion" id="religion" size="50" th:value="${religion}" />
-        <!-- &nbsp; -->
-  
-        UHID: <input type="text" name="uhid" id="uhid" size="50" th:value="${uhid}" />
-        <!-- &nbsp; -->
-  
-        RCH ID: <input type="text" name="rch" id="rch" size="50" th:value="${rch}" />
-        <!-- &nbsp; -->
-  
-        SAM ID: <input type="text" name="sam" id="sam" size="50" th:value="${sam}" />
-        <!-- &nbsp; -->
-  
-        <input type="submit" value="Search" />
-        &nbsp;
-        <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
-      </form>
+      
   
       <script type="text/javascript">
         function clearSearch() {

@@ -30,8 +30,8 @@ public class PatientService {
         return this.patientRepository.findAll();
     }
 
-    public List<Patient> getByKeyword(String name, String address, String religion, String uhid, String rch, String sam){
-        return this.patientRepository.findByKeyword(name, address, religion, uhid, rch, sam);
+    public List<Patient> getByKeyword(String name, String address, String religion, String uhid, String sam){
+        return this.patientRepository.findByKeyword(name, address, religion, uhid, sam);
     }
 
     public Patient getPatientById(Long uhid) {

@@ -3,8 +3,9 @@ import PatientService from '../services/PatientService'
 import { faHome, faPencilAlt, faTrash, faFolder } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SideBarComponent from './SideBarComponent';
+import SideBarComponentReceptionist from './SideBarComponentReceptionist';
 
-class AddPatientComponent extends Component {
+class AddPatientComponentReceptionist extends Component {
   constructor(props) {
     super(props)
 
@@ -110,7 +111,7 @@ cancel(){
         return (
           <div class="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
             <div class="wrapper">  
-            <SideBarComponent /> 
+            <SideBarComponentReceptionist /> 
           <section class="content">
           <div class="container-fluid">
             
@@ -285,4 +286,4 @@ cancel(){
     }
 }
 
-export default AddPatientComponent
+export default AddPatientComponentReceptionist

@@ -14,14 +14,14 @@ class ListPatientComponent extends Component {
         this.addPatient = this.addPatient.bind(this);
         this.editPatient = this.editPatient.bind(this);
         this.viewPatient = this.viewPatient.bind(this);
-        // this.deletePatient  = this.deletePatient.bind(this);
+        this.deletePatient  = this.deletePatient.bind(this);
     }
 
-    // deletePatient(id){
-    //     PatientService.deletePatient (id).then( res => {
-    //         this.setState({employees: this.state.employees.filter(employee => employee.id !== id)});
-    //     });
-    // }
+    deletePatient(id){
+        PatientService.deletePatient (id).then( res => {
+            this.setState({patients: this.state.patients.filter(patient => patient.uhid !== id)});
+        });
+    }
     viewPatient(uhid){
         this.props.history.push(`/view-patient/${uhid}`);
     }
@@ -50,7 +50,7 @@ class ListPatientComponent extends Component {
         }
         else{
             console.log("keyword", window.location.href);
-            PatientService.getByKeyword(name, address, religion, uhid, rch, sam).then( res => {
+            PatientService.getByKeyword(name, address, religion, uhid, sam).then( res => {
                 this.setState({patients: res.data});
             })
         }
@@ -63,6 +63,9 @@ class ListPatientComponent extends Component {
 
     render() {
         return (
+          <div class="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
+            <div class="wrapper">   
+            <SideBarComponent />
             <section class="content">
             <div class="container-fluid">
         
@@ -168,6 +171,8 @@ class ListPatientComponent extends Component {
         
       </div>
     </section>
+    </div>
+    </div>
         )
     }
 }

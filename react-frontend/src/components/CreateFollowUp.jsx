@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PatientService from '../services/PatientService'
 import './plugins/select2/css/select2.min.css'
 import './plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'
+import SideBarComponent from './SideBarComponent'
 // import "./plugins/select2/js/select2.full.min.js"
 import $ from 'jquery';
 
@@ -91,6 +92,9 @@ class CreateFollowUp extends Component {
 
     render() {
         return (
+          <div class="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
+                <div class="wrapper">   
+                    <SideBarComponent/>
             <section class="content">
                 <script src="./plugins/select2/js/select2.full.min.js"></script>
             <div class="container-fluid">
@@ -116,7 +120,7 @@ class CreateFollowUp extends Component {
                               </div>
                           </div>
                       </div>
-                      <div class="form-group">
+                      {/* <div class="form-group">
                         <label>Date and time:</label>
                           <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                               <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime"/>
@@ -124,11 +128,11 @@ class CreateFollowUp extends Component {
                                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                               </div>
                           </div>
-                      </div>
+                      </div> */}
       
                       <div class="form-group">
                           <label>Location</label>
-                          <select class="select2" multiple="multiple" data-placeholder="Choose Area" style={{width: "100%"}}>
+                          <select class="form-control select2" data-placeholder="Choose Area" style={{width: "100%"}}>
                             <option>Alabama</option>
                             <option>Alaska</option>
                             <option>California</option>
@@ -155,7 +159,7 @@ class CreateFollowUp extends Component {
                     </div>
                     <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
                       <div class="mb-3">
-                        <a href="followup-receptionist.html" class="btn btn-sm btn-success">Create</a>
+                        <a href="/followup-receptionist" class="btn btn-sm btn-success">Create</a>
                         
                       </div>
                     </div>
@@ -165,7 +169,8 @@ class CreateFollowUp extends Component {
               </div>       
             </div>
           </section>
-            
+            </div> 
+            </div>
         )
     }
 }
