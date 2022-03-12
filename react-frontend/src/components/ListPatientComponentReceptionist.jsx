@@ -32,7 +32,7 @@ class ListPatientComponentReceptionist extends Component {
     }
     editPatient(uhid){
         console.log("CURRENT UHID", uhid);
-        this.props.history.push(`/edit-patient/${uhid}`);
+        this.props.history.push(`/edit-patient-receptionist/${uhid}`);
     }
 
     componentDidMount(){

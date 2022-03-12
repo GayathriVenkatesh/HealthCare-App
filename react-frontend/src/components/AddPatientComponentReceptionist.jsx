@@ -74,7 +74,7 @@ createPatient = (e) => {
     console.log('Patient => ' + patient);
     PatientService.createPatient(patient).then(res =>{
         console.log("INSIDE THEN");
-        this.props.history.push('/view-patients');
+        this.props.history.push('/view-patients-receptionist');
     });
 }
 
@@ -103,7 +103,7 @@ changeContactHandler= (event) => {
 }
 
 cancel(){
-    this.props.history.push('/view-patients');
+    this.props.history.push('/view-patients-receptionist');
 }
 
 

@@ -21,7 +21,7 @@ class SideBarComponent extends Component {
 
     render() {
         return (           
-            <div className="hold-transition sidebar-mini" style={{height: "calc(200vh - 200px)", marginLeft: "-280px", marginTop: "-60px", float: "left", display: "block"}}>
+            <div className="hold-transition sidebar-mini" style={{height: "100vh", marginLeft: "-280px", marginTop: "-60px", float: "left", display: "block"}}>
                 <div className="wrapper">                
                     <aside className="main-sidebar sidebar-dark-primary elevation-4">
                         <a href="/" className="brand-link">

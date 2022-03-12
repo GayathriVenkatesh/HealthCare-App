@@ -159,7 +159,7 @@ class ListPatientComponent extends Component {
               </div>
               <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
                 <div class="mb-3">
-                  <a href="project-detail.html" class="btn btn-sm btn-success">Create</a>
+                  <a href="/view-patients" class="btn btn-sm btn-success">Create</a>
                   
                 </div>
               </div>

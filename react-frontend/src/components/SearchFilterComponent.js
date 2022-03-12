@@ -26,8 +26,8 @@ class SearchFilterComponent extends Component {
     }
 
     clearSearch() {
-        console.log("clearing")
-        window.location = "/view-patients";
+        console.log("clearing", window.location.href, window.location.pathname)
+        window.location = window.location.pathname;
     }
 
     render() {

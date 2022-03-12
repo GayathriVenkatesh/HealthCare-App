@@ -32,8 +32,8 @@ class DashboardComponent extends Component {
 
     render() {
         return ( 
-            <div class="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
-            <div class="wrapper">   
+            <div className="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
+            <div className="wrapper">   
             {/* <h3></h3>              */}
                 <SideBarComponent/>
             <section className="content">

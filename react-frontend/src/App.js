@@ -22,6 +22,7 @@ import ViewComponent from './components/ViewComponent';
 import ViewComponentReceptionist from './components/ViewComponentReceptionist';
 import ViewFollowUpDetails from './components/ViewFollowUpDetails';
 import ViewPatientComponent from './components/ViewPatientComponent';
+import UpdatePatientComponentReceptionist from './components/UpdatePatientComponentReceptionist'
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
                 <div className="container">
                     <Switch> 
                     <Route path = "/dashboard" exact component = {DashboardComponent}></Route>
+                    {/* <Route path = "/dashboard-receptionist" exact component = {DashboardComponentReceptionist}></Route> */}
+                    <Route path = "/" exact component = {LoginAsComponent}></Route>
                           <Route path = "/dashboard-receptionist" exact component = {DashboardComponentReceptionist}></Route>
                           <Route path = "/search" component = {ListPatientComponent}></Route>
                           <Route path = "/register" component = {RegisterComponent}></Route>
@@ -50,6 +53,7 @@ function App() {
                           <Route path = "/view-receptionist/:uhid" component = {ViewComponentReceptionist} id="1"></Route>
                           {/* <Route path = "/view-patient/:uhid" element={<ViewPatientComponent id={1}/>}></Route> */}
                           <Route path = "/edit-patient/:uhid" component = {UpdatePatientComponent}></Route>
+                          <Route path = "/edit-patient-receptionist/:uhid" component = {UpdatePatientComponentReceptionist}></Route>
                           <Route path = "/followup-doctor" component = {FollowUpDoctor}></Route>
                           <Route path = "/followup-receptionist" component = {FollowUpReceptionist}></Route>
                           <Route path = "/view-followup" component = {ViewFollowUpDetails}></Route>

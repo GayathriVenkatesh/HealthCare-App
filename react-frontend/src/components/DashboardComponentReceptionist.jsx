@@ -8,7 +8,7 @@ import "./plugins/fontawesome-free/css/all.min.css";
 import "./dist/css/adminlte.min.css"
 import "./dist/js/pages/dashboard.js";
 
-class DashboardComponent extends Component {
+class DashboardComponentReceptionist extends Component {
     constructor(props) {
         super(props)
 
@@ -32,8 +32,8 @@ class DashboardComponent extends Component {
 
     render() {
         return ( 
-            <div class="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
-            <div class="wrapper">   
+            <div className="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
+            <div className="wrapper">   
             {/* <h3></h3>              */}
                 <SideBarComponentReceptionist />
             <section className="content">
@@ -99,7 +99,7 @@ class DashboardComponent extends Component {
                         <div className="card-body">
                             <div className="tab-content p-0">
                                 <div style={{position: "relative", height: "300px"}}>
-                                    <canvas id="revenue-chart-canvas" height="300" style={{height: "300px"}}></canvas>
+                                    <canvas id="revenue-chart-canvas-receptionist" height="300" style={{height: "300px"}}></canvas>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@ class DashboardComponent extends Component {
                         <div className="card-body">
                             <div className="tab-content p-0">
                                 <div style={{position: "relative", height: "300px"}}>
-                                    <canvas id="sales-chart-canvas2" height="300" style={{height: "300px"}}></canvas>
+                                    <canvas id="sales-chart-canvas2-receptionist" height="300" style={{height: "300px"}}></canvas>
                                 </div>
                             </div>
                         </div>
@@ -134,4 +134,4 @@ class DashboardComponent extends Component {
     }
 }
 
-export default DashboardComponent
+export default DashboardComponentReceptionist

@@ -1,11 +1,11 @@
 // import { Chart, registerables } from 'chart.js';
 // import "https://cdn.jsdelivr.net/npm/chart.js";
 import Chart from 'chart.js/auto';
+// import './dashboard';
 
-window.onload = function() {
-  console.log("HEY BROTHER")
-  var salesChartCanvas = document.getElementById('revenue-chart-canvas');
-  console.log(salesChartCanvas, "NOW")
+var salesChartCanvas2 = document.getElementById('revenue-chart-canvas-receptionist');
+
+window.onload = function() {  
 
   var salesChartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -55,42 +55,43 @@ window.onload = function() {
     }
   }
 
-  const salesChart = new Chart(salesChartCanvas, { // lgtm[js/unused-local-variable]
+  const salesChart2 = new Chart(salesChartCanvas2, { // lgtm[js/unused-local-variable]
     type: 'line',
     data: salesChartData,
     options: salesChartOptions
   })
 
-  var pieChartCanvas2 = document.getElementById('sales-chart-canvas2');
-  // console.log(pieChartCanvas2, "NOW")
-  var pieData = {
-    labels: [
-      'Complete',
-      'Pending',
-      'Overdue'
-    ],
-    datasets: [
-      {
-        data: [30, 12, 20],
-        backgroundColor: ['#28a745', '#ffc107', '#dc3545']
-      }
-    ]
-  }
-  var pieOptions = {
-    legend: {
-      display: true
-    },
-    maintainAspectRatio: false,
-    responsive: true
-  }
+ 
+
+
+  // var pieChartCanvas = document.getElementById('sales-chart-canvas2-receptionist');
+  // // console.log(pieChartCanvas2, "NOW")
+  // var pieData = {
+  //   labels: [
+  //     'Complete',
+  //     'Pending',
+  //     'Overdue'
+  //   ],
+  //   datasets: [
+  //     {
+  //       data: [30, 12, 20],
+  //       backgroundColor: ['#28a745', '#ffc107', '#dc3545']
+  //     }
+  //   ]
+  // }
+  // var pieOptions = {
+  //   legend: {
+  //     display: true
+  //   },
+  //   maintainAspectRatio: false,
+  //   responsive: true
+  // }
   
-  // pieChart.destroy();
-  // var pieChart = new Chart(pieChartCanvas2, { 
+  // var pieChart2 = new Chart(pieChartCanvas, { 
   //   type: 'doughnut',
   //   data: pieData,
   //   options: pieOptions
   // })
-  // // pieChart.destroy()
+  // pieChart.destroy()
   // salesChart.destroy()
 }
-
