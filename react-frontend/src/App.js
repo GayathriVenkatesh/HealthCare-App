@@ -23,6 +23,7 @@ import ViewComponentReceptionist from './components/ViewComponentReceptionist';
 import ViewFollowUpDetails from './components/ViewFollowUpDetails';
 import ViewPatientComponent from './components/ViewPatientComponent';
 import UpdatePatientComponentReceptionist from './components/UpdatePatientComponentReceptionist'
+import ViewDischargeSummaryComponent from './components/ViewDischargeSummaryComponent'
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
                           <Route path = "/followup-receptionist" component = {FollowUpReceptionist}></Route>
                           <Route path = "/view-followup" component = {ViewFollowUpDetails}></Route>
                           <Route path = "/discharge-history" component = {DischargeDetails}></Route>
+                          <Route path = "/view-discharge-summary" component = {ViewDischargeSummaryComponent}></Route>
                           <Route path = "/schedule-followup" component = {CreateFollowUp}></Route>
                     </Switch>
                 </div>

@@ -1,7 +1,6 @@
 package net.javaguides.springboot.service;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import net.javaguides.springboot.exception.ResourceNotFoundException;
 import net.javaguides.springboot.model.Patient;

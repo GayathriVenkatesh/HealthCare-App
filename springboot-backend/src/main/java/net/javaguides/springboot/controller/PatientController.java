@@ -56,7 +56,7 @@ public class PatientController {
     //     return ResponseEntity.ok(p); 
     // }
 
-    @RequestMapping(value = "/search")
+    @RequestMapping(value = "/search-patient")
     @ResponseBody
     public List<Patient> search(@RequestParam("name") String name, 
                                 @RequestParam("address") String address,

@@ -14,4 +14,63 @@
 
 # GET http://localhost:8080/api/v1/search?name=Aru&address=an&religion=in&uhid=1&rch=4&sam=1
 
-GET http://localhost:8080/api/v1/delete-patient/3
+# GET http://localhost:8080/api/v1/delete-patient/3
+
+
+
+# GET http://localhost:8080/api/v1/view-discharge-summaries
+
+# GET http://localhost:8080/api/v1/view-discharge-summary/1
+
+# PUT http://localhost:8080/api/v1/edit-discharge-summary/1
+# Content-Type: application/json
+
+# {"name":"Aruna", "dischargeId": 1, "SAM_ID":22,"admissionDate": "2020-05-01","dischargeDate":"2020-09-08", "admissionWeight": 50, "dischargeWeight": 40, "targetWeight": 55, "outcome": "poor", "treatmentProtocol": "none"}
+
+# POST http://localhost:8080/api/v1/discharge-summary
+# Content-Type: application/json
+
+# {"name":"Test Patient", "dischargeId": 3, "SAM_ID": 22,"admissionDate": "2020-05-01","dischargeDate":"2020-09-08", "admissionWeight": 50, "dischargeWeight": 60, "targetWeight": 55, "outcome": "great", "treatmentProtocol": "none"}
+
+# GET http://localhost:8080/api/v1/delete-discharge-summary/1
+
+# GET http://localhost:8080/api/v1/search-summary?sam_id=&discharge_id=&name=ob
+
+
+
+# GET http://localhost:8080/api/v1/view-anganwadi-workers
+
+# PUT http://localhost:8080/api/v1/edit-anganwadi-worker/1
+# Content-Type: application/json
+
+# {"name":"Gayathri", "address": "Koramangala", "locality": "Bangalore", "contactNo": "7022029113"}
+
+# POST http://localhost:8080/api/v1/anganwadi-worker
+# Content-Type: application/json
+
+# {"name":"Test Worker"}
+
+# GET http://localhost:8080/api/v1/search-worker?address=r&locality=bai
+
+# GET http://localhost:8080/api/v1/delete-anganwadi-worker/1
+
+
+
+
+# GET http://localhost:8080/api/v1/view-followups
+
+# GET http://localhost:8080/api/v1/view-followup/1
+
+# POST http://localhost:8080/api/v1/followup
+# Content-Type: application/json
+
+# {"completed":"false"}
+
+# PUT http://localhost:8080/api/v1/edit-followup/1
+# Content-Type: application/json
+
+# {"completed":"false", "deadline": "2020-02-02", "completedOn": "2020-02-02", "workerId": 12, "samId": 23}
+
+# GET http://localhost:8080/api/v1/search-followup?samId=&workerId=&completed=false
+
+GET http://localhost:8080/api/v1/delete-followup/1

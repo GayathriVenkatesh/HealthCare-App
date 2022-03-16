@@ -1,0 +1,120 @@
+package net.javaguides.springboot.model;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "discharge_summary")
+public class DischargeSummary implements Serializable {
+	@SequenceGenerator(
+		name = "discharge_summary_sequence",
+		sequenceName = "discharge_summary_sequence",
+		allocationSize = 1
+	)
+	@GeneratedValue(
+		strategy = GenerationType.SEQUENCE,
+		generator = "discharge_summary_sequence"
+	)
+	@Id
+	private Long dischargeId;
+	private Long samId;
+	private String name;
+	private LocalDate admissionDate, dischargeDate;
+	private Double admissionWeight, targetWeight, dischargeWeight;
+	private String contactNo, outcome, treatmentProtocol;
+
+	public DischargeSummary() {
+	}
+	
+	public DischargeSummary(Long dischargeId, Long samId, String name, LocalDate admissionDate, LocalDate dischargeDate,
+			Double admissionWeight, Double targetWeight, Double dischargeWeight, String contactNo, String outcome,
+			String treatmentProtocol) {
+		this.dischargeId = dischargeId;
+		this.samId = samId;
+		this.name = name;
+		this.admissionDate = admissionDate;
+		this.dischargeDate = dischargeDate;
+		this.admissionWeight = admissionWeight;
+		this.targetWeight = targetWeight;
+		this.dischargeWeight = dischargeWeight;
+		this.contactNo = contactNo;
+		this.outcome = outcome;
+		this.treatmentProtocol = treatmentProtocol;
+	}
+	public Long getDischargeId() {
+		return dischargeId;
+	}
+	public void setDischargeId(Long dischargeId) {
+		this.dischargeId = dischargeId;
+	}
+	public Long getSamId() {
+		return samId;
+	}
+	public void setSamId(Long samId) {
+		this.samId = samId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public LocalDate getAdmissionDate() {
+		return admissionDate;
+	}
+	public void setAdmissionDate(LocalDate admissionDate) {
+		this.admissionDate = admissionDate;
+	}
+	public LocalDate getDischargeDate() {
+		return dischargeDate;
+	}
+	public void setDischargeDate(LocalDate dischargeDate) {
+		this.dischargeDate = dischargeDate;
+	}
+	public Double getAdmissionWeight() {
+		return admissionWeight;
+	}
+	public void setAdmissionWeight(Double admissionWeight) {
+		this.admissionWeight = admissionWeight;
+	}
+	public Double getTargetWeight() {
+		return targetWeight;
+	}
+	public void setTargetWeight(Double targetWeight) {
+		this.targetWeight = targetWeight;
+	}
+	public Double getDischargeWeight() {
+		return dischargeWeight;
+	}
+	public void setDischargeWeight(Double dischargeWeight) {
+		this.dischargeWeight = dischargeWeight;
+	}
+	public String getContactNo() {
+		return contactNo;
+	}
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
+	}
+	public String getOutcome() {
+		return outcome;
+	}
+	public void setOutcome(String outcome) {
+		this.outcome = outcome;
+	}
+	public String getTreatmentProtocol() {
+		return treatmentProtocol;
+	}
+	public void setTreatmentProtocol(String treatmentProtocol) {
+		this.treatmentProtocol = treatmentProtocol;
+	}
+
+
+}
+

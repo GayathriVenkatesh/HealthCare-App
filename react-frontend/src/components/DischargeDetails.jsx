@@ -123,7 +123,7 @@ class DischargeDetails extends Component {
                                 </td>
                                 
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="#">
+                                    <a class="btn btn-primary btn-sm" href="/view-discharge-summary/1">
                                         <i class="fas fa-folder">
                                         </i>
                                         View PDF
