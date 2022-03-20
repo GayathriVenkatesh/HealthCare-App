@@ -74,7 +74,7 @@ public class HealthStatusController {
         List<HealthStatus> p = healthStatusService.getHealthStatuss();
         List<HealthStatus> ans = new ArrayList<HealthStatus>();
         for (HealthStatus f: p) {
-            if(f.getHealthStatusId() != healthStatus_id) {
+            if(f.getHsId() != healthStatus_id) {
                 ans.add(f);
             }
         }
