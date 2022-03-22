@@ -24,8 +24,8 @@ public class FollowupService {
         return this.followupRepository.findAll();
     }
 
-    public List<Followup> getByKeyword(String samId, String workerId, String completed){
-        return this.followupRepository.findByKeyword(samId, workerId, completed);
+    public List<Followup> getByKeyword(String workerId, String completed){
+        return this.followupRepository.findByKeyword(workerId, completed);
     }
 
     public Followup getFollowupById(Long id) {
@@ -36,7 +36,7 @@ public class FollowupService {
     }
 
     @Transactional
-    public void updateFollowup(Long followupId, Long samId, Long workerId,
+    public void updateFollowup(Long followupId, Long workerId,
 	LocalDate deadline, LocalDate completedOn, Boolean completed) {
 
         Followup d = followupRepository.findByFollowupId(followupId)
@@ -44,7 +44,6 @@ public class FollowupService {
                 "Follow up with ID " + followupId + " does not exist"
             ));
         
-        if (samId != null && !samId.equals(d.getSamId())) { d.setSamId(samId); }
         if (workerId != null && !workerId.equals(d.getWorkerId())) { d.setWorkerId(workerId); }
         if (deadline != null && !deadline.equals(d.getDeadline())) { d.setDeadline(deadline); }
         if (completedOn != null && !completedOn.equals(d.getCompletedOn())) { d.setCompletedOn(completedOn); }       
