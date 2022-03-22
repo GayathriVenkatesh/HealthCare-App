@@ -24,10 +24,14 @@ public class Followup implements Serializable {
 	)
 	@Id
 	private Long followupId;
-	private Long samId;
 	private Long workerId;
 	private LocalDate deadline, completedOn;
 	private Boolean completed;
+
+    @ManyToOne
+    @JoinColumn(name = "sam_id")
+    private Patient patient;
+
 	public Long getFollowupId() {
 		return followupId;
 	}
