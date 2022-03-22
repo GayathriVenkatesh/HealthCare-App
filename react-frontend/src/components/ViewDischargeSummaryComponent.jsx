@@ -14,6 +14,7 @@ class ViewComponent extends Component {
     }
 
     componentDidMount(){
+        console.log("HIHIHIH", this.state.dischargeId)
         DischargeSummaryService.getDischargeSummaryById(this.state.dischargeId).then( res => {
             console.log("dataa", res.data)
             console.log("PATH", window.location.pathname.split("/")[2])

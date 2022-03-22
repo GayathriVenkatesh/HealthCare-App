@@ -1,64 +1,68 @@
 import React, { Component } from 'react'
-import PatientService from '../services/PatientService'
+import DischargeSummaryService from '../services/DischargeSummaryService'
 import { faHome, faPencilAlt, faTrash, faFolder } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SideBarComponent from './SideBarComponent';
 
-class ListPatientComponent extends Component {
+class DischargeComponent extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-                patients: []
+          dischargeId: 1,
+          samId: 0,
+          name: '',
+          admissionDate: "2021-01-01",  
+          dischargeDate: "2021-01-01",  
+          admissionWeight: 0.0,
+          targetWeight: 0.0,
+          dischargeWeight: 0.0,
+          contactNo: "",
+          outcome: "",
+          treatmentProtocol: ""
         }
-        this.addPatient = this.addPatient.bind(this);
-        this.editPatient = this.editPatient.bind(this);
-        this.viewPatient = this.viewPatient.bind(this);
-        this.deletePatient  = this.deletePatient.bind(this);
+        this.changeDischargeIdHandler = this.changeDischargeIdHandler.bind(this);
+        this.changeAdmissionDateHandler = this.changeAdmissionDateHandler.bind(this);
+        this.changeDischargeDateHandler = this.changeDischargeDateHandler.bind(this);
+        this.changeDischargeWeightHandler = this.changeDischargeWeightHandler.bind(this);
+        this.changeAdmissionWeightHandler = this.changeAdmissionWeightHandler.bind(this);
+        this.changeTargetWeightHandler = this.changeTargetWeightHandler.bind(this);
+        this.changeOutcomeHandler = this.changeOutcomeHandler.bind(this);
+        this.changeTreatmentProtocolHandler = this.changeTreatmentProtocolHandler.bind(this);
     }
 
-    deletePatient(id){
-        PatientService.deletePatient (id).then( res => {
-            this.setState({patients: this.state.patients.filter(patient => patient.uhid !== id)});
-        });
-    }
-    viewPatient(uhid){
-        this.props.history.push(`/view-patient/${uhid}`);
-    }
-    editPatient(uhid){
-        console.log("CURRENT UHID", uhid);
-        this.props.history.push(`/edit-patient/${uhid}`);
-    }
-
-    componentDidMount(){
-        
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-
-        var name = urlParams.get('name')
-        var address = urlParams.get('address')
-        var religion = urlParams.get('religion')
-        var uhid = urlParams.get('uhid')
-        var rch = urlParams.get('rch')
-        var sam = urlParams.get('sam')
-
-        if (!(name || address || religion || uhid || sam || rch)) {
-            PatientService.getPatients().then((res) => {
-                this.setState({ patients: res.data});
-                console.log("NOW IS", res.data)
-            });
-        }
-        else{
-            console.log("keyword", window.location.href);
-            PatientService.getByKeyword(name, address, religion, uhid, sam).then( res => {
-                this.setState({patients: res.data});
-            })
-        }
-    
+    createDischargeSummary = (e) => {
+      console.log("HELLLLO", e);
+      e.preventDefault();
+      let summary = {dischargeId: this.state.dischargeId,
+        samId: this.state.samId,
+        name: this.state.name,
+        admissionDate: this.state.admissionDate,  
+        dischargeDate: this.state.dischargeDate,  
+        admissionWeight: this.state.admissionWeight,
+        targetWeight: this.state.targetWeight,
+        dischargeWeight: this.state.dischargeWeight,
+        contactNo: this.state.contactNo,
+        outcome: this.state.outcome,
+        treatmentProtocol: this.state.treatmentProtocol
+      };
+      DischargeSummaryService.createDischargeSummary(summary).then(res =>{
+          this.props.history.push('/view-discharge-summary/' + this.state.dischargeId);
+      });
     }
 
-    addPatient(){
-        this.props.history.push('/add-patient');
+    changeDischargeIdHandler = (event) => { this.setState({dischargeId: event.target.value}); }
+    changeAdmissionDateHandler = (event) => { this.setState({admissionDate: event.target.value}); }
+    changeDischargeDateHandler= (event) => { this.setState({dischargeDate: event.target.value}); }
+    changeDischargeWeightHandler= (event) => { this.setState({dischargeWeight: event.target.value}); }
+    changeAdmissionWeightHandler= (event) => { this.setState({admissionWeight: event.target.value}); }
+    changeTargetWeightHandler = (event) => { this.setState({targetWeight: event.target.value}); }
+    changeOutcomeHandler= (event) => { this.setState({outcome: event.target.value}); }
+    changeTreatmentProtocolHandler= (event) => { this.setState({treatmentProtocol: event.target.value}); }
+
+    componentDidMount(){  
+      console.log(this.state.UHID);
+      return;
     }
 
     render() {
@@ -83,22 +87,22 @@ class ListPatientComponent extends Component {
               <div class="card-body">
                 <div class="form-group">
                   <label>Enter SAM ID</label>
-                  <input class="form-control" type="text"/>                  
+                  <input name="samId" className="form-control" type="text" value={this.state.samId} />         
                 </div>
 
                 <div class="form-group">
                     <label>Patient Name</label>
-                    <input class="form-control" type="text"/>                  
+                    <input name="name" className="form-control" type="text" value={this.state.name} />         
                   </div>
 
                   <div class="form-group">
                     <label>Patient Contact Number</label>
-                    <input class="form-control" type="text"/>                  
+                    <input name="contactNo" className="form-control" type="text" value={this.state.contactNo} />         
                   </div>
                 <div class="form-group">
                   <label>Date of Admission:</label>
                     <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" value={this.state.admissionDate} onChange={this.changeAdmissionDateHandler} />         
                         <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -107,13 +111,13 @@ class ListPatientComponent extends Component {
 
                 <div class="form-group">
                     <label>Weight on Date of Admission (in kg)</label>
-                    <input class="form-control" type="text"/>                  
+                    <input name="admissionWeight" className="form-control" type="text" value={this.state.admissionWeight} onChange={this.changeAdmissionWeightHandler} />         
                   </div>
 
                   <div class="form-group">
                     <label>Date of Discharge:</label>
                       <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                          <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                          <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" value={this.state.dischargeDate} onChange={this.changeDischargeDateHandler} /> 
                           <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                               <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                           </div>
@@ -122,44 +126,44 @@ class ListPatientComponent extends Component {
   
                   <div class="form-group">
                       <label>Weight on Date of Discharge (in kg)</label>
-                      <input class="form-control" type="text"/>                  
+                      <input name="dischargeWeight" className="form-control" type="text" value={this.state.dischargeWeight} onChange={this.changeDischargeWeightHandler} />         
+                  </div>
+
+                  <div class="form-group">
+                      <label>Target Weight (in kg)</label>
+                      <input name="targetWeight" className="form-control" type="text" value={this.state.targetWeight} onChange={this.changeTargetWeightHandler} />         
                     </div>
 
-                    <div class="form-group">
-                        <label>Target Weight (in kg)</label>
-                        <input class="form-control" type="text"/>                  
-                      </div>
-
-                    <div class="form-group">
-                        <label>Outcome</label>
-                        <select class="form-control select2" style={{width: "100%"}}>
-                          <option selected="selected">Improved</option>
-                          <option>Poor Prognosis</option>
-                          <option>Death</option>
-                          
-                        </select>
-                      </div>
+                  <div class="form-group">
+                      <label>Outcome</label>                      
+                      <select class="form-control select2" style={{width: "100%"}} value={this.state.outcome} onChange={this.changeOutcomeHandler} >
+                        <option selected="selected">Improved</option>
+                        <option>Poor Prognosis</option>
+                        <option>Death</option>
+                        
+                      </select>
+                  </div>
 
                 <div class="form-group">
                     <label>Treatment Protocol</label>
-                    <input class="form-control" type="text"/>                  
+                    <input class="form-control" type="text" value={this.state.treatmentProtocol} onChange={this.changeTreatmentProtocolHandler} />                    
                 </div>
   
-                <div class="form-group">
+                {/* <div class="form-group">
                     <label>Follow-Up Date</label>
                       <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                          <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                          <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" value={this.state.targetWeight} onChange={this.changeTargetWeightHandler} />         
                           <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                               <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                           </div>
                       </div>
-                  </div>
+                  </div> */}
 
                 
               </div>
               <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
                 <div class="mb-3">
-                  <a href="/view-patients" class="btn btn-sm btn-success">Create</a>
+                <button className="btn btn-success" onClick={this.createDischargeSummary} >Save</button>
                   
                 </div>
               </div>
@@ -177,4 +181,4 @@ class ListPatientComponent extends Component {
     }
 }
 
-export default ListPatientComponent
+export default DischargeComponent

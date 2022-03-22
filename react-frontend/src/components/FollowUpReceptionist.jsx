@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import FollowupService from '../services/FollowupService'
 import PatientService from '../services/PatientService'
 import SideBarComponent from './SideBarComponent'
 import SideBarComponentReceptionist from './SideBarComponentReceptionist'
@@ -7,22 +8,16 @@ class FollowUpReceptionist extends Component {
         super(props)
 
         this.state = {
-            // uhid: this.props.match.params.id,  // change this to 1, otherwise uhid will be treated as an automatically generated key
-            // uhid: this.props.route.id,
-            uhid: window.location.pathname.split("/")[2],
-            patient: {}
+            followups: []
         }
         // this.state.patient.uhid = this.props.match.params.id
     }
 
     componentDidMount(){
-        console.log("UHID NOW", this.state.uhid)
-        PatientService.getPatientById(this.state.uhid).then( res => {
-            console.log("dataa", res.data)
-            console.log("PATH", window.location.pathname.split("/")[2])
-            
-            this.setState({patient: res.data});
-        })
+        FollowupService.getFollowups().then((res) => {
+            this.setState({ followups: res.data});
+            console.log("NOW IS", this.state.followups[0].completed)
+        });
     }
 
     render() {
@@ -67,83 +62,26 @@ class FollowUpReceptionist extends Component {
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                          <td>
-                              #
-                          </td>
-                          <td>
-                              <a>
-                                  20-01-2022
-                              </a>   
-                          </td>
-    
-                          <td>
-                            <a>
-                                Mira Chawla
-                            </a>   
-                        </td>
-                          
-                          <td class="project_progress">
-                            9893524464
-                              
-                          </td>
-                          <td class="project-state">
-                              <span class="badge badge-success">Complete</span>
-                          </td>    
-                      </tr>       
-    
-                      <tr>
-                        <td>
-                            #
-                        </td>
-                        <td>
-                            <a>
-                                20-01-2022
-                            </a>   
-                        </td>
-    
-                        <td>
-                          <a>
-                              Areem Bansal
-                          </a>   
-                      </td>
-                        <td class="project_progress">
-                          8868599253
-                        </td>
-                        <td class="project-state">
-                            <span class="badge badge-warning">Pending</span>
-                        </td>           
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            #
-                        </td>
-                        <td>
-                            <a>
-                                20-02-2022
-                            </a>   
-                        </td>
-    
-                        <td>
-                          <a>
-                              Shruti Banjra
-                          </a>   
-                      </td>
-                        <td class="project_progress">
-                          7033554241
-                        </td>
-                        <td class="project-state">
-                            <span class="badge badge-danger">Overdue</span>
-                        </td>           
-                    </tr>
+                  {
+                            this.state.followups.map(
+                                f => 
+                                <tr key = {f.followupId}>
+                                <td style={{width: "1%"}}>  </td>
+                                <td style={{width: "20%"}}> {f.deadline} </td>   
+                                <td style={{width: "20%"}}> {f.workerId}</td>
+                                <td style={{width: "20%"}}> 8676296926 </td>
+                                <td style={{width: "20%"}} className={"badge badge-" + (f.completed ? 'success' : 'warning')}> {f.completed.toString()} </td>
+                                
+                        </tr>
+                                )
+                            }
                   </tbody>
               </table>
             </div>
           </div>
     
           <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-              <a href="/schedule-followup" class="btn btn-sm btn-primary">Create schedule</a>
+              <a href={"/schedule-followup/" + 1} class="btn btn-sm btn-primary">Create schedule</a>
           </div>
     
         </section>

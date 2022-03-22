@@ -9,7 +9,8 @@ class DischargeDetails extends Component {
         super(props)
 
         this.state = {
-                patients: []
+            uhid: window.location.pathname.split("/")[2],
+            patients: []
         }
         this.addPatient = this.addPatient.bind(this);
         this.editPatient = this.editPatient.bind(this);
@@ -54,7 +55,6 @@ class DischargeDetails extends Component {
                 this.setState({patients: res.data});
             })
         }
-    
     }
 
     addPatient(){
@@ -157,7 +157,7 @@ class DischargeDetails extends Component {
                                 </td>
                                 
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-info btn-sm" href="/discharge-summary">
+                                    <a class="btn btn-info btn-sm" href={"/discharge-summary/" + this.state.uhid}>
                                         <i class="fas fa-folder">
                                         </i>
                                         Record Summary

@@ -1,96 +1,81 @@
 import React, { Component } from 'react'
-import PatientService from '../services/PatientService'
-import './plugins/select2/css/select2.min.css'
+import AnganwadiWorkerService from '../services/AnganwadiWorkerService'
+import FollowupService from '../services/FollowupService'
 import './plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'
+import './plugins/select2/css/select2.min.css'
 import SideBarComponent from './SideBarComponent'
-// import "./plugins/select2/js/select2.full.min.js"
-import $ from 'jquery';
+import Select from 'react-select';
 
 class CreateFollowUp extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            // uhid: this.props.match.params.id,  // change this to 1, otherwise uhid will be treated as an automatically generated key
-            // uhid: this.props.route.id,
-            uhid: window.location.pathname.split("/")[2],
-            patient: {}
+          followupId: 0,
+          samId: 0,
+          workerId: 0,
+          deadline: "2021-01-01", 
+          completedOn: "2021-01-01",
+          completed: false,
+          height: 0,
+          weight: 0,
+          muac: 0,
+          growth: "",
+          workers: []
         }
-        // this.state.patient.uhid = this.props.match.params.id
+        this.changeSamIdHandler = this.changeSamIdHandler.bind(this);
+        this.changeWorkerIdHandler = this.changeWorkerIdHandler.bind(this);
+        this.changeDeadlineHandler = this.changeDeadlineHandler.bind(this);
+        this.changeCompletedOnHandler = this.changeCompletedOnHandler.bind(this);
+        this.changeCompletedHandler = this.changeCompletedHandler.bind(this);
     }
 
     componentDidMount(){
-        console.log("UHID NOW", this.state.uhid)
-        PatientService.getPatientById(this.state.uhid).then( res => {
-            console.log("dataa", res.data)
-            console.log("PATH", window.location.pathname.split("/")[2])
-            
-            this.setState({patient: res.data});
-        })
-        $(function () {
-            //Initialize Select2 Elements
-            $('.select2').select2()
-        
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-              theme: 'bootstrap4'
-            })
-        
-            //Datemask dd/mm/yyyy
-            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-            //Datemask2 mm/dd/yyyy
-            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-            //Money Euro
-            $('[data-mask]').inputmask()
-        
-            //Date picker
-            $('#reservationdate').datetimepicker({
-                format: 'L'
-            });
-        
-            //Date and time picker
-            $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
-        
-            //Date range picker
-            $('#reservation').daterangepicker()
-            //Date range picker with time picker
-            $('#reservationtime').daterangepicker({
-              timePicker: true,
-              timePickerIncrement: 30,
-              locale: {
-                format: 'MM/DD/YYYY hh:mm A'
-              }
-            })
-            //Date range as a button
-           
-            //Timepicker
-            $('#timepicker').datetimepicker({
-              format: 'LT'
-            })
-        
-            //Bootstrap Duallistbox
-            $('.duallistbox').bootstrapDualListbox()
-        
-            //Colorpicker
-            $('.my-colorpicker1').colorpicker()
-            //color picker with addon
-            $('.my-colorpicker2').colorpicker()
-        
-            $('.my-colorpicker2').on('colorpickerChange', function(event) {
-              $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-            })
-        
-            $("input[data-bootstrap-switch]").each(function(){
-              $(this).bootstrapSwitch('state', $(this).prop('checked'));
-            })
-        
-          })
+      AnganwadiWorkerService.getAnganwadiWorkers().then((res) => {
+        this.setState({ workers: res.data});
+    });
+        return;
     }
 
-    
-     
+    getElement(x) {
+      return <option>{x.name}</option>
+    }
+
+    createFollowUp = (e) => {
+      e.preventDefault();
+      let f = {samId: this.state.samId,
+        workerId: this.state.workerId,
+        deadline: this.state.deadline, 
+        completedOn: this.state.completedOn,
+        completed: this.state.completed
+      };
+      console.log("BRO I CREATED FOLLOWUP", f);
+      FollowupService.createFollowup(f).then(res =>{
+          this.props.history.push('/followup-receptionist/1');
+      });
+  }
+
+  changeSamIdHandler = (event) => { this.setState({samId: event.target.value}); }
+  changeWorkerIdHandler = (event) => { 
+    this.setState({workerId: event.target.value}); 
+    console.log("WORKER", this.state.workerId)
+  }
+  changeDeadlineHandler = (event) => { this.setState({deadline: event.target.value}); 
+  console.log("WORKER", this.state.deadline)
+}
+  changeCompletedOnHandler = (event) => { this.setState({completedOn: event.target.value}); }
+  changeCompletedHandler = (event) => { this.setState({completed: event.target.value}); 
+  console.log("WORKER", this.state.completed)
+}
 
     render() {
+      console.log("JHBKJJJJJJJJJJ", this.state.workers)
+      const options = []
+      for(var i = 0; i < this.state.workers.length; i++) {
+        options.push({ value: this.state.workers[i].name, label: this.state.workers[i].name })
+    }
+      // console.log
+
         return (
           <div class="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
                 <div class="wrapper">   
@@ -114,7 +99,7 @@ class CreateFollowUp extends Component {
                       <div class="form-group">
                         <label>Date:</label>
                           <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                              <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                              <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" value={this.state.deadline} onChange={this.changeDeadlineHandler}/>
                               <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                               </div>
@@ -132,7 +117,7 @@ class CreateFollowUp extends Component {
       
                       <div class="form-group">
                           <label>Location</label>
-                          <select class="form-control select2" data-placeholder="Choose Area" style={{width: "100%"}}>
+                          <Select class="form-control select2" data-placeholder="Choose Area" style={{width: "100%"}}>
                             <option>Alabama</option>
                             <option>Alaska</option>
                             <option>California</option>
@@ -140,26 +125,23 @@ class CreateFollowUp extends Component {
                             <option>Tennessee</option>
                             <option>Texas</option>
                             <option>Washington</option>
-                          </select>
+                          </Select>
                         </div>
       
                         <div class="form-group">
                           <label>Anganwadi Worker</label>
-                          <select class="form-control select2" style={{width: "100%"}}>
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
-                          </select>
+                            <Select class="form-control select2" style={{width: "100%"}} 
+                            value={this.state.workerId} onChange={this.changeWorkerIdHandler} options={options}>
+                            {/* {Data.map(this.state.workers)} */}
+                            
+                            {/* <option>Washington</option> */}
+                          </Select>
                         </div>
                       
                     </div>
                     <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
                       <div class="mb-3">
-                        <a href="/followup-receptionist" class="btn btn-sm btn-success">Create</a>
+                        <a href="/followup-receptionist/1" class="btn btn-sm btn-success" onClick={this.createFollowUp}>Create</a>
                         
                       </div>
                     </div>

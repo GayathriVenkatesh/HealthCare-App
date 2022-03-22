@@ -42,6 +42,12 @@ public class FollowupController {
         return ResponseEntity.ok(p);			
 	}
 
+    @GetMapping("/view-health-record/{followupId}")
+	public ResponseEntity<Object> getHealthRecord(@PathVariable Long followupId) {
+		Object p = followupService.getHealthRecord(followupId);	
+        return ResponseEntity.ok(p);			
+	}
+
     @PostMapping("/followup")
 	public void addFollowup(@RequestBody Followup p) {
 		followupService.addFollowup(p);

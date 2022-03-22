@@ -28,6 +28,22 @@ public class Followup implements Serializable {
 	private Long workerId;
 	private LocalDate deadline, completedOn;
 	private Boolean completed;
+	private Double height, weight, muac;
+	private String growth;
+	
+	public Followup(Long followupId, Long samId, Long workerId, LocalDate deadline, LocalDate completedOn,
+			Boolean completed, Double height, Double weight, Double muac, String growth) {
+		this.followupId = followupId;
+		this.samId = samId;
+		this.workerId = workerId;
+		this.deadline = deadline;
+		this.completedOn = completedOn;
+		this.completed = completed;
+		this.height = height;
+		this.weight = weight;
+		this.muac = muac;
+		this.growth = growth;
+	}
 	public Long getFollowupId() {
 		return followupId;
 	}
@@ -74,6 +90,30 @@ public class Followup implements Serializable {
 		this.completed = completed;
 	}
 	public Followup() {
+	}
+	public Double getHeight() {
+		return height;
+	}
+	public void setHeight(Double height) {
+		this.height = height;
+	}
+	public Double getWeight() {
+		return weight;
+	}
+	public void setWeight(Double weight) {
+		this.weight = weight;
+	}
+	public Double getMuac() {
+		return muac;
+	}
+	public void setMuac(Double muac) {
+		this.muac = muac;
+	}
+	public String getGrowth() {
+		return growth;
+	}
+	public void setGrowth(String growth) {
+		this.growth = growth;
 	}
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PatientService from '../services/PatientService'
+import FollowupService from '../services/FollowupService'
 import SideBarComponent from './SideBarComponent'
 
 class ViewFollowUpDetails extends Component {
@@ -7,22 +7,21 @@ class ViewFollowUpDetails extends Component {
         super(props)
 
         this.state = {
-            // uhid: this.props.match.params.id,  // change this to 1, otherwise uhid will be treated as an automatically generated key
-            // uhid: this.props.route.id,
-            uhid: window.location.pathname.split("/")[2],
-            patient: {}
+            followupId: window.location.pathname.split("/")[2],
+            // status: {},
+            height: 30,
+            weight: 0,
+            muac: 0,
+            growth: "Normal"
         }
-        // this.state.patient.uhid = this.props.match.params.id
     }
 
     componentDidMount(){
-        console.log("UHID NOW", this.state.uhid)
-        PatientService.getPatientById(this.state.uhid).then( res => {
-            console.log("dataa", res.data)
-            console.log("PATH", window.location.pathname.split("/")[2])
-            
-            this.setState({patient: res.data});
+        console.log("UHID NOW", this.state.followupId)
+        FollowupService.getHealthRecord(this.state.followupId).then( res => {
+            this.setState({height: res.data[0], weight: res.data[1], muac: res.data[2], growth: res.data[3]});
         })
+        console.log("IUBKNION", this.state.growth)
     }
 
     render() {
@@ -74,7 +73,7 @@ class ViewFollowUpDetails extends Component {
     
                           <td>
                             <a>
-                                162 cm
+                                {this.state.height}
                             </a>   
                         </td>
                           
@@ -91,7 +90,7 @@ class ViewFollowUpDetails extends Component {
     
                         <td>
                           <a>
-                              36 kg
+                            {this.state.weight}
                           </a>   
                       </td>
                         
@@ -108,7 +107,7 @@ class ViewFollowUpDetails extends Component {
     
                         <td>
                           <a>
-                              14 cm
+                            {this.state.muac}
                           </a>   
                       </td>
                         
@@ -124,7 +123,7 @@ class ViewFollowUpDetails extends Component {
                         </td>
     
                         <td>
-                            <span class="badge badge-danger">Underweight</span>
+                            <span class={"badge badge-" + (this.state.growth == "Normal" ? "success" : (this.state.growth == "Overweight" ? "warning" : "danger"))}>{this.state.growth}</span>
                         </td>  
                         
                     </tr>

@@ -60,7 +60,7 @@ function App() {
                           <Route path = "/view-followup" component = {ViewFollowUpDetails}></Route>
                           <Route path = "/discharge-history" component = {DischargeDetails}></Route>
                           <Route path = "/view-discharge-summary" component = {ViewDischargeSummaryComponent}></Route>
-                          <Route path = "/schedule-followup" component = {CreateFollowUp}></Route>
+                          <Route path = "/schedule-followup/:uhid" component = {CreateFollowUp}></Route>
                     </Switch>
                 </div>
               {/* <FooterComponent /> */}

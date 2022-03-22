@@ -28,6 +28,10 @@ public class FollowupService {
         return this.followupRepository.findByKeyword(samId, workerId, completed);
     }
 
+    public Object getHealthRecord(Long followupId){
+        return this.followupRepository.findHealthRecordById(followupId);
+    }
+
     public Followup getFollowupById(Long id) {
         Followup d = this.followupRepository.findByFollowupId(id).orElseThrow(
             () -> new ResourceNotFoundException("No follow up with given ID")
