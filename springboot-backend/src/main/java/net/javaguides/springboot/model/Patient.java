@@ -48,6 +48,9 @@ public class Patient implements Serializable {
     @OneToMany(mappedBy = "patient")
     private Set<Followup> followups = new HashSet<>();
 
+	@OneToMany(mappedBy = "patient")
+    private Set<Followup> discharge_summaries = new HashSet<>();
+
 	public Patient() {}
 	
 	public Patient(Long UHID, Long sam_id, Long rch_id, String name, LocalDate dob, String contact_no,

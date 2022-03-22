@@ -20,6 +20,6 @@ public interface DischargeSummaryRepository extends JpaRepository<DischargeSumma
     Optional<DischargeSummary> findByDischargeId(Long dischargeId);
     Optional<DischargeSummary> findBySamId(Long sam_id);
 
-    @Query("SELECT d FROM DischargeSummary d WHERE str(d.samId) LIKE %?1% AND str(d.dischargeId) LIKE %?2% AND d.name LIKE %?3%")
+    @Query("SELECT d FROM DischargeSummary d WHERE str(d.dischargeId) LIKE %?2% AND d.name LIKE %?3%")
     public List<DischargeSummary> findByKeyword(String sam_id, String discharge_id, String name);
 }

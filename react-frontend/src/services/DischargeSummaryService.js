@@ -15,9 +15,9 @@ class DischargeSummaryService {
         return axios.get("http://localhost:8080/api/v1/view-discharge-summary" + '/' + dischargeId);
     }
 
-    getByKeyword(samId, dischargeId, name){
+    getByKeyword(dischargeId, name){
         // return axios.get("http://localhost:8080/api/v1/search" + '/' + keyword);
-        return axios.get("http://localhost:8080/api/v1/search-summary" + '?samId=' + samId + '&dischargeId=' + dischargeId + '&name=' + name);
+        return axios.get("http://localhost:8080/api/v1/search-summary" + '?dischargeId=' + dischargeId + '&name=' + name);
     }
 
     updateDischargeSummary(discharge, dischargeId){

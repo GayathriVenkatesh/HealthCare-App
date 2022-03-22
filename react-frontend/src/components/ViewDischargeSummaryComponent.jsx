@@ -45,7 +45,7 @@ class ViewComponent extends Component {
                           </tr>
                           <tr>
                             <td>SAM ID:</td>
-                            <td>{ this.state.summary.samId }</td>
+                            <td>{ this.state.summary.sam_id }</td>
                           </tr>
                           <tr>
                             <td>Name:</td>

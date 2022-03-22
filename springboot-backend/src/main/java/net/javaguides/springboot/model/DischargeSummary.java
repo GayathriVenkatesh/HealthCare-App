@@ -24,20 +24,22 @@ public class DischargeSummary implements Serializable {
 	)
 	@Id
 	private Long dischargeId;
-	private Long samId;
 	private String name;
 	private LocalDate admissionDate, dischargeDate;
 	private Double admissionWeight, targetWeight, dischargeWeight;
 	private String contactNo, outcome, treatmentProtocol;
 
+	@ManyToOne
+    @JoinColumn(name = "sam_id")
+    private Patient patient;
+
 	public DischargeSummary() {
 	}
 	
-	public DischargeSummary(Long dischargeId, Long samId, String name, LocalDate admissionDate, LocalDate dischargeDate,
+	public DischargeSummary(Long dischargeId,String name, LocalDate admissionDate, LocalDate dischargeDate,
 			Double admissionWeight, Double targetWeight, Double dischargeWeight, String contactNo, String outcome,
 			String treatmentProtocol) {
 		this.dischargeId = dischargeId;
-		this.samId = samId;
 		this.name = name;
 		this.admissionDate = admissionDate;
 		this.dischargeDate = dischargeDate;
@@ -53,12 +55,6 @@ public class DischargeSummary implements Serializable {
 	}
 	public void setDischargeId(Long dischargeId) {
 		this.dischargeId = dischargeId;
-	}
-	public Long getSamId() {
-		return samId;
-	}
-	public void setSamId(Long samId) {
-		this.samId = samId;
 	}
 	public String getName() {
 		return name;
