@@ -15,8 +15,9 @@ class FollowupService {
         return axios.get("http://localhost:8080/api/v1/view-followup" + '/' + employeeId);
     }
 
-    getByKeyword(samId, workerId, completed){
-        return axios.get("http://localhost:8080/api/v1/search-followup" + '?samId=' + samId + '&workerId=' + workerId + '&completed=' + completed);
+    getByKeyword(workerId, completed){
+        // return axios.get("http://localhost:8080/api/v1/search" + '/' + keyword);
+        return axios.get("http://localhost:8080/api/v1/search-followup" + '?workerId=' + workerId + '&completed=' + completed);
     }
 
     getHealthRecord(followupId){

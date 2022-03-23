@@ -24,8 +24,8 @@ public class DischargeSummaryService {
         return this.dischargeRepository.findAll();
     }
 
-    public List<DischargeSummary> getByKeyword(String samId, String dischargeId, String name){
-        return this.dischargeRepository.findByKeyword(samId, dischargeId, name);
+    public List<DischargeSummary> getByKeyword(String dischargeId, String name){
+        return this.dischargeRepository.findByKeyword(dischargeId, name);
     }
 
     public DischargeSummary getDischargeSummaryById(Long dischargeId) {
@@ -36,7 +36,7 @@ public class DischargeSummaryService {
     }
 
     @Transactional
-    public void updateDischargeSummary(Long discharge_id, Long samId, String name, LocalDate admissionDate,
+    public void updateDischargeSummary(Long discharge_id,String name, LocalDate admissionDate,
     LocalDate dischargeDate, Double admissionWeight, Double targetWeight, Double dischargeWeight,
     String contactNo, String outcome, String treatmentProtocol) {
 
@@ -48,7 +48,6 @@ public class DischargeSummaryService {
         if (name != null && name.length() > 0 && !name.equals(d.getName())) { d.setName(name); }
         if (admissionDate != null && !admissionDate.equals(d.getAdmissionDate())) { d.setAdmissionDate(admissionDate); }
         if (dischargeDate != null && !dischargeDate.equals(d.getDischargeDate())) { d.setDischargeDate(dischargeDate); }
-        if (samId != null && samId != d.getSamId()) {  d.setSamId(samId); }
        
         if (admissionWeight != null && admissionWeight != d.getAdmissionWeight()) {  d.setAdmissionWeight(admissionWeight); }
         if (dischargeWeight != null && dischargeWeight != d.getDischargeWeight()) {  d.setDischargeWeight(dischargeWeight); }

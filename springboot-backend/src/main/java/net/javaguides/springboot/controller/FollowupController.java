@@ -56,7 +56,6 @@ public class FollowupController {
     @PutMapping("/edit-followup/{followupId}")
 	public ResponseEntity<Followup> updateFollowup(@PathVariable Long followupId, @RequestBody Followup p) {
         Followup followup = followupService.getFollowupById(followupId);
-        // followup.setSamId(p.getSamId());
         followup.setWorkerId(p.getWorkerId());
         followup.setDeadline(p.getDeadline());
         followup.setCompletedOn(p.getCompletedOn());
@@ -68,11 +67,10 @@ public class FollowupController {
 
     @RequestMapping(value = "/search-followup")
     @ResponseBody
-    public List<Followup> search(@RequestParam("workerId") String workerId, 
-                                @RequestParam("samId") String samId,
+    public List<Followup> search(@RequestParam("workerId") String workerId,
                                 @RequestParam("completed") String completed
                             ) {
-        List<Followup> p = followupService.getByKeyword(samId, workerId, completed);    
+        List<Followup> p = followupService.getByKeyword(workerId, completed);    
         return p; 
     }
 

@@ -50,18 +50,13 @@ public class Followup implements Serializable {
 		this.muac = muac;
 		this.growth = growth;
 	}
+
 	public Long getFollowupId() {
 		return followupId;
 	}
 	public void setFollowupId(Long followupId) {
 		this.followupId = followupId;
 	}
-	// public Long getSamId() {
-	// 	// return this.samId;
-	// }
-	// public void setSamId(Long samId) {
-	// 	// this.samId = samId;
-	// }
 	public Long getWorkerId() {
 		return workerId;
 	}
@@ -86,10 +81,9 @@ public class Followup implements Serializable {
 	public void setCompleted(Boolean completed) {
 		this.completed = completed;
 	}
-	public Followup(Long followupId, Long samId, Long workerId, LocalDate deadline, LocalDate completedOn,
+	public Followup(Long followupId, Long workerId, LocalDate deadline, LocalDate completedOn,
 			Boolean completed) {
 		this.followupId = followupId;
-		// this.samId = samId;
 		this.workerId = workerId;
 		this.deadline = deadline;
 		this.completedOn = completedOn;

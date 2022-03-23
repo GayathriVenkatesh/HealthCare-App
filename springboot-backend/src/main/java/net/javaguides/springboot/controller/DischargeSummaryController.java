@@ -75,7 +75,6 @@ public class DischargeSummaryController {
 	public ResponseEntity<DischargeSummary> updateDischargeSummary(@PathVariable Long discharge_id, @RequestBody DischargeSummary d) {
         DischargeSummary discharge = dischargeService.getDischargeSummaryById(discharge_id);
         discharge.setName(d.getName());
-        discharge.setSamId(d.getSamId());
         discharge.setAdmissionDate(d.getAdmissionDate());
         discharge.setDischargeDate(d.getDischargeDate());
         discharge.setAdmissionWeight(d.getAdmissionWeight());
