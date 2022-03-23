@@ -56,7 +56,7 @@ public class FollowupController {
     @PutMapping("/edit-followup/{followupId}")
 	public ResponseEntity<Followup> updateFollowup(@PathVariable Long followupId, @RequestBody Followup p) {
         Followup followup = followupService.getFollowupById(followupId);
-        followup.setSamId(p.getSamId());
+        // followup.setSamId(p.getSamId());
         followup.setWorkerId(p.getWorkerId());
         followup.setDeadline(p.getDeadline());
         followup.setCompletedOn(p.getCompletedOn());

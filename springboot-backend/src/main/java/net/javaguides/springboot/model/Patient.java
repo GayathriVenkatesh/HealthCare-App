@@ -9,12 +9,15 @@ import java.io.Serializable;
 import java.time.LocalDate;
 // import javax.persistence.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -45,6 +48,9 @@ public class Patient implements Serializable {
 
 	private HashMap<String, Double> health_params = new HashMap<String, Double>();
 
+	@OneToMany(mappedBy = "patient")
+    private Set<Followup> followups = new HashSet<>();
+	
 	public Patient() {}
 	
 	public Patient(Long UHID, Long sam_id, Long rch_id, String name, LocalDate dob, String contact_no,

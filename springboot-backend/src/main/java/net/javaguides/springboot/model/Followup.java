@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,17 +26,21 @@ public class Followup implements Serializable {
 	)
 	@Id
 	private Long followupId;
-	private Long samId;
+	// private Long samId;
 	private Long workerId;
 	private LocalDate deadline, completedOn;
 	private Boolean completed;
 	private Double height, weight, muac;
 	private String growth;
 	
+	@ManyToOne
+    @JoinColumn(name = "sam_id")
+    private Patient patient;
+
 	public Followup(Long followupId, Long samId, Long workerId, LocalDate deadline, LocalDate completedOn,
 			Boolean completed, Double height, Double weight, Double muac, String growth) {
 		this.followupId = followupId;
-		this.samId = samId;
+		// this.samId = samId;
 		this.workerId = workerId;
 		this.deadline = deadline;
 		this.completedOn = completedOn;
@@ -50,12 +56,12 @@ public class Followup implements Serializable {
 	public void setFollowupId(Long followupId) {
 		this.followupId = followupId;
 	}
-	public Long getSamId() {
-		return samId;
-	}
-	public void setSamId(Long samId) {
-		this.samId = samId;
-	}
+	// public Long getSamId() {
+	// 	// return this.samId;
+	// }
+	// public void setSamId(Long samId) {
+	// 	// this.samId = samId;
+	// }
 	public Long getWorkerId() {
 		return workerId;
 	}
@@ -83,7 +89,7 @@ public class Followup implements Serializable {
 	public Followup(Long followupId, Long samId, Long workerId, LocalDate deadline, LocalDate completedOn,
 			Boolean completed) {
 		this.followupId = followupId;
-		this.samId = samId;
+		// this.samId = samId;
 		this.workerId = workerId;
 		this.deadline = deadline;
 		this.completedOn = completedOn;

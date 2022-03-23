@@ -1,28 +1,21 @@
 import React, { Component } from 'react'
-import PatientService from '../services/PatientService'
+import FollowupService from '../services/FollowupService'
 import SideBarComponent from './SideBarComponent'
 
 class FollowUpDoctor extends Component {
     constructor(props) {
         super(props)
-
-        this.state = {
-            // uhid: this.props.match.params.id,  // change this to 1, otherwise uhid will be treated as an automatically generated key
-            // uhid: this.props.route.id,
-            uhid: window.location.pathname.split("/")[2],
-            patient: {}
-        }
-        // this.state.patient.uhid = this.props.match.params.id
+          this.state = {
+              followups: []
+          }
+          // this.state.patient.uhid = this.props.match.params.id
     }
 
     componentDidMount(){
-        console.log("UHID NOW", this.state.uhid)
-        PatientService.getPatientById(this.state.uhid).then( res => {
-            console.log("dataa", res.data)
-            console.log("PATH", window.location.pathname.split("/")[2])
-            
-            this.setState({patient: res.data});
-        })
+      FollowupService.getFollowups().then((res) => {
+        this.setState({ followups: res.data});
+        console.log("NOW IS", this.state.followups[0].completed)
+    });
     }
 
     render() {
@@ -66,88 +59,25 @@ class FollowUpDoctor extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                #
-                            </td>
-                            <td>
-                                <a>
-                                    20-01-2022
-                                </a>   
-                            </td>
-      
-                            <td>
-                              <a>
-                                  Mira Chawla
-                              </a>   
-                          </td>
-                           
-                            <td class="project_progress">
-                              9893524464
-                               
-                            </td>
-                            <td class="project-state">
-                                <span class="badge badge-success">Complete</span>
-                            </td>    
-      
-                            <td class="project-state">
+                    {
+                            this.state.followups.map(
+                                f => 
+                                <tr key = {f.followupId}>
+                                <td style={{width: "1%"}}>  </td>
+                                <td style={{width: "20%"}}> {f.deadline} </td>   
+                                <td style={{width: "20%"}}> {f.workerId}</td>
+                                <td style={{width: "20%"}}> 8676296926 </td>
+                                <td className="project-state">
+                                  <span style={{width: "35%"}} className={"badge badge-" + (f.completed ? 'success' : 'warning')}> {f.completed ? "Completed" : "Pending"}</span> 
+                                </td>
+                                <td class="project-state">
                               <a href="/view-followup" class="btn btn-block btn-outline-primary btn-xs">View</a>
-                          </td>    
-                        </tr>       
-      
-                        <tr>
-                          <td>
-                              #
-                          </td>
-                          <td>
-                              <a>
-                                  20-01-2022
-                              </a>   
-                          </td>
-      
-                          <td>
-                            <a>
-                                Areem Bansal
-                            </a>   
-                        </td>
-                          <td class="project_progress">
-                            8868599253
-                          </td>
-                          <td class="project-state">
-                              <span class="badge badge-warning">Pending</span>
-                          </td>   
-                          
-                          <td class="project-state">
-                            <a href="viewdetails.html" class="btn btn-block btn-outline-primary btn-xs disabled">View</a>
-                          </td>
-                      </tr>
-                      
-                      <tr>
-                          <td>
-                              #
-                          </td>
-                          <td>
-                              <a>
-                                  20-02-2022
-                              </a>   
-                          </td>
-      
-                          <td>
-                            <a>
-                                Shruti Banjra
-                            </a>   
-                        </td>
-                          <td class="project_progress">
-                            7033554241
-                          </td>
-                          <td class="project-state">
-                              <span class="badge badge-danger">Overdue</span>
-                          </td>           
-      
-                          <td class="project-state">
-                            <a href="viewdetails.html" class="btn btn-block btn-outline-primary btn-xs disabled">View</a>
-                          </td>
-                      </tr>
+                          </td>  
+                        </tr>
+                                )
+                            }
+                                  
+                        
                     </tbody>
                 </table>
               </div>

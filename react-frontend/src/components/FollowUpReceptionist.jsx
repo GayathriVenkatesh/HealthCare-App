@@ -70,8 +70,9 @@ class FollowUpReceptionist extends Component {
                                 <td style={{width: "20%"}}> {f.deadline} </td>   
                                 <td style={{width: "20%"}}> {f.workerId}</td>
                                 <td style={{width: "20%"}}> 8676296926 </td>
-                                <td style={{width: "20%"}} className={"badge badge-" + (f.completed ? 'success' : 'warning')}> {f.completed.toString()} </td>
-                                
+                                <td className="project-state">
+                                    <span style={{width: "35%"}} className={"badge badge-" + (f.completed ? 'success' : 'warning')}> {f.completed ? "Completed" : "Pending"} </span>
+                                </td>
                         </tr>
                                 )
                             }
