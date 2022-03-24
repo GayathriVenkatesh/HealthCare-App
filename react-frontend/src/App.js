@@ -47,20 +47,20 @@ function App() {
                           <Route path = "/discharge-summary" component = {DischargeComponent}></Route>
                           <Route path = "/add-patient" component = {AddPatientComponent}></Route>
                           <Route path = "/add-patient-receptionist" component = {AddPatientComponentReceptionist}></Route>
-                          {/* <Route path = "/view-patient/:uhid" component = {ViewPatientComponent} id="1"></Route> */}
-                          <Route path = "/delete-patient/:uhid" component = {ListPatientComponent} id="1"></Route>
+                          {/* <Route path = "/view-patient/:samId" component = {ViewPatientComponent} id="1"></Route> */}
+                          <Route path = "/delete-patient/:samId" component = {ListPatientComponent} id="1"></Route>
 
-                          <Route path = "/view/:uhid" component = {ViewComponent} id="1"></Route>
-                          <Route path = "/view-receptionist/:uhid" component = {ViewComponentReceptionist} id="1"></Route>
-                          {/* <Route path = "/view-patient/:uhid" element={<ViewPatientComponent id={1}/>}></Route> */}
-                          <Route path = "/edit-patient/:uhid" component = {UpdatePatientComponent}></Route>
-                          <Route path = "/edit-patient-receptionist/:uhid" component = {UpdatePatientComponentReceptionist}></Route>
+                          <Route path = "/view/:samId" component = {ViewComponent} id="1"></Route>
+                          <Route path = "/view-receptionist/:samId" component = {ViewComponentReceptionist} id="1"></Route>
+                          {/* <Route path = "/view-patient/:samId" element={<ViewPatientComponent id={1}/>}></Route> */}
+                          <Route path = "/edit-patient/:samId" component = {UpdatePatientComponent}></Route>
+                          <Route path = "/edit-patient-receptionist/:samId" component = {UpdatePatientComponentReceptionist}></Route>
                           <Route path = "/followup-doctor" component = {FollowUpDoctor}></Route>
                           <Route path = "/followup-receptionist" component = {FollowUpReceptionist}></Route>
                           <Route path = "/view-followup" component = {ViewFollowUpDetails}></Route>
                           <Route path = "/discharge-history" component = {DischargeDetails}></Route>
                           <Route path = "/view-discharge-summary" component = {ViewDischargeSummaryComponent}></Route>
-                          <Route path = "/schedule-followup/:uhid" component = {CreateFollowUp}></Route>
+                          <Route path = "/schedule-followup/:samId" component = {CreateFollowUp}></Route>
                     </Switch>
                 </div>
               {/* <FooterComponent /> */}

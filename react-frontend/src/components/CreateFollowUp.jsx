@@ -32,8 +32,9 @@ class CreateFollowUp extends Component {
 
     componentDidMount(){
       AnganwadiWorkerService.getAnganwadiWorkers().then((res) => {
+        console.log("DATA", res.data)
         this.setState({ workers: res.data});
-    });
+      });
         return;
     }
 
@@ -69,7 +70,7 @@ class CreateFollowUp extends Component {
 }
 
     render() {
-      console.log("JHBKJJJJJJJJJJ", this.state.workers)
+      console.log("JHBKJJJJJJJJJJ", this.state.workers[0])
       const options = []
       for(var i = 0; i < this.state.workers.length; i++) {
         options.push({ value: this.state.workers[i].name, label: this.state.workers[i].name })
@@ -77,47 +78,48 @@ class CreateFollowUp extends Component {
       // console.log
 
         return (
-          <div class="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
-                <div class="wrapper">   
+          <div className="hold-transition sidebar-mini" style={{marginLeft: "200px", width: "88%"}}>
+                <div className="wrapper">   
                     <SideBarComponent/>
-            <section class="content">
+            <section className="content">
                 <script src="./plugins/select2/js/select2.full.min.js"></script>
-            <div class="container-fluid">
+            <div className="container-fluid">
               
       
-              <div class="row">
-                <div class="col-md-3">     
+              <div className="row">
+                <div className="col-md-3">     
                  
       
                 </div>
-                <div class="col-md-6">
-                  <div class="card card-info">
-                    <div class="card-header">
-                      <h3 class="card-title">Create a Follow-Up Schedule</h3>
+                <div className="col-md-6">
+                  <div className="card card-info">
+                    <div className="card-header">
+                      <h3 className="card-title">Create a Follow-Up Schedule</h3>
                     </div>
-                    <div class="card-body">
-                      <div class="form-group">
+                    <div className="card-body">
+                      <div className="form-group">
                         <label>Date:</label>
-                          <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                              <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" value={this.state.deadline} onChange={this.changeDeadlineHandler}/>
-                              <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                          <div className="input-group date" id="reservationdate" data-target-input="nearest">
+                              <input type="text" className="form-control datetimepicker-input" data-target="#reservationdate" value={this.state.deadline} onChange={this.changeDeadlineHandler}/>
+                              <div className="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                  <div className="input-group-text"><i className="fa fa-calendar"></i></div>
                               </div>
                           </div>
                       </div>
-                      {/* <div class="form-group">
+                      {/* <div className="form-group">
                         <label>Date and time:</label>
-                          <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                              <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime"/>
-                              <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
-                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                          <div className="input-group date" id="reservationdatetime" data-target-input="nearest">
+                              <input type="text" className="form-control datetimepicker-input" data-target="#reservationdatetime"/>
+                              <div className="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                                  <div className="input-group-text"><i className="fa fa-calendar"></i></div>
                               </div>
                           </div>
                       </div> */}
       
-                      <div class="form-group">
+                      <div className="form-group">
                           <label>Location</label>
-                          <Select class="form-control select2" data-placeholder="Choose Area" style={{width: "100%"}}>
+                          <input name="samId" className="form-control" type="text" value={this.state.workers[0].locality} />  
+                          {/* <Select className="form-control select2" data-placeholder="Choose Area" style={{width: "100%"}}>
                             <option>Alabama</option>
                             <option>Alaska</option>
                             <option>California</option>
@@ -125,23 +127,23 @@ class CreateFollowUp extends Component {
                             <option>Tennessee</option>
                             <option>Texas</option>
                             <option>Washington</option>
-                          </Select>
+                          </Select> */}
                         </div>
       
-                        <div class="form-group">
+                        {/* <div className="form-group">
                           <label>Anganwadi Worker</label>
-                            <Select class="form-control select2" style={{width: "100%"}} 
+                            <Select className="form-control select2" style={{width: "100%"}} 
                             value={this.state.workerId} onChange={this.changeWorkerIdHandler} options={options}>
-                            {/* {Data.map(this.state.workers)} */}
+                            {Data.map(this.state.workers)}
                             
-                            {/* <option>Washington</option> */}
+                            <option>Washington</option>
                           </Select>
-                        </div>
+                        </div> */}
                       
                     </div>
-                    <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-                      <div class="mb-3">
-                        <a href="/followup-receptionist/1" class="btn btn-sm btn-success" onClick={this.createFollowUp}>Create</a>
+                    <div className="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+                      <div className="mb-3">
+                        <a href="/followup-receptionist/1" className="btn btn-sm btn-success" onClick={this.createFollowUp}>Create</a>
                         
                       </div>
                     </div>

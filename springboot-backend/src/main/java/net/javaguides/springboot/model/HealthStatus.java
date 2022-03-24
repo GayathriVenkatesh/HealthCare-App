@@ -36,19 +36,19 @@ public class HealthStatus implements Serializable {
 	public void setHsId(Long hsId) {
 		this.hsId = hsId;
 	}
-	public Long getHeight() {
+	public Float getHeight() {
 		return height;
 	}
 	public void setHeight(Float height) {
 		this.height = height;
 	}
-	public Long getWeight() {
+	public Float getWeight() {
 		return weight;
 	}
 	public void setWeight(Float weight) {
 		this.weight = weight;
 	}
-	public Long getMuac() {
+	public Float getMuac() {
 		return muac;
 	}
 	public void setMuac(Float muac) {

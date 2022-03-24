@@ -8,9 +8,9 @@ class UpdatePatientComponentReceptionist extends Component {
 
         this.state = {
             // UHID: this.props.match.params.id,
-            UHID: window.location.pathname.split("/")[2],
+            samId: window.location.pathname.split("/")[2],
             name: '',
-            sam_id: 0, 
+            UHID: 0, 
             rch_id: 0,
             dob: "2021-01-01",          
             age: 0,
@@ -18,12 +18,12 @@ class UpdatePatientComponentReceptionist extends Component {
             bpl: true,
             address: "", religion: "", caste: "", relationship: "", symptoms: "", referred_by: "",
             contact_no: "",
-            health_params: [
-                { "height": 0.0 },
-                { "weight": 0.0 },
-                { "muac": 0.0 },
-                { "growth_status": 0.0 }
-              ]
+            // health_params: [
+            //     { "height": 0.0 },
+            //     { "weight": 0.0 },
+            //     { "muac": 0.0 },
+            //     { "growth_status": 0.0 }
+            //   ]
         }
         this.changeNameHandler = this.changeNameHandler.bind(this);
         this.changeRCHHandler = this.changeRCHHandler.bind(this);
@@ -46,14 +46,14 @@ class UpdatePatientComponentReceptionist extends Component {
     }
 
     componentDidMount(){
-        PatientService.getPatientById(this.state.UHID).then( (res) => {
+        PatientService.getPatientById(this.state.samId).then( (res) => {
             let patient = res.data;
             console.log("I AM HERE", patient);
-            console.log("SAM ID", patient.sam_id);
+            console.log("SAM ID", patient.samId);
                 this.setState({
                     name: patient.name,
-                    UHID: this.state.UHID,  // we are not changing UHID
-                    SAM_ID: patient.sam_id, 
+                    UHID: patient.UHID,  // we are not changing UHID
+                    SAM_ID: this.state.samId, 
                     rch_id: patient.rch_id,
                     dob: patient.dob,          
                     gender: patient.gender,
@@ -61,7 +61,7 @@ class UpdatePatientComponentReceptionist extends Component {
                     address: patient.address, religion: patient.religion, caste: patient.caste, 
                     relationship: patient.relationship, symptoms: patient.symptoms, referred_by: patient.referred_by,
                     contact_no: patient.contact_no,
-                    health_params: patient.health_params
+                    // health_params: patient.health_params
                 });
             });
     }
@@ -69,8 +69,7 @@ class UpdatePatientComponentReceptionist extends Component {
     updatePatient = (e) => {
         e.preventDefault();
         let patient = {name: this.state.name, 
-            UHID: this.state.UHID,  // we are not changing UHID
-            sam_id: this.state.sam_id, 
+            UHID: this.state.UHID,  
             rch_id: this.state.rch_id,
             dob: this.state.dob,          
             gender: this.state.gender,
@@ -78,16 +77,17 @@ class UpdatePatientComponentReceptionist extends Component {
             address: this.state.address, religion: this.state.religion, caste: this.state.caste, 
             relationship: this.state.relationship, symptoms: this.state.symptoms, referred_by: this.state.referred_by,
             contact_no: this.state.contact_no,
-            health_params: this.state.health_params};
+            // health_params: this.state.health_params
+          };
         console.log("IN UPDATE")
-        PatientService.updatePatient(patient, this.state.UHID).then( res => {
+        PatientService.updatePatient(patient, this.state.samId).then( res => {
             this.props.history.push('/view-patients-receptionist');
         });
     }
     
     changeNameHandler= (event) => { this.setState({name: event.target.value}); }
     changeRCHHandler= (event) => { this.setState({rch_id: event.target.value}); }
-    changeSAMHandler= (event) => { this.setState({sam_id: event.target.value}); }
+    changeSAMHandler= (event) => { this.setState({samId: event.target.value}); }
     changeUHIDHandler= (event) => { this.setState({UHID: event.target.value}); }
 
     changeDOBHandler= (event) => { this.setState({dob: event.target.value}); }
@@ -102,7 +102,7 @@ class UpdatePatientComponentReceptionist extends Component {
     changeBplHandler= (event) => { this.setState({bpl: event.target.value}); 
 console.log("BPL IS", this.state.bpl)}
     changeRelationshipHandler= (event) => { this.setState({relationship: event.target.value}); }
-    changeHealthHandler= (event) => { this.setState({health_params: event.target.value}); }
+    // changeHealthHandler= (event) => { this.setState({health_params: event.target.value}); }
     changeContactNoHandler= (event) => { 
         console.log("NUMBER", event.target.value)
         this.setState({contact_no: event.target.value}); 
@@ -135,12 +135,12 @@ console.log("BPL IS", this.state.bpl)}
                     <h3 class="card-title"> Patient</h3>
                   </div>
                   <div class="card-body">
-                    <div class="form-group">
+                    {/* <div class="form-group">
                       <label>Enter SAM ID</label>
-                      <input placeholder="SAM ID" name="sam_id" className="form-control" 
-                                                value={this.state.SAM_ID} onChange={this.changeSam_idHandler}/>
+                      <input placeholder="SAM ID" name="samId" className="form-control" 
+                                                value={this.state.SAM_ID} onChange={this.changeSamIdHandler}/>
                                     
-                    </div>
+                    </div> */}
     
                     <div class="form-group">
                       <label>Enter UHID ID</label>
@@ -317,8 +317,8 @@ console.log("BPL IS", this.state.bpl)}
             //                         </div>
             //                         <div className = "form-group">
             //                             <label> SAM ID: </label>
-            //                             <input placeholder="sam_id" name="sam_id" className="form-control" 
-            //                                 value={this.state.sam_id} onChange={this.changeSAMHandler}/>
+            //                             <input placeholder="samId" name="samId" className="form-control" 
+            //                                 value={this.state.samId} onChange={this.changeSAMHandler}/>
             //                         </div>
             //                         <div className = "form-group">
             //                             <label> Date of Birth: </label>

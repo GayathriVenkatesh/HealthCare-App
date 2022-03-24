@@ -24,15 +24,15 @@ class ListPatientComponentReceptionist extends Component {
 
     deletePatient(id){
         PatientService.deletePatient (id).then( res => {
-            this.setState({patients: this.state.patients.filter(patient => patient.uhid !== id)});
+            this.setState({patients: this.state.patients.filter(patient => patient.samId !== id)});
         });
     }
-    viewPatient(uhid){
-        this.props.history.push(`/view-receptionist/${uhid}`);
+    viewPatient(samId){
+        this.props.history.push(`/view-receptionist/${samId}`);
     }
-    editPatient(uhid){
-        console.log("CURRENT UHID", uhid);
-        this.props.history.push(`/edit-patient-receptionist/${uhid}`);
+    editPatient(samId){
+        console.log("CURRENT UHID", samId);
+        this.props.history.push(`/edit-patient-receptionist/${samId}`);
     }
 
     componentDidMount(){
@@ -129,32 +129,32 @@ class ListPatientComponentReceptionist extends Component {
                         {
                             this.state.patients.map(
                                 patient => 
-                                <tr key = {patient.uhid}>
+                                <tr key = {patient.samId}>
                                 <td> {patient.uhid}</td>
                                 <td> {patient.name} </td>   
                                 <td> {patient.contact_no}</td>
                                 <td> {patient.dob}</td>
                                 {/* <td> {patient.bpl}</td> */}
 
-                                <td> {patient.sam_id} </td> 
+                                <td> {patient.samId} </td> 
                                 <td> {patient.rch_id}</td>  
                                 <td> {patient.gender}</td>
                                 <td> {patient.religion}</td>
                                 {/* <td> {patient.caste}</td> */}
                                 <td class="project-actions text-right">
-                                <button onClick={ () => this.viewPatient(patient.uhid)} className="btn btn-primary btn-sm" style={{paddingLeft: "15px", paddingRight: "15px"}}>
+                                <button onClick={ () => this.viewPatient(patient.samId)} className="btn btn-primary btn-sm" style={{paddingLeft: "15px", paddingRight: "15px"}}>
                                     <FontAwesomeIcon icon={faFolder} /><br></br>
                                     View 
                                 </button>
                                 <br></br>
 
-                                <button style={{marginTop: "0.5em"}} onClick={ () => this.editPatient(patient.uhid)} className="btn btn-info btn-sm">
+                                <button style={{marginTop: "0.5em"}} onClick={ () => this.editPatient(patient.samId)} className="btn btn-info btn-sm">
                                     <FontAwesomeIcon icon={faPencilAlt} /><br></br>
                                     Update
                                 </button>
                                 <br></br>
                                 {/* <a class="btn btn-danger btn-sm" href="#"> */}
-                                <button style={{marginTop: "0.5em"}} onClick={ () => this.deletePatient(patient.uhid)} className="btn btn-danger btn-sm"> 
+                                <button style={{marginTop: "0.5em"}} onClick={ () => this.deletePatient(patient.samId)} className="btn btn-danger btn-sm"> 
                                     
                                     <FontAwesomeIcon icon={faTrash} />
                                     Delete 

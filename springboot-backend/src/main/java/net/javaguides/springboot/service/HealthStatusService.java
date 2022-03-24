@@ -29,7 +29,7 @@ public class HealthStatusService {
     }
 
     public HealthStatus getHealthStatusById(Long id) {
-        HealthStatus d = this.healthStatusRepository.findByHealthStatusId(id).orElseThrow(
+        HealthStatus d = this.healthStatusRepository.findByHsId(id).orElseThrow(
             () -> new ResourceNotFoundException("No health status with given ID")
         );
         return d;
@@ -38,7 +38,7 @@ public class HealthStatusService {
     @Transactional
     public void updateHealthStatus(Long hsId, Float height, Float weight, Float muac, String growthStatus, String otherSymptoms) {
 
-        HealthStatus d = healthStatusRepository.findByHealthStatusId(hsId)
+        HealthStatus d = healthStatusRepository.findByHsId(hsId)
             .orElseThrow(() -> new IllegalStateException(
                 "Follow up with ID " + hsId + " does not exist"
             ));

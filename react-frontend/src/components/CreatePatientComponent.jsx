@@ -30,7 +30,7 @@ class CreatePatientComponent extends Component {
         }
         this.changeNameHandler = this.changeNameHandler.bind(this);
         this.changeRch_idHandler = this.changeRch_idHandler.bind(this);
-        this.changeSam_idHandler = this.changeSam_idHandler.bind(this);
+        this.changeSamIdHandler = this.changeSamIdHandler.bind(this);
         this.changeUhidHandler = this.changeUhidHandler.bind(this);
         this.changeDobHandler = this.changeDobHandler.bind(this);
         this.changeBplHandler = this.changeBplHandler.bind(this);
@@ -57,7 +57,7 @@ class CreatePatientComponent extends Component {
         e.preventDefault();
         let patient = {name: this.state.name, 
             UHID: this.state.UHID,  // we are not changing UHID
-            sam_id: this.state.sam_id, 
+            // samId: this.state.samId, 
             rch_id: this.state.rch_id,
             dob: this.state.dob,          
             gender: this.state.gender,
@@ -76,7 +76,7 @@ class CreatePatientComponent extends Component {
     
     changeNameHandler= (event) => { this.setState({name: event.target.value}); }
     changeRch_idHandler= (event) => { this.setState({rch_id: event.target.value}); }
-    changeSam_idHandler= (event) => { this.setState({sam_id: event.target.value}); }
+    changeSamIdHandler= (event) => { this.setState({samId: event.target.value}); }
     changeUhidHandler= (event) => { this.setState({UHID: event.target.value}); }
 
     changeDobHandler= (event) => { this.setState({dob: event.target.value}); }
@@ -136,11 +136,11 @@ class CreatePatientComponent extends Component {
                                             <input placeholder="rch_id" name="rch_id" className="form-control" 
                                                 value={this.state.rch_id} onChange={this.changeRch_idHandler}/>
                                         </div>
-                                        <div className = "form-group">
+                                        {/* <div className = "form-group">
                                             <label> SAM ID: </label>
-                                            <input placeholder="sam_id" name="sam_id" className="form-control" 
-                                                value={this.state.sam_id} onChange={this.changeSam_idHandler}/>
-                                        </div>
+                                            <input placeholder="samId" name="samId" className="form-control" 
+                                                value={this.state.samId} onChange={this.changeSamIdHandler}/>
+                                        </div> */}
                                         <div className = "form-group">
                                             <label> Date of Birth: </label>
                                             <input placeholder="Date of birth" name="dob" className="form-control" 

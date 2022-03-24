@@ -24,17 +24,12 @@ public class FollowupService {
         return this.followupRepository.findAll();
     }
 
-<<<<<<< HEAD
-    public List<Followup> getByKeyword(String samId, String workerId, String completed){
+    public List<Followup> getByKeyword(String workerId, String completed){
         return this.followupRepository.findByKeyword(workerId, completed);
     }
 
     public Object getHealthRecord(Long followupId){
         return this.followupRepository.findHealthRecordById(followupId);
-=======
-    public List<Followup> getByKeyword(String workerId, String completed){
-        return this.followupRepository.findByKeyword(workerId, completed);
->>>>>>> 7adf126cbc1e2bdb469fc77cec1d1f52cf2cff70
     }
 
     public Followup getFollowupById(Long id) {
@@ -53,10 +48,6 @@ public class FollowupService {
                 "Follow up with ID " + followupId + " does not exist"
             ));
         
-<<<<<<< HEAD
-        // if (samId != null && !samId.equals(d.getSamId())) { d.setSamId(samId); }
-=======
->>>>>>> 7adf126cbc1e2bdb469fc77cec1d1f52cf2cff70
         if (workerId != null && !workerId.equals(d.getWorkerId())) { d.setWorkerId(workerId); }
         if (deadline != null && !deadline.equals(d.getDeadline())) { d.setDeadline(deadline); }
         if (completedOn != null && !completedOn.equals(d.getCompletedOn())) { d.setCompletedOn(completedOn); }       

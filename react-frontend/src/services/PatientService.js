@@ -17,7 +17,7 @@ class PatientService {
 
     getByKeyword(name, address, religion, uhid, sam){
         // return axios.get("http://localhost:8080/api/v1/search" + '/' + keyword);
-        return axios.get("http://localhost:8080/api/v1/search" + '?name=' + name + '&address=' + address + '&religion=' + religion + '&uhid=' + uhid + '&sam=' + sam);
+        return axios.get("http://localhost:8080/api/v1/search-patient" + '?name=' + name + '&address=' + address + '&religion=' + religion + '&uhid=' + uhid + '&sam=' + sam);
     }
 
     updatePatient(employee, employeeId){

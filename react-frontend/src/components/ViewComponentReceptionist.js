@@ -9,17 +9,13 @@ class ViewComponentReceptionist extends Component {
         super(props)
 
         this.state = {
-            // uhid: this.props.match.params.id,  // change this to 1, otherwise uhid will be treated as an automatically generated key
-            // uhid: this.props.route.id,
-            uhid: window.location.pathname.split("/")[2],
+            samId: window.location.pathname.split("/")[2],
             patient: {}
         }
-        // this.state.patient.uhid = this.props.match.params.id
     }
 
     componentDidMount(){
-        console.log("UHID NOW", this.state.uhid)
-        PatientService.getPatientById(this.state.uhid).then( res => {
+        PatientService.getPatientById(this.state.samId).then( res => {
             console.log("dataa", res.data)
             console.log("PATH", window.location.pathname.split("/")[2])
             
@@ -68,7 +64,7 @@ class ViewComponentReceptionist extends Component {
                           </tr>
                           <tr>
                             <td>SAM ID</td>
-                            <td>{ this.state.patient.sam_id }</td>
+                            <td>{ this.state.patient.samId }</td>
                           </tr>
                           <tr>
                             <td>RCH ID</td>

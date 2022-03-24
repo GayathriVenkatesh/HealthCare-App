@@ -29,15 +29,15 @@ public class PatientService {
         return this.patientRepository.findAll();
     }
 
-    public List<Patient> getByKeyword(String name, String address, String religion, String uhid, String sam){
-        return this.patientRepository.findByKeyword(name, address, religion, uhid, sam);
+    public List<Patient> getByKeyword(String name, String address, String religion, String samId, String sam){
+        return this.patientRepository.findByKeyword(name, address, religion, samId, sam);
     }
 
-    public Patient getPatientById(Long uhid) {
-        Patient p = this.patientRepository.findByUhid(uhid).orElseThrow(
-            () -> new ResourceNotFoundException("No Patient with given UHID")
+    public Patient getPatientById(Long samId) {
+        Patient p = this.patientRepository.findBySamId(samId).orElseThrow(
+            () -> new ResourceNotFoundException("No Patient with given SAM ID")
         );
-        System.out.println("NEW PATIENT " + p.getName() + " " + p.getUhid() + " " + p.getContact_no());
+        System.out.println("NEW PATIENT " + p.getName() + " " + p.getSamId() + " " + p.getContact_no());
         return p;
     }
 
@@ -52,19 +52,19 @@ public class PatientService {
     }
 
     @Transactional
-    public void updatePatient(Long uhid, String name, LocalDate dob, Long sam_id,
+    public void updatePatient(Long samId, String name, LocalDate dob, Long uhid,
                 Long rch_id, String contact_no, Character gender, Boolean bpl, 
                 String addr, String religion, String caste, String relationship, 
                 String symptoms, String refer) {
 
-        Patient p = patientRepository.findByUhid(uhid)
+        Patient p = patientRepository.findBySamId(samId)
             .orElseThrow(() -> new IllegalStateException(
-                "Patient with UHID " + uhid + " does not exist"
+                "Patient with SAM ID " + samId + " does not exist"
             ));
         
         if (name != null && name.length() > 0 && !name.equals(p.getName())) { p.setName(name); }
         if (dob != null && !dob.equals(p.getDob())) { p.setDob(dob); }
-        if (sam_id != null && sam_id != p.getSam_id()) {  p.setSam_id(sam_id); }
+        if (uhid != null && uhid != p.getUhid()) {  p.setUhid(uhid); }
         if (rch_id != null && rch_id != p.getRch_id()) {  p.setRch_id(rch_id); }
         if (contact_no != null && contact_no.length() > 0 && !contact_no.equals(p.getContact_no())) { p.setContact_no(contact_no); }
         if (religion != null && religion.length() > 0 && !religion.equals(p.getReligion())) {

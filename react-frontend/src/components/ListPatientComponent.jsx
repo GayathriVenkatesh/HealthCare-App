@@ -23,15 +23,15 @@ class ListPatientComponent extends Component {
 
     deletePatient(id){
         PatientService.deletePatient (id).then( res => {
-            this.setState({patients: this.state.patients.filter(patient => patient.uhid !== id)});
+            this.setState({patients: this.state.patients.filter(patient => patient.samId !== id)});
         });
     }
-    viewPatient(uhid){
-        this.props.history.push(`/view/${uhid}`);
+    viewPatient(samId){
+        this.props.history.push(`/view/${samId}`);
     }
-    editPatient(uhid){
-        console.log("CURRENT UHID", uhid);
-        this.props.history.push(`/edit-patient/${uhid}`);
+    editPatient(samId){
+        console.log("CURRENT UHID", samId);
+        this.props.history.push(`/edit-patient/${samId}`);
     }
 
     componentDidMount(){
@@ -91,32 +91,23 @@ class ListPatientComponent extends Component {
                         <tr>
                             {/* <th style={{width: "1%"}}>
                             </th> */}
-                            <th style={{width: "10%"}}>
-                                UHID
+                            <th style={{width: "15%"}}>
+                                Patient ID
                             </th>
-                            <th style={{width: "10%"}}>
+                            <th style={{width: "20%"}}>
                                 Name
                             </th>
                             <th  style={{width: "15%"}}>
                                 Contact No
                             </th>
-                            <th  style={{width: "15%"}}>
-                                DOB
-                            </th>
                             {/* <th  style={{width: "5%"}}>
                                 BPL
                             </th> */}
-                            <th style={{width: "10%"}}>
-                                SAM ID
-                            </th>
-                            <th  style={{width: "10%"}}>
-                                RCH ID
+                            <th style={{width: "20%"}}>
+                                UHID
                             </th>
                             <th  style={{width: "10%"}}>
                                 Gender
-                            </th>
-                            <th  style={{width: "10%"}}>
-                                Religion
                             </th>
                                             
                             {/* <th style={{width: "20%"}}>
@@ -128,36 +119,35 @@ class ListPatientComponent extends Component {
                         {
                             this.state.patients.map(
                                 patient => 
-                                <tr key = {patient.uhid}>
-                                <td> {patient.uhid}</td>
+                                <tr key = {patient.samId}>
+                                <td> {patient.samId}</td>
                                 <td> {patient.name} </td>   
                                 <td> {patient.contact_no}</td>
-                                <td> {patient.dob}</td>
                                 {/* <td> {patient.bpl}</td> */}
 
-                                <td> {patient.sam_id} </td> 
-                                <td> {patient.rch_id}</td>  
+                                <td> {patient.uhid} </td> 
                                 <td> {patient.gender}</td>
-                                <td> {patient.religion}</td>
                                 {/* <td> {patient.caste}</td> */}
-                                <td class="project-actions text-right">
-                                <button onClick={ () => this.viewPatient(patient.uhid)} className="btn btn-primary btn-sm" style={{paddingLeft: "15px", paddingRight: "15px"}}>
-                                    <FontAwesomeIcon icon={faFolder} /><br></br>
-                                    View 
-                                </button>
-                                <br></br>
+                                {/* <td class="project-actions text-right">
+                                    <button onClick={ () => this.viewPatient(patient.uhid)} className="btn btn-primary btn-sm" >
+                                        <FontAwesomeIcon icon={faFolder} /><br></br>
+                                        View 
+                                    </button>
+                                </td> */}
 
-                                <button style={{marginTop: "0.5em"}} onClick={ () => this.editPatient(patient.uhid)} className="btn btn-info btn-sm">
-                                    <FontAwesomeIcon icon={faPencilAlt} /><br></br>
-                                    Update
-                                </button>
-                                <br></br>
-                                {/* <a class="btn btn-danger btn-sm" href="#"> */}
-                                <button style={{marginTop: "0.5em"}} onClick={ () => this.deletePatient(patient.uhid)} className="btn btn-danger btn-sm"> 
-                                    
-                                    <FontAwesomeIcon icon={faTrash} />
-                                    Delete 
-                                </button>
+                                <td>
+                                    <button style={{marginTop: "0.5em"}} onClick={ () => this.editPatient(patient.samId)} className="btn btn-info btn-sm">
+                                        <FontAwesomeIcon icon={faPencilAlt} /><br></br>
+                                        Update
+                                    </button>
+                                </td>
+                                    {/* <a class="btn btn-danger btn-sm" href="#"> */}
+                                <td>
+                                    <button style={{marginTop: "0.5em"}} onClick={ () => this.deletePatient(patient.samId)} className="btn btn-danger btn-sm"> 
+                                        
+                                        <FontAwesomeIcon icon={faTrash} />
+                                        Delete 
+                                    </button>
                                 {/* </a> */}
                             </td>
                                 

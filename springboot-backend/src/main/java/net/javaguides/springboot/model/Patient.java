@@ -35,8 +35,8 @@ public class Patient implements Serializable {
 		generator = "patient_sequence"
 	)
 	@Id
-	private Long uhid;
-	private Long sam_id, rch_id;
+	private Long samId;
+	private Long uhid, rch_id;
 	private String name;
 	private LocalDate dob;
 	@Transient  
@@ -56,12 +56,12 @@ public class Patient implements Serializable {
 
 	public Patient() {}
 	
-	public Patient(Long UHID, Long sam_id, Long rch_id, String name, LocalDate dob, String contact_no,
+	public Patient(Long UHID, Long rch_id, String name, LocalDate dob, String contact_no,
 	Character gender, Boolean bpl, String addr, String religion, String caste, String relationship, 
 	String symptoms, String refer, List<Double> health) {
 		this.uhid = UHID;
-		this.sam_id = sam_id;
-		this.rch_id = sam_id;
+		// this.samId = samId;
+		this.rch_id = samId;
 		this.bpl = bpl;
 		this.name = name;
 		this.dob = dob;
@@ -74,17 +74,12 @@ public class Patient implements Serializable {
 		this.symptoms = symptoms;
 		this.referred_by = refer;
 		this.religion = religion;
-
-		this.health_params.put("height", health.get(0));
-		this.health_params.put("width", health.get(1));
-		this.health_params.put("muac", health.get(2));
-		this.health_params.put("growth_status", health.get(3));
 	}
 
-	public Patient(Long UHID, Long sam_id, Long rch_id, String name, LocalDate dob, String contact_no,
+	public Patient(Long UHID, Long rch_id, String name, LocalDate dob, String contact_no,
 	Character gender, Boolean bpl, String addr, String religion, String symptoms, List<Double> health) {
 		this.uhid = UHID;
-		this.sam_id = sam_id;
+		// this.samId = samId;
 		this.rch_id = rch_id;
 		this.bpl = bpl;
 		this.name = name;
@@ -94,17 +89,12 @@ public class Patient implements Serializable {
 		this.address = addr;
 		this.symptoms = symptoms;
 		this.religion = religion;
-
-		this.health_params.put("height", health.get(0));
-		this.health_params.put("width", health.get(1));
-		this.health_params.put("muac", health.get(2));
-		this.health_params.put("growth_status", health.get(3));
 	}
 
 	public Long getUhid() { return this.uhid; }
 	public void setUhid(Long id) { this.uhid = id; }
-	public Long getSam_id() { return this.sam_id; }
-	public void setSam_id(Long id) { this.sam_id = id; }
+	public Long getSamId() { return this.samId; }
+	public void setSamId(Long id) { this.samId = id; }
 	public Long getRch_id() { return this.rch_id; }
 	public void setRch_id(Long id) { this.rch_id = id; }
 
@@ -169,14 +159,6 @@ public class Patient implements Serializable {
 
 	public void setReferred_by(String referred_by) {
 		this.referred_by = referred_by;
-	}
-
-	public HashMap<String, Double> getHealth_params() {
-		return health_params;
-	}
-
-	public void setHealth_params(HashMap<String, Double> health_params) {
-		this.health_params = health_params;
 	}
 
 	public String getCaste() {

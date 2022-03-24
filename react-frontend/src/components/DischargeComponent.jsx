@@ -7,10 +7,10 @@ import SideBarComponent from './SideBarComponent';
 class DischargeComponent extends Component {
     constructor(props) {
         super(props)
-
+        console.log(this.state)
         this.state = {
           dischargeId: 1,
-          samId: 0,
+          samId: this.samId,
           name: '',
           admissionDate: "2021-01-01",  
           dischargeDate: "2021-01-01",  
@@ -61,7 +61,6 @@ class DischargeComponent extends Component {
     changeTreatmentProtocolHandler= (event) => { this.setState({treatmentProtocol: event.target.value}); }
 
     componentDidMount(){  
-      console.log(this.state.UHID);
       return;
     }
 

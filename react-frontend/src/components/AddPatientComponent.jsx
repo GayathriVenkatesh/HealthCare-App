@@ -33,7 +33,7 @@ class AddPatientComponent extends Component {
     }
     this.changeNameHandler = this.changeNameHandler.bind(this);
     this.changeRch_idHandler = this.changeRch_idHandler.bind(this);
-    this.changeSam_idHandler = this.changeSam_idHandler.bind(this);
+    this.changeSamIdHandler = this.changeSamIdHandler.bind(this);
     this.changeUhidHandler = this.changeUhidHandler.bind(this);
     this.changeDobHandler = this.changeDobHandler.bind(this);
     this.changeBplHandler = this.changeBplHandler.bind(this);
@@ -60,7 +60,7 @@ createPatient = (e) => {
     e.preventDefault();
     let patient = {name: this.state.name, 
         UHID: this.state.UHID,  // we are not changing UHID
-        sam_id: this.state.SAM_ID, 
+        samId: this.state.SAM_ID, 
         rch_id: this.state.rch_id,
         dob: this.state.dob,          
         gender: this.state.gender,
@@ -79,7 +79,7 @@ createPatient = (e) => {
 
 changeNameHandler= (event) => { this.setState({name: event.target.value}); }
 changeRch_idHandler= (event) => { this.setState({rch_id: event.target.value}); }
-changeSam_idHandler= (event) => { this.setState({sam_id: event.target.value}); }
+changeSamIdHandler= (event) => { this.setState({samId: event.target.value}); }
 changeUhidHandler= (event) => { this.setState({UHID: event.target.value}); }
 
 changeDobHandler= (event) => { this.setState({dob: event.target.value}); }
@@ -126,12 +126,12 @@ cancel(){
                     <h3 class="card-title">Create New Patient</h3>
                   </div>
                   <div class="card-body">
-                    <div class="form-group">
+                    {/* <div class="form-group">
                       <label>Enter SAM ID</label>
-                      <input placeholder="SAM ID" name="sam_id" className="form-control" 
-                                                value={this.state.SAM_ID} onChange={this.changeSam_idHandler}/>
+                      <input placeholder="SAM ID" name="samId" className="form-control" 
+                                                value={this.state.SAM_ID} onChange={this.changeSamIdHandler}/>
                                     
-                    </div>
+                    </div> */}
     
                     <div class="form-group">
                       <label>Enter UHID ID</label>

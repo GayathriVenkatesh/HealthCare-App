@@ -34,7 +34,7 @@ public class Followup implements Serializable {
 	private String growth;
 	
 	@ManyToOne
-    @JoinColumn(name = "sam_id")
+    @JoinColumn(name = "samId")
     private Patient patient;
 
 	public Followup(Long followupId, Long samId, Long workerId, LocalDate deadline, LocalDate completedOn,

@@ -51,12 +51,12 @@ public class DischargeSummaryController {
 
     @RequestMapping(value = "/search-summary")
     @ResponseBody
-    public List<DischargeSummary> search(@RequestParam("sam_id") String sam_id, 
+    public List<DischargeSummary> search(@RequestParam("samId") String samId, 
                                 @RequestParam("discharge_id") String discharge_id,
                                 @RequestParam("name") String name
                                 // @RequestParam("discharge_date") LocalDate discharge_date
                             ) {
-        List<DischargeSummary> p = dischargeService.getByKeyword(sam_id, discharge_id, name);    
+        List<DischargeSummary> p = dischargeService.getByKeyword(discharge_id, name);    
         return p; 
     }
 

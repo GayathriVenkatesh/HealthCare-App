@@ -37,13 +37,13 @@ public class PatientController {
         return patientService.getPatients();
     }
 
-    @GetMapping("/delete-patient/{uhid}")
-    public List<Patient> deletePatient(@PathVariable Long uhid) { 
+    @GetMapping("/delete-patient/{samId}")
+    public List<Patient> deletePatient(@PathVariable Long samId) { 
         System.out.print("INSIDE THIS FUNC"); 
         List<Patient> p = patientService.getPatients();
         List<Patient> ans = new ArrayList<Patient>();
         for (Patient patient: p) {
-            if(patient.getUhid() != uhid) {
+            if(patient.getSamId() != samId) {
                 ans.add(patient);
             }
         }
@@ -69,10 +69,10 @@ public class PatientController {
         return p; 
     }
 
-    @GetMapping("/view-patient/{uhid}")
-	public ResponseEntity<Patient> getPatientById(@PathVariable Long uhid) {
-        System.out.print("ID PASSED ........" + uhid + "\n");
-		Patient p = patientService.getPatientById(uhid);	
+    @GetMapping("/view-patient/{samId}")
+	public ResponseEntity<Patient> getPatientById(@PathVariable Long samId) {
+        System.out.print("ID PASSED ........" + samId + "\n");
+		Patient p = patientService.getPatientById(samId);	
         System.out.print("PATIENT HERE "+ p);
         return ResponseEntity.ok(p);			
 	}
@@ -83,15 +83,15 @@ public class PatientController {
 	}
 
     @PutMapping("/edit-patient/{uhid}")
-	public ResponseEntity<Patient> updatePatient(@PathVariable Long uhid, @RequestBody Patient p) {
-        Patient patient = patientService.getPatientById(uhid);
+	public ResponseEntity<Patient> updatePatient(@PathVariable Long samId, @RequestBody Patient p) {
+        Patient patient = patientService.getPatientById(samId);
         patient.setName(p.getName());
         patient.setReligion(p.getReligion());
         patient.setBpl(p.getBpl());
         patient.setGender(p.getGender());
         patient.setCaste(p.getCaste());
         patient.setRch_id(p.getRch_id());
-        patient.setSam_id(p.getSam_id());
+        patient.setSamId(p.getSamId());
         patient.setAddress(p.getAddress());
         // LIKE THIS WRITE FOR ALL
 
