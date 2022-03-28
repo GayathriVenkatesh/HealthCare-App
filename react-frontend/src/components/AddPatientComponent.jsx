@@ -58,7 +58,7 @@ createPatient = (e) => {
     e.preventDefault();
     let patient = {name: this.state.name, 
         uhid: this.state.uhid,  
-        samId: this.state.SAM_ID, 
+        samId: this.state.samId, 
         rch_id: this.state.rch_id,
         dob: this.state.dob,          
         gender: this.state.gender,

@@ -68,8 +68,12 @@ class ListPatientComponentReceptionist extends Component {
     
     }
 
+    // addPatient(){
+    //     this.props.history.push('/add-patient');
+    // }
     addPatient(){
-        this.props.history.push('/add-patient');
+        var n = this.state.patients.length
+        this.props.history.push('/add-patient/' + (parseInt(n) + 1).toString());
     }
 
     render() {
@@ -173,6 +177,10 @@ class ListPatientComponentReceptionist extends Component {
             </div> 
                     </div>
         {/* </div> */}
+            <button className="btn btn-info btn-sm" onClick={ () => this.addPatient() } >                         
+                <FontAwesomeIcon icon={faPlus} />
+                    Add 
+            </button>
         </section>
         </div>    
         </div>

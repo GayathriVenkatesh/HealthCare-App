@@ -68,8 +68,7 @@ class SideBarComponent extends Component {
                             {/* </a> */}
                             
                             </li>
-                            <li className="nav-item">
-                            {/* <a href="/add-patient" className="nav-link"> */}
+                            {/* <li className="nav-item">
                             <NavLink to="/add-patient" exact activeClassName="nav-link active" className="nav-link">
                                 <i className="nav-icon fas fa-plus"></i>
                                 <p>
@@ -77,8 +76,7 @@ class SideBarComponent extends Component {
                                 <i className="fas fa-angle-left right"></i>
                                 </p>
                             </NavLink>
-                            {/* </a> */}
-                            </li>
+                            </li> */}
                         </ul>
                         </nav>
                     </aside>

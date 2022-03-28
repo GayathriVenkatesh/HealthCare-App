@@ -37,7 +37,7 @@ public class HealthStatus implements Serializable {
 	private String growthStatus;
     private String otherSymptoms; 
 	private LocalDate date;
-	// private Boolean discharged;
+	// private Boolean discharged
 
 	@JsonBackReference
 	@ManyToOne

@@ -2,6 +2,7 @@ package net.javaguides.springboot.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,7 @@ public class DischargeSummary implements Serializable {
 	private LocalDate admissionDate, dischargeDate;
 	private Double admissionWeight, targetWeight, dischargeWeight;
 	private String outcome, treatmentProtocol;
+	private LocalDateTime createdDate;
 
 	@JsonBackReference
 	@ManyToOne
@@ -45,10 +47,10 @@ public class DischargeSummary implements Serializable {
 	public DischargeSummary() {
 	}
 	
-	public DischargeSummary(Long dischargeId, LocalDate admissionDate, LocalDate dischargeDate,
+	public DischargeSummary(LocalDate admissionDate, LocalDate dischargeDate,
 			Double admissionWeight, Double targetWeight, Double dischargeWeight, String outcome,
 			String treatmentProtocol) {
-		this.dischargeId = dischargeId;
+		// this.dischargeId = dischargeId;
 		// this.name = name;
 		this.admissionDate = admissionDate;
 		this.dischargeDate = dischargeDate;

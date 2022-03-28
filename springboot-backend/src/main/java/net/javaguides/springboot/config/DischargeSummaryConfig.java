@@ -15,12 +15,12 @@ public class DischargeSummaryConfig {
     CommandLineRunner commandLineRunner2(DischargeSummaryRepository repo) {
         return args -> {
             DischargeSummary d1 = new DischargeSummary(
-				1234L, LocalDate.of(2021, 7, 5), LocalDate.of(2021, 8, 1),
+				LocalDate.of(2021, 7, 5), LocalDate.of(2021, 8, 1),
 				35.0, 42.0, 39.0, "poor", ""
 			);
 
             DischargeSummary d2 = new DischargeSummary(
-				1234L, LocalDate.of(2021, 7, 5), LocalDate.of(2021, 8, 1),
+				LocalDate.of(2021, 7, 5), LocalDate.of(2021, 8, 1),
 				35.0, 42.0, 39.0, "poor", ""
 			);
 

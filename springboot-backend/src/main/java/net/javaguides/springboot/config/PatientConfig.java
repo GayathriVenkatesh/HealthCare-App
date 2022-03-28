@@ -22,14 +22,14 @@ public class PatientConfig {
 				"Hindu", "None", List.of(130.0, 32.0, 12.0, 0.0)
 			);
 
-            Patient bob = new Patient(
-				1234L, 4566L, "Bob",
-				LocalDate.of(2010, 9, 5),
-				"7022029113",'M', false, "Indiranagar",
-				"Christian", "None", List.of(130.0, 32.0, 12.2, 0.0)
-			);
+            // Patient bob = new Patient(
+			// 	1234L, 4566L, "Bob",
+			// 	LocalDate.of(2010, 9, 5),
+			// 	"7022029113",'M', false, "Indiranagar",
+			// 	"Christian", "None", List.of(130.0, 32.0, 12.2, 0.0)
+			// );
 
-            repo.saveAll(List.of(aruna, bob));
+            repo.saveAll(List.of(aruna));
         };
     } 
 }
