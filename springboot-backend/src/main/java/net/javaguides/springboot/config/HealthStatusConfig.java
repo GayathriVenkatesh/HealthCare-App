@@ -16,13 +16,15 @@ public class HealthStatusConfig {
 
         return args -> {
             HealthStatus hs1 = new HealthStatus(
-				1234L, 145.0F, 32.0F,
+				LocalDate.of(2010, 9, 4),
+                145.0F, 32.0F,
                 12.0F, "Status 1",
                 "cough"
 			);
 
             HealthStatus hs2 = new HealthStatus(
-				2534L, 147.0f, 22.0f,
+				LocalDate.of(2010, 8, 6),
+                147.0f, 22.0f, 
                 12.0f, "Status 2",
                 "nil"
 			);

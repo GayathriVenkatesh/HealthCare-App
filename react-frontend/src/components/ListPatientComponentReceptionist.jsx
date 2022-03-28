@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
-import PatientService from '../services/PatientService'
-import { faHome, faPencilAlt, faTrash, faFolder } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SideBarComponent from './SideBarComponent';
+import { faHome, faPencilAlt, faTrash, faFolder, faPlus, faEye, faUserMd } from "@fortawesome/free-solid-svg-icons";
+import React, { Component } from 'react';
+import PatientService from '../services/PatientService';
+import "./dist/css/adminlte.min.css";
 // import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback";
 import "./plugins/fontawesome-free/css/all.min.css";
-import "./dist/css/adminlte.min.css"
 import SearchFilterComponent from './SearchFilterComponent';
 import SideBarComponentReceptionist from './SideBarComponentReceptionist';
 
@@ -34,6 +33,13 @@ class ListPatientComponentReceptionist extends Component {
         console.log("CURRENT UHID", samId);
         this.props.history.push(`/edit-patient-receptionist/${samId}`);
     }
+    followUp(samId){
+        this.props.history.push(`/followup-receptionist/${samId}`);
+    }
+    // discharge(samId){
+    //     this.props.history.push(`/discharge-history/${samId}`);
+    // }
+
 
     componentDidMount(){
         
@@ -85,90 +91,86 @@ class ListPatientComponentReceptionist extends Component {
                     </div> */}
                 </div>
 
-            <div class="card-body p-0">
+                <div class="card-body p-0">
                 
-                    <table class="table table-striped projects">
-                    <thead>
-                        <tr>
-                            {/* <th style={{width: "1%"}}>
-                            </th> */}
-                            <th style={{width: "10%"}}>
-                                UHID
-                            </th>
-                            <th style={{width: "10%"}}>
-                                Name
-                            </th>
-                            <th  style={{width: "15%"}}>
-                                Contact No
-                            </th>
-                            <th  style={{width: "15%"}}>
-                                DOB
-                            </th>
-                            {/* <th  style={{width: "5%"}}>
-                                BPL
-                            </th> */}
-                            <th style={{width: "10%"}}>
-                                SAM ID
-                            </th>
-                            <th  style={{width: "10%"}}>
-                                RCH ID
-                            </th>
-                            <th  style={{width: "10%"}}>
-                                Gender
-                            </th>
-                            <th  style={{width: "10%"}}>
-                                Religion
-                            </th>
-                                            
-                            {/* <th style={{width: "20%"}}>
-                                Caste
-                            </th> */}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.state.patients.map(
-                                patient => 
-                                <tr key = {patient.samId}>
-                                <td> {patient.uhid}</td>
-                                <td> {patient.name} </td>   
-                                <td> {patient.contact_no}</td>
-                                <td> {patient.dob}</td>
-                                {/* <td> {patient.bpl}</td> */}
+                <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        {/* <th style={{width: "1%"}}>
+                        </th> */}
+                        <th style={{width: "20%"}}>
+                            Patient ID
+                        </th>
+                        <th style={{width: "20%"}}>
+                            Name
+                        </th>
+                        <th  style={{width: "20%"}}>
+                            Contact No
+                        </th>
+                        {/* <th  style={{width: "5%"}}>
+                            BPL
+                        </th> */}
+                        <th style={{width: "20%"}}>
+                            UHID
+                        </th>
+                        <th  style={{width: "10%"}}>
+                            Gender
+                        </th>
+                                        
+                        {/* <th style={{width: "20%"}}>
+                            Caste
+                        </th> */}
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        this.state.patients.map(
+                            patient => 
+                            <tr key = {patient.samId} >
+                            {/* // onClick={ () => this.viewPatient(patient.samId)} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover} style={linkStyle}>  */}
+                            <td> {patient.samId}</td>
+                            <td> {patient.name} </td>   
+                            <td> {patient.contact_no}</td>
+                            {/* <td> {patient.bpl}</td> */}
 
-                                <td> {patient.samId} </td> 
-                                <td> {patient.rch_id}</td>  
-                                <td> {patient.gender}</td>
-                                <td> {patient.religion}</td>
-                                {/* <td> {patient.caste}</td> */}
-                                <td class="project-actions text-right">
-                                <button onClick={ () => this.viewPatient(patient.samId)} className="btn btn-primary btn-sm" style={{paddingLeft: "15px", paddingRight: "15px"}}>
-                                    <FontAwesomeIcon icon={faFolder} /><br></br>
-                                    View 
-                                </button>
-                                <br></br>
+                            <td> {patient.uhid} </td> 
+                            <td> {patient.gender}</td>
+                            {/* <td> {patient.caste}</td> */}
+                            <td>
+                                    <button onClick={ () => this.viewPatient(patient.samId)} className="btn btn-success btn-sm" style={{marginRight: "-10px"}}>
+                                        <FontAwesomeIcon icon={faEye} />
+                                    </button>
+                                </td>
+                                {/* <td>
+                                    <button onClick={ () => this.editPatient(patient.samId)} className="btn btn-info btn-sm" style={{marginRight: "-10px"}}>
+                                        <FontAwesomeIcon icon={faPencilAlt} />
+                                    </button>
+                                </td>
+                                <td>
+                                    <button onClick={ () => this.deletePatient(patient.samId)} className="btn btn-danger btn-sm" style={{marginRight: "-10px"}}>  
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </button>
+                                </td> */}
 
-                                <button style={{marginTop: "0.5em"}} onClick={ () => this.editPatient(patient.samId)} className="btn btn-info btn-sm">
-                                    <FontAwesomeIcon icon={faPencilAlt} /><br></br>
-                                    Update
-                                </button>
-                                <br></br>
-                                {/* <a class="btn btn-danger btn-sm" href="#"> */}
-                                <button style={{marginTop: "0.5em"}} onClick={ () => this.deletePatient(patient.samId)} className="btn btn-danger btn-sm"> 
-                                    
-                                    <FontAwesomeIcon icon={faTrash} />
-                                    Delete 
-                                </button>
-                                {/* </a> */}
-                            </td>
-                                
-                        </tr>
-                                )
-                            }
-                        </tbody>
-                    </table>
-                       
-                </div>
+                                <td>
+                                    <button onClick={ () => this.followUp(patient.samId)} className="btn btn-warning btn-sm" style={{marginRight: "-10px"}}>
+                                        <FontAwesomeIcon icon={faUserMd} />
+                                    </button>
+                                </td>
+                                {/* <td>
+                                    <button onClick={ () => this.discharge(patient.samId)} className="btn btn-danger btn-sm">  
+                                        <FontAwesomeIcon icon={faPlus} />
+                                    </button>
+                                </td> */}
+                            
+                            
+                    </tr>
+                            )
+                        }
+                    </tbody>
+                </table>
+                   
+            </div> 
                     </div>
         {/* </div> */}
         </section>

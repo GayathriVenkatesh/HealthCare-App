@@ -7,8 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "healthStatus")
@@ -29,9 +36,23 @@ public class HealthStatus implements Serializable {
     private Float muac;
 	private String growthStatus;
     private String otherSymptoms; 
+	private LocalDate date;
+	// private Boolean discharged;
 
+	@JsonBackReference
+	@ManyToOne
+    @JoinColumn(name = "samId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Patient patient;
+	
 	public Long getHsId() {
 		return hsId;
+	}
+	public LocalDate getDate() {
+		return date;
+	}
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 	public void setHsId(Long hsId) {
 		this.hsId = hsId;
@@ -66,8 +87,8 @@ public class HealthStatus implements Serializable {
 	public void setOtherSymptoms(String otherSymptoms) {
 		this.otherSymptoms = otherSymptoms;
 	}
-	public HealthStatus(Long hsId, Float height, Float weight, Float muac, String growthStatus, String otherSymptoms) {
-		this.hsId = hsId;
+	public HealthStatus(LocalDate date, Float height, Float weight, Float muac, String growthStatus, String otherSymptoms) {
+		this.date = date;
 		this.height = height;
         this.weight = weight;
         this.muac = muac;
@@ -75,6 +96,16 @@ public class HealthStatus implements Serializable {
         this.otherSymptoms = otherSymptoms;
 	}
 	public HealthStatus() {
+	}
+	public Patient getPatient() {
+		return patient;
+	}
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+	@Override
+	public String toString() {
+		return height + " " + weight + " " + muac + " " + growthStatus;
 	}
 }
 

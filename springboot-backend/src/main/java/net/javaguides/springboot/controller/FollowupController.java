@@ -42,37 +42,51 @@ public class FollowupController {
         return ResponseEntity.ok(p);			
 	}
 
+    @GetMapping("/view-patient-followup/{samId}")
+	public List<Followup> getFollowupBySamId(@PathVariable Long samId) {
+		return followupService.getFollowupBySamId(samId);	
+	}
+
+    @GetMapping("/view-worker-followup/{workerId}")
+	public List<Followup> getFollowupByWorkerId(@PathVariable Long workerId) {
+		return followupService.getFollowupByWorkerId(workerId);	
+	}
+
     @GetMapping("/view-health-record/{followupId}")
 	public ResponseEntity<Object> getHealthRecord(@PathVariable Long followupId) {
 		Object p = followupService.getHealthRecord(followupId);	
         return ResponseEntity.ok(p);			
 	}
 
-    @PostMapping("/followup")
-	public void addFollowup(@RequestBody Followup p) {
-		followupService.addFollowup(p);
+    @PostMapping("/followup/{samId}")
+	public Followup addFollowup(@PathVariable Long samId, @RequestBody Followup p) {
+		return followupService.addFollowup(samId, p);
 	}
-
-    @PutMapping("/edit-followup/{followupId}")
-	public ResponseEntity<Followup> updateFollowup(@PathVariable Long followupId, @RequestBody Followup p) {
+    
+    @PutMapping("/edit-followup/{samId}/{followupId}")
+	public ResponseEntity<Followup> updateFollowup(@PathVariable Long samId, @PathVariable Long followupId, @RequestBody Followup p) {
         Followup followup = followupService.getFollowupById(followupId);
-        followup.setWorkerId(p.getWorkerId());
+        // followup.setWorkerId(p.getWorkerId());
         followup.setDeadline(p.getDeadline());
         followup.setCompletedOn(p.getCompletedOn());
         followup.setCompleted(p.getCompleted());
-
-        followupService.addFollowup(followup);
+        followup.setLocation(p.getLocation());
+        followup.setHeight(p.getHeight());
+        followup.setWeight(p.getWeight());
+        followup.setMuac(p.getMuac());
+        followup.setGrowthStatus(p.getGrowthStatus());
+        followupService.addFollowup(samId, followup);
         return ResponseEntity.ok(followup);
     }
 
-    @RequestMapping(value = "/search-followup")
-    @ResponseBody
-    public List<Followup> search(@RequestParam("workerId") String workerId,
-                                @RequestParam("completed") String completed
-                            ) {
-        List<Followup> p = followupService.getByKeyword(workerId, completed);    
-        return p; 
-    }
+    // @RequestMapping(value = "/search-followup")
+    // @ResponseBody
+    // public List<Followup> search(@RequestParam("workerId") String workerId,
+    //                             @RequestParam("completed") String completed
+    //                         ) {
+    //     List<Followup> p = followupService.getByKeyword(workerId, completed);    
+    //     return p; 
+    // }
 
     @GetMapping("/delete-followup/{followup_id}")
     public List<Followup> deleteFollowup(@PathVariable Long followup_id) { 

@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.javaguides.springboot.model.DischargeSummary;
@@ -37,6 +35,11 @@ public class DischargeSummaryController {
         return dischargeService.getDischargeSummaries();
     }
 
+    @GetMapping("/view-discharge-summary-patient/{samId}")
+	public List<DischargeSummary> getDischargeSummaryBySamId(@PathVariable Long samId) {
+		return dischargeService.getDischargeSummaryBySamId(samId);	
+	}
+
     @GetMapping("/delete-discharge-summary/{discharge_id}")
     public List<DischargeSummary> deleteDischargeSummary(@PathVariable Long discharge_id) { 
         List<DischargeSummary> p = dischargeService.getDischargeSummaries();
@@ -49,16 +52,16 @@ public class DischargeSummaryController {
         return ans;
     }   
 
-    @RequestMapping(value = "/search-summary")
-    @ResponseBody
-    public List<DischargeSummary> search(@RequestParam("samId") String samId, 
-                                @RequestParam("discharge_id") String discharge_id,
-                                @RequestParam("name") String name
-                                // @RequestParam("discharge_date") LocalDate discharge_date
-                            ) {
-        List<DischargeSummary> p = dischargeService.getByKeyword(discharge_id, name);    
-        return p; 
-    }
+    // @RequestMapping(value = "/search-summary")
+    // @ResponseBody
+    // public List<DischargeSummary> search(@RequestParam("samId") String samId, 
+    //                             @RequestParam("discharge_id") String discharge_id,
+    //                             @RequestParam("name") String name
+    //                             // @RequestParam("discharge_date") LocalDate discharge_date
+    //                         ) {
+    //     List<DischargeSummary> p = dischargeService.getByKeyword(discharge_id, name);    
+    //     return p; 
+    // }
 
     @GetMapping("/view-discharge-summary/{discharge_id}")
 	public ResponseEntity<DischargeSummary> getDischargeSummaryById(@PathVariable Long discharge_id) {
@@ -66,25 +69,25 @@ public class DischargeSummaryController {
         return ResponseEntity.ok(d);			
 	}
 
-    @PostMapping("/discharge-summary")
-	public void addDischargeSummary(@RequestBody DischargeSummary d) {
-		dischargeService.addDischargeSummary(d);
+    @PostMapping("/discharge-summary/{samId}")
+	public void addDischargeSummary(@PathVariable Long samId, @RequestBody DischargeSummary d) {
+		dischargeService.addDischargeSummary(samId, d);
 	}
 
-    @PutMapping("/edit-discharge-summary/{discharge_id}")
-	public ResponseEntity<DischargeSummary> updateDischargeSummary(@PathVariable Long discharge_id, @RequestBody DischargeSummary d) {
+    @PutMapping("/edit-discharge-summary/{samId}/{discharge_id}")
+	public ResponseEntity<DischargeSummary> updateDischargeSummary(@PathVariable Long samId, @PathVariable Long discharge_id, @RequestBody DischargeSummary d) {
         DischargeSummary discharge = dischargeService.getDischargeSummaryById(discharge_id);
-        discharge.setName(d.getName());
+        // discharge.setName(d.getName());
         discharge.setAdmissionDate(d.getAdmissionDate());
         discharge.setDischargeDate(d.getDischargeDate());
         discharge.setAdmissionWeight(d.getAdmissionWeight());
         discharge.setDischargeWeight(d.getDischargeWeight());
         discharge.setTargetWeight(d.getTargetWeight());
-        discharge.setContactNo(d.getContactNo());
+        // discharge.setContactNo(d.getContactNo());
         discharge.setTreatmentProtocol(d.getTreatmentProtocol());
         discharge.setOutcome(d.getOutcome());
 
-        dischargeService.addDischargeSummary(discharge);
+        dischargeService.addDischargeSummary(samId, discharge);
         return ResponseEntity.ok(discharge);
     }
 }

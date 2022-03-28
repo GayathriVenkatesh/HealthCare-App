@@ -7,11 +7,10 @@ package net.javaguides.springboot.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 // import javax.persistence.*;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "patient")
@@ -46,22 +47,27 @@ public class Patient implements Serializable {
 	private String address, religion, caste, relationship, symptoms, referred_by;
 	private String contact_no;
 
-	private HashMap<String, Double> health_params = new HashMap<String, Double>();
+	// private HashMap<String, Double> health_params = new HashMap<String, Double>();
 
+	@JsonManagedReference
     @OneToMany(mappedBy = "patient")
-    private Set<Followup> followups = new HashSet<>();
+    private List<Followup> followups = new ArrayList<Followup>();
 
 	@OneToMany(mappedBy = "patient")
-    private Set<Followup> discharge_summaries = new HashSet<>();
+    private List<DischargeSummary> discharge_summaries = new ArrayList<DischargeSummary>();
+
+	@OneToMany(mappedBy = "patient")
+    private List<HealthStatus> health_records = new ArrayList<HealthStatus>();
 
 	public Patient() {}
 	
 	public Patient(Long UHID, Long rch_id, String name, LocalDate dob, String contact_no,
 	Character gender, Boolean bpl, String addr, String religion, String caste, String relationship, 
-	String symptoms, String refer, List<Double> health) {
+	String symptoms, String refer, Float height, Float weight, Float muac, String growthStatus, LocalDate admission, 
+	String other_symptoms) {
 		this.uhid = UHID;
 		// this.samId = samId;
-		this.rch_id = samId;
+		this.rch_id = rch_id;
 		this.bpl = bpl;
 		this.name = name;
 		this.dob = dob;
@@ -74,6 +80,8 @@ public class Patient implements Serializable {
 		this.symptoms = symptoms;
 		this.referred_by = refer;
 		this.religion = religion;
+
+		this.health_records.add(new HealthStatus(admission, height, weight, muac, growthStatus, other_symptoms));
 	}
 
 	public Patient(Long UHID, Long rch_id, String name, LocalDate dob, String contact_no,
@@ -107,7 +115,7 @@ public class Patient implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Patient:" + "\nName: " + name +
+		return "Patient:" + "\nName: " + name + " " + health_records + 
 		"\nDOB:" + dob + "\nAge: " + age + 
 		"\nAddress: " + address + "\nRelation: " + relationship + ", referred by=" + referred_by
 		+ ", symptoms=" + symptoms + ", religion=" + religion + ", caste=" + caste + '}';
@@ -175,6 +183,30 @@ public class Patient implements Serializable {
 
 	public void setRelationship(String relationship) {
 		this.relationship = relationship;
+	}
+
+	public List<Followup> getFollowups() {
+		return followups;
+	}
+
+	public void setFollowups(List<Followup> followups) {
+		this.followups = followups;
+	}
+
+	public List<DischargeSummary> getDischarge_summaries() {
+		return this.discharge_summaries;
+	}
+
+	public void setDischarge_summaries(List<DischargeSummary> discharge_summaries) {
+		this.discharge_summaries = discharge_summaries;
+	}
+
+	public List<HealthStatus> getHealth_records() {
+		return health_records;
+	}
+
+	public void setHealth_records(List<HealthStatus> health_records) {
+		this.health_records = health_records;
 	}
 }
 

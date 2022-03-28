@@ -16,15 +16,15 @@ public class FollowupConfig {
 
         return args -> {
             Followup f1 = new Followup(
-				1254L, 4566L,
-				LocalDate.of(2000, 9, 5),
+				1254L, LocalDate.of(2000, 9, 5),
+                "Indiranagar",
                 LocalDate.of(2000, 9, 5),
                 true
 			);
 
             Followup f2 = new Followup(
-				1274L, 4576L,
-				LocalDate.of(2010, 9, 5),
+				1274L, LocalDate.of(2010, 9, 5),
+                "Koramangala",
                 LocalDate.of(2010, 9, 5),
                 false
 			);

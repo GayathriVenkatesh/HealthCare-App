@@ -9,7 +9,7 @@ class UpdatePatientComponent extends Component {
             // UHID: this.props.match.params.id,
             samId: window.location.pathname.split("/")[2],
             name: '',
-            UHID: 0, 
+            uhid: 0, 
             rch_id: 0,
             dob: "2021-01-01",          
             age: 0,
@@ -26,8 +26,7 @@ class UpdatePatientComponent extends Component {
         }
         this.changeNameHandler = this.changeNameHandler.bind(this);
         this.changeRCHHandler = this.changeRCHHandler.bind(this);
-        this.changeSAMHandler = this.changeSAMHandler.bind(this);
-        this.changeUHIDHandler = this.changeUHIDHandler.bind(this);
+        this.changeUhidHandler = this.changeUhidHandler.bind(this);
         this.changeDOBHandler = this.changeDOBHandler.bind(this);
         this.changeBplHandler = this.changeBplHandler.bind(this);
 
@@ -40,18 +39,16 @@ class UpdatePatientComponent extends Component {
         this.changeGenderHandler = this.changeGenderHandler.bind(this);
         this.changeAddressHandler = this.changeAddressHandler.bind(this);
         this.changeRelationshipHandler = this.changeRelationshipHandler.bind(this);
-        this.changeHealthHandler = this.changeHealthHandler.bind(this);
+        // this.changeHealthHandler = this.changeHealthHandler.bind(this);
         this.updatePatient = this.updatePatient.bind(this);
     }
 
     componentDidMount(){
         PatientService.getPatientById(this.state.samId).then( (res) => {
             let patient = res.data;
-            console.log("I AM HERE", patient);
-            console.log("SAM ID", patient.samId);
                 this.setState({
                     name: patient.name,
-                    UHID: patient.uhid,  // we are not changing UHID
+                    uhid: patient.uhid, 
                     SAM_ID: this.state.samId, 
                     rch_id: patient.rch_id,
                     dob: patient.dob,          
@@ -68,7 +65,7 @@ class UpdatePatientComponent extends Component {
     updatePatient = (e) => {
         e.preventDefault();
         let patient = {name: this.state.name, 
-            UHID: this.state.UHID,  // we are not changing UHID
+            uhid: this.state.uhid,  // we are not changing UHID
             rch_id: this.state.rch_id,
             dob: this.state.dob,          
             gender: this.state.gender,
@@ -90,7 +87,7 @@ class UpdatePatientComponent extends Component {
     changeNameHandler= (event) => { this.setState({name: event.target.value}); }
     changeRCHHandler= (event) => { this.setState({rch_id: event.target.value}); }
     changeSAMHandler= (event) => { this.setState({samId: event.target.value}); }
-    changeUHIDHandler= (event) => { this.setState({UHID: event.target.value}); }
+    changeUhidHandler= (event) => { this.setState({uhid: event.target.value}); }
 
     changeDOBHandler= (event) => { this.setState({dob: event.target.value}); }
     changeGenderHandler= (event) => { this.setState({gender: event.target.value}); }
@@ -146,7 +143,7 @@ console.log("BPL IS", this.state.bpl)}
                     <div class="form-group">
                       <label>Enter UHID</label>
                       <input placeholder="UHID" name="UHID" className="form-control" 
-                                                value={this.state.UHID} onChange={this.changeUhidHandler}/>            
+                                                value={this.state.uhid} onChange={this.changeUhidHandler}/>            
                     </div>
     
                     <div class="form-group">
@@ -291,104 +288,6 @@ console.log("BPL IS", this.state.bpl)}
         </section>
         </div>
         </div>
-
-        
-            // <div>
-            //     <br></br>
-            //        <div className = "container">
-            //             <div className = "row">
-            //                 <div className = "card col-md-6 offset-md-3 offset-md-3">
-            //                     <h3 className="text-center">Update Patient</h3>
-            //                     <div className = "card-body">
-            //                     <form>
-            //                         <div className = "form-group">
-            //                             <label> Full Name: </label>
-            //                             <input placeholder="Full Name" name="name" className="form-control" 
-            //                                 value={this.state.name} onChange={this.changeNameHandler}/>
-            //                         </div>
-            //                         <div className = "form-group">
-            //                             <label> UHID: </label>
-            //                             <input placeholder="UHID" name="UHID" className="form-control" 
-            //                                 value={this.state.UHID} onChange={this.changeUHIDHandler}/>
-            //                         </div>
-            //                         <div className = "form-group">
-            //                             <label> RCH ID: </label>
-            //                             <input placeholder="rch_id" name="rch_id" className="form-control" 
-            //                                 value={this.state.rch_id} onChange={this.changeRCHHandler}/>
-            //                         </div>
-            //                         <div className = "form-group">
-            //                             <label> SAM ID: </label>
-            //                             <input placeholder="samId" name="samId" className="form-control" 
-            //                                 value={this.state.samId} onChange={this.changeSAMHandler}/>
-            //                         </div>
-            //                         <div className = "form-group">
-            //                             <label> Date of Birth: </label>
-            //                             <input placeholder="Date of birth" name="dob" className="form-control" 
-            //                                 value={this.state.dob} onChange={this.changeDOBHandler}/>
-            //                         </div>
-            //                         <div className = "form-group">
-            //                             <label> Gender: </label>
-            //                             <input placeholder="Gender" name="gender" className="form-control" 
-            //                                 value={this.state.gender} onChange={this.changeGenderHandler}/>
-            //                         </div>
-            //                         <div className = "form-group">
-            //                             <label> BPL / APL: </label>
-            //                             <input placeholder="bpl" name="bpl" className="form-control" 
-            //                                 value={this.state.bpl} onChange={this.changeBplHandler}/>
-            //                         </div>
-            //                         <div className = "form-group">
-            //                             <label> Contact Number: </label>
-            //                             <input placeholder="Contact No" name="contact_no" className="form-control" 
-            //                                 value={this.state.contact_no} onChange={this.changeContactHandler}/>
-            //                         </div>
-
-            //                         <div className = "form-group">
-            //                             <label> Address: </label>
-            //                             <input placeholder="Address" name="address" className="form-control" 
-            //                                 value={this.state.address} onChange={this.changeAddressHandler}/>
-            //                         </div>
-            //                         <div className = "form-group">
-            //                             <label> Religion: </label>
-            //                             <input placeholder="Religion" name="religion" className="form-control" 
-            //                                 value={this.state.religion} onChange={this.changeReligionHandler}/>
-            //                         </div>
-            //                         <div className = "form-group">
-            //                             <label> Caste: </label>
-            //                             <input placeholder="Caste" name="caste" className="form-control" 
-            //                                 value={this.state.caste} onChange={this.changeCasteHandler}/>
-            //                         </div>
-
-            //                         <div className = "form-group">
-            //                             <label> Relationship: </label>
-            //                             <input placeholder="Relationship" name="relationship" className="form-control" 
-            //                                 value={this.state.relationship} onChange={this.changeRelationshipHandler}/>
-            //                         </div>
-            //                         <div className = "form-group">
-            //                             <label> Symptoms: </label>
-            //                             <input placeholder="Symptoms" name="symptoms" className="form-control" 
-            //                                 value={this.state.symptoms} onChange={this.changeSymptomsHandler}/>
-            //                         </div>
-            //                         <div className = "form-group">
-            //                             <label> Referred By: </label>
-            //                             <input placeholder="Referred By" name="referred by" className="form-control" 
-            //                                 value={this.state.referred_by} onChange={this.changeReferredByHandler}/>
-            //                         </div>
-            //                         {/* <div className = "form-group">
-            //                             <label> Health Parameters: </label>
-            //                             <input placeholder="Health" name="health" className="form-control" 
-            //                                 value={this.state.health_params} onChange={this.changeHealthHandler}/>
-            //                         </div> */}
-
-
-            //                         <button className="btn btn-success" onClick={this.updatePatient}>Save</button>
-            //                         <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
-            //                     </form>
-            //                     </div>
-            //                 </div>
-            //             </div>
-
-            //        </div>
-            // </div>
         )
     }
 }

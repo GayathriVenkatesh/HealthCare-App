@@ -10,7 +10,7 @@ class UpdatePatientComponentReceptionist extends Component {
             // UHID: this.props.match.params.id,
             samId: window.location.pathname.split("/")[2],
             name: '',
-            UHID: 0, 
+            uhid: 0, 
             rch_id: 0,
             dob: "2021-01-01",          
             age: 0,
@@ -28,7 +28,7 @@ class UpdatePatientComponentReceptionist extends Component {
         this.changeNameHandler = this.changeNameHandler.bind(this);
         this.changeRCHHandler = this.changeRCHHandler.bind(this);
         this.changeSAMHandler = this.changeSAMHandler.bind(this);
-        this.changeUHIDHandler = this.changeUHIDHandler.bind(this);
+        this.changeUhidHandler = this.changeUhidHandler.bind(this);
         this.changeDOBHandler = this.changeDOBHandler.bind(this);
         this.changeBplHandler = this.changeBplHandler.bind(this);
 
@@ -41,7 +41,7 @@ class UpdatePatientComponentReceptionist extends Component {
         this.changeGenderHandler = this.changeGenderHandler.bind(this);
         this.changeAddressHandler = this.changeAddressHandler.bind(this);
         this.changeRelationshipHandler = this.changeRelationshipHandler.bind(this);
-        this.changeHealthHandler = this.changeHealthHandler.bind(this);
+        // this.changeHealthHandler = this.changeHealthHandler.bind(this);
         this.updatePatient = this.updatePatient.bind(this);
     }
 
@@ -52,7 +52,7 @@ class UpdatePatientComponentReceptionist extends Component {
             console.log("SAM ID", patient.samId);
                 this.setState({
                     name: patient.name,
-                    UHID: patient.UHID,  // we are not changing UHID
+                    uhid: patient.uhid,  // we are not changing UHID
                     SAM_ID: this.state.samId, 
                     rch_id: patient.rch_id,
                     dob: patient.dob,          
@@ -69,7 +69,7 @@ class UpdatePatientComponentReceptionist extends Component {
     updatePatient = (e) => {
         e.preventDefault();
         let patient = {name: this.state.name, 
-            UHID: this.state.UHID,  
+            uhid: this.state.uhid,  
             rch_id: this.state.rch_id,
             dob: this.state.dob,          
             gender: this.state.gender,
@@ -88,7 +88,7 @@ class UpdatePatientComponentReceptionist extends Component {
     changeNameHandler= (event) => { this.setState({name: event.target.value}); }
     changeRCHHandler= (event) => { this.setState({rch_id: event.target.value}); }
     changeSAMHandler= (event) => { this.setState({samId: event.target.value}); }
-    changeUHIDHandler= (event) => { this.setState({UHID: event.target.value}); }
+    changeUhidHandler= (event) => { this.setState({uhid: event.target.value}); }
 
     changeDOBHandler= (event) => { this.setState({dob: event.target.value}); }
     changeGenderHandler= (event) => { this.setState({gender: event.target.value}); }
@@ -145,7 +145,7 @@ console.log("BPL IS", this.state.bpl)}
                     <div class="form-group">
                       <label>Enter UHID ID</label>
                       <input placeholder="UHID" name="UHID" className="form-control" 
-                                                value={this.state.UHID} onChange={this.changeUhidHandler}/>            
+                                                value={this.state.uhid} onChange={this.changeUhidHandler}/>            
                     </div>
     
                     <div class="form-group">

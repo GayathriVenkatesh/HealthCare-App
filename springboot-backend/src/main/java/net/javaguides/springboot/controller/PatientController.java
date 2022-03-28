@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.javaguides.springboot.model.Patient;
+import net.javaguides.springboot.model.HealthStatus;
 import net.javaguides.springboot.service.PatientService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -79,10 +80,13 @@ public class PatientController {
 
     @PostMapping("/view-patients")
 	public void addPatient(@RequestBody Patient p) {
+        System.out.println("PATEINT IS " + p);
 		patientService.addPatient(p);
+        // List<HealthStatus> h = p.getHealth_records();
+        // healthStatusService.addHealthStatus(p.getSamId(),)
 	}
 
-    @PutMapping("/edit-patient/{uhid}")
+    @PutMapping("/edit-patient/{samId}")
 	public ResponseEntity<Patient> updatePatient(@PathVariable Long samId, @RequestBody Patient p) {
         Patient patient = patientService.getPatientById(samId);
         patient.setName(p.getName());
@@ -91,7 +95,7 @@ public class PatientController {
         patient.setGender(p.getGender());
         patient.setCaste(p.getCaste());
         patient.setRch_id(p.getRch_id());
-        patient.setSamId(p.getSamId());
+        patient.setUhid(p.getUhid());
         patient.setAddress(p.getAddress());
         // LIKE THIS WRITE FOR ALL
 

@@ -4,7 +4,9 @@ import java.util.List;
 
 import net.javaguides.springboot.exception.ResourceNotFoundException;
 import net.javaguides.springboot.model.HealthStatus;
+import net.javaguides.springboot.model.Patient;
 import net.javaguides.springboot.repository.HealthStatusRepository;
+import net.javaguides.springboot.repository.PatientRepository;
 
 import javax.transaction.Transactional;
 
@@ -15,12 +17,14 @@ import org.springframework.stereotype.Service;
 public class HealthStatusService {
 
     private final HealthStatusRepository healthStatusRepository;
+    private final PatientRepository patientRepository;
 
     @Autowired
-    public HealthStatusService(HealthStatusRepository healthStatusRepository) {
+    public HealthStatusService(HealthStatusRepository healthStatusRepository, PatientRepository patientRepository) {
         this.healthStatusRepository = healthStatusRepository;
+        this.patientRepository = patientRepository;
     }
-    public List<HealthStatus> getHealthStatuss() {
+    public List<HealthStatus> getHealthStatuses() {
         return this.healthStatusRepository.findAll();
     }
 
@@ -33,6 +37,14 @@ public class HealthStatusService {
             () -> new ResourceNotFoundException("No health status with given ID")
         );
         return d;
+    }
+
+    public List<HealthStatus> getHealthStatusBySamId(Long samId) {
+        Patient p = this.patientRepository.findBySamId(samId).orElseThrow(
+            () -> new ResourceNotFoundException("No patient with given ID")
+        );
+        System.out.println("PATIENT IS: " + p);
+        return p.getHealth_records();
     }
 
     @Transactional
@@ -50,7 +62,10 @@ public class HealthStatusService {
         if (otherSymptoms != null && !otherSymptoms.equals(d.getOtherSymptoms())) { d.setOtherSymptoms(otherSymptoms); }       
     }
 
-    public void addHealthStatus(HealthStatus d) {
-        this.healthStatusRepository.save(d);
+    public HealthStatus addHealthStatus(Long samId, HealthStatus d) {
+        return this.patientRepository.findBySamId(samId).map(patient -> {   
+            d.setPatient(patient);
+            return healthStatusRepository.save(d);
+        }).orElseThrow(() -> new ResourceNotFoundException("Patient " + samId + " not found"));
     }
 }

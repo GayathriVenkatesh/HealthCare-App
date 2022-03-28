@@ -95,8 +95,8 @@ class ViewComponent extends Component {
       
               <div class="col-12 col-md-12 col-lg-12 order-1 order-md-2">
                 <div class="row">
-                  <a href="/followup-doctor" className="btn btn-sm btn-primary" style={{marginLeft: "0px", marginRight: "20px"}}>View follow up schedule</a>
-                  <a href={"/discharge-history/" + this.state.samId} class="btn btn-sm btn-warning">View discharge history</a>
+                  <a href={"/edit-patient/" + this.state.samId} className="btn btn-sm btn-primary" style={{marginLeft: "0px", marginRight: "20px"}}>Edit</a>
+                  <a href={"/delete-patient/" + this.state.samId} class="btn btn-sm btn-warning">Delete</a>
                 </div>
               </div>
               {/* </div> */}

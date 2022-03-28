@@ -7,21 +7,22 @@ class ViewFollowUpDetails extends Component {
         super(props)
 
         this.state = {
-            followupId: window.location.pathname.split("/")[2],
+            followupId: window.location.pathname.split("/")[3],
+            samId: window.location.pathname.split("/")[2],
             // status: {},
-            height: 30,
+            height: 0,
             weight: 0,
             muac: 0,
-            growth: "Normal"
+            growthStatus: ""
         }
     }
 
     componentDidMount(){
         console.log("UHID NOW", this.state.followupId)
-        FollowupService.getHealthRecord(this.state.followupId).then( res => {
-            this.setState({height: res.data[0], weight: res.data[1], muac: res.data[2], growth: res.data[3]});
+        FollowupService.getFollowupById(this.state.followupId).then( res => {
+            console.log("IUBKNION", res.data)
+            this.setState({height: res.data.height, weight: res.data.weight, muac: res.data.muac, growthStatus: res.data.growthStatus});
         })
-        console.log("IUBKNION", this.state.growth)
     }
 
     render() {
@@ -118,12 +119,12 @@ class ViewFollowUpDetails extends Component {
                         </td>
                         <td>
                             <a>
-                                Growth Status
+                                Growth Status 
                             </a>   
                         </td>
     
                         <td>
-                            <span class={"badge badge-" + (this.state.growth == "Normal" ? "success" : (this.state.growth == "Overweight" ? "warning" : "danger"))}>{this.state.growth}</span>
+                            <span class={"badge badge-" + (this.state.growthStatus == "Normal" ? "success" : (this.state.growthStatus == "Overweight" ? "warning" : "danger"))}>{this.state.growthStatus}</span>
                         </td>  
                         
                     </tr>
@@ -135,7 +136,7 @@ class ViewFollowUpDetails extends Component {
             </div>
           </div>
           <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-              <a href="followup.html" class="btn btn-sm btn-info">Back</a>
+              <a href={"/followup-doctor/" + this.state.samId} class="btn btn-sm btn-info">Back</a>
           </div>
         </section>
         </div>

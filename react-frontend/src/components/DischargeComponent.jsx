@@ -3,14 +3,14 @@ import DischargeSummaryService from '../services/DischargeSummaryService'
 import { faHome, faPencilAlt, faTrash, faFolder } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SideBarComponent from './SideBarComponent';
+import PatientService from '../services/PatientService';
 
 class DischargeComponent extends Component {
     constructor(props) {
         super(props)
-        console.log(this.state)
         this.state = {
-          dischargeId: 1,
-          samId: this.samId,
+          // dischargeId: 1,
+          samId: window.location.pathname.split("/")[2],
           name: '',
           admissionDate: "2021-01-01",  
           dischargeDate: "2021-01-01",  
@@ -18,7 +18,7 @@ class DischargeComponent extends Component {
           targetWeight: 0.0,
           dischargeWeight: 0.0,
           contactNo: "",
-          outcome: "",
+          outcome: "Improved",
           treatmentProtocol: ""
         }
         this.changeDischargeIdHandler = this.changeDischargeIdHandler.bind(this);
@@ -31,23 +31,30 @@ class DischargeComponent extends Component {
         this.changeTreatmentProtocolHandler = this.changeTreatmentProtocolHandler.bind(this);
     }
 
+    componentDidMount(){ 
+      PatientService.getPatientById(this.state.samId).then((res) => {
+        this.setState({ name: res.data.name, contactNo: res.data.contact_no });
+        console.log("PATIENT", res.data)
+      }); 
+      return;
+    }
+
     createDischargeSummary = (e) => {
-      console.log("HELLLLO", e);
       e.preventDefault();
-      let summary = {dischargeId: this.state.dischargeId,
+      let summary = {
+        // dischargeId: this.state.dischargeId,
         samId: this.state.samId,
-        name: this.state.name,
         admissionDate: this.state.admissionDate,  
         dischargeDate: this.state.dischargeDate,  
         admissionWeight: this.state.admissionWeight,
-        targetWeight: this.state.targetWeight,
+        targetWeight: this.state.admissionWeight * 1.15,
         dischargeWeight: this.state.dischargeWeight,
-        contactNo: this.state.contactNo,
-        outcome: this.state.outcome,
+        outcome: parseFloat(this.state.dischargeWeight) >= (this.state.admissionWeight * 1.15) ? "Improved" : (parseFloat(this.state.dischargeWeight) == 0 ? "Death" : "Poor prognosis"),
         treatmentProtocol: this.state.treatmentProtocol
       };
-      DischargeSummaryService.createDischargeSummary(summary).then(res =>{
-          this.props.history.push('/view-discharge-summary/' + this.state.dischargeId);
+      console.log("THE SUMMARY JIS", summary,  parseFloat(this.state.dischargeWeight), parseFloat(this.state.targetWeight))
+      DischargeSummaryService.createDischargeSummary(this.state.samId, summary).then(res =>{
+          this.props.history.push('/discharge-history/' + this.state.samId);
       });
     }
 
@@ -59,10 +66,6 @@ class DischargeComponent extends Component {
     changeTargetWeightHandler = (event) => { this.setState({targetWeight: event.target.value}); }
     changeOutcomeHandler= (event) => { this.setState({outcome: event.target.value}); }
     changeTreatmentProtocolHandler= (event) => { this.setState({treatmentProtocol: event.target.value}); }
-
-    componentDidMount(){  
-      return;
-    }
 
     render() {
         return (
@@ -94,10 +97,10 @@ class DischargeComponent extends Component {
                     <input name="name" className="form-control" type="text" value={this.state.name} />         
                   </div>
 
-                  <div class="form-group">
+                  {/* <div class="form-group">
                     <label>Patient Contact Number</label>
                     <input name="contactNo" className="form-control" type="text" value={this.state.contactNo} />         
-                  </div>
+                  </div> */}
                 <div class="form-group">
                   <label>Date of Admission:</label>
                     <div class="input-group date" id="reservationdate" data-target-input="nearest">
@@ -128,20 +131,20 @@ class DischargeComponent extends Component {
                       <input name="dischargeWeight" className="form-control" type="text" value={this.state.dischargeWeight} onChange={this.changeDischargeWeightHandler} />         
                   </div>
 
-                  <div class="form-group">
+                  {/* <div class="form-group">
                       <label>Target Weight (in kg)</label>
                       <input name="targetWeight" className="form-control" type="text" value={this.state.targetWeight} onChange={this.changeTargetWeightHandler} />         
-                    </div>
+                    </div> */}
 
-                  <div class="form-group">
+                  {/* <div class="form-group">
                       <label>Outcome</label>                      
                       <select class="form-control select2" style={{width: "100%"}} value={this.state.outcome} onChange={this.changeOutcomeHandler} >
-                        <option selected="selected">Improved</option>
+                        <option>Improved</option>
                         <option>Poor Prognosis</option>
                         <option>Death</option>
                         
                       </select>
-                  </div>
+                  </div> */}
 
                 <div class="form-group">
                     <label>Treatment Protocol</label>

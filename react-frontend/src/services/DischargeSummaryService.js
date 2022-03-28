@@ -6,13 +6,17 @@ class DischargeSummaryService {
         return axios.get("http://localhost:8080/api/v1/view-discharge-summaries");
     }
 
-    createDischargeSummary(summary){
+    createDischargeSummary(samId, summary){
         console.log("Patient inside service", summary);
-        return axios.post("http://localhost:8080/api/v1/discharge-summary", summary);
+        return axios.post("http://localhost:8080/api/v1/discharge-summary/" + samId, summary);
     }
 
     getDischargeSummaryById(dischargeId){
         return axios.get("http://localhost:8080/api/v1/view-discharge-summary" + '/' + dischargeId);
+    }
+
+    getDischargeSummaryBySamId(samId){
+        return axios.get("http://localhost:8080/api/v1/view-discharge-summary-patient" + '/' + samId);
     }
 
     getByKeyword(dischargeId, name){

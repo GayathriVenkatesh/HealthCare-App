@@ -6,15 +6,16 @@ class FollowUpDoctor extends Component {
     constructor(props) {
         super(props)
           this.state = {
-              followups: []
+              followups: [],
+              samId: window.location.pathname.split("/")[2]
           }
           // this.state.patient.uhid = this.props.match.params.id
     }
 
     componentDidMount(){
-      FollowupService.getFollowups().then((res) => {
+      FollowupService.getFollowupBySamId(this.state.samId).then((res) => {
         this.setState({ followups: res.data});
-        console.log("NOW IS", this.state.followups[0].completed)
+        console.log("NOW IS", this.state.followups)
     });
     }
 
@@ -71,7 +72,7 @@ class FollowUpDoctor extends Component {
                                   <span style={{width: "35%"}} className={"badge badge-" + (f.completed ? 'success' : 'warning')}> {f.completed ? "Completed" : "Pending"}</span> 
                                 </td>
                                 <td class="project-state">
-                              <a href="/view-followup" class="btn btn-block btn-outline-primary btn-xs">View</a>
+                              <a href={"/view-followup/" + this.state.samId + "/" + f.followupId} className={f.completed ? "btn btn-block btn-outline-primary btn-sm" : "btn btn-block btn-outline-primary btn-sm disabled"}>View</a>
                           </td>  
                         </tr>
                                 )

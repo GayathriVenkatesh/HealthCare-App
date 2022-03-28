@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PatientService from '../services/PatientService'
+import HealthStatusService from '../services/HealthStatusService'
 import { faHome, faPencilAlt, faTrash, faFolder } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SideBarComponent from './SideBarComponent';
@@ -10,26 +11,17 @@ class AddPatientComponent extends Component {
 
     this.state = {
         // step 2
-        UHID: 0,
+        uhid: 0,
         name: '',
-        SAM_ID: 0, 
+        samId: window.location.pathname.split("/")[2], 
         rch_id: 0,
         dob: "2021-01-01",          
         age: 0,
         gender: 'M',
         bpl: true,
         address: "", religion: "", caste: "", relationship: "", symptoms: "", referred_by: "",
-        contact_no: ""
-        // health_params: [
-        //     { "height": 0.0 },
-        //     { "weight": 0.0 },
-        //     { "muac": 0.0 },
-        //     { "growth_status": 0.0 }
-        //   ]
-        // health_params.put("height", 0.0);
-        // health_params.put("weight", 0.0);
-        // health_params.put("muac", 0.0);
-        // health_params.put("growth_status", 0.0);
+        contact_no: "",
+        height: 0.0, weight: 0.0, muac: 0.0, growthStatus: "", otherSymptoms: "", date: new Date()
     }
     this.changeNameHandler = this.changeNameHandler.bind(this);
     this.changeRch_idHandler = this.changeRch_idHandler.bind(this);
@@ -37,6 +29,13 @@ class AddPatientComponent extends Component {
     this.changeUhidHandler = this.changeUhidHandler.bind(this);
     this.changeDobHandler = this.changeDobHandler.bind(this);
     this.changeBplHandler = this.changeBplHandler.bind(this);
+
+    this.changeHeightHandler = this.changeHeightHandler.bind(this);
+    this.changeWeightHandler = this.changeWeightHandler.bind(this);
+    this.changeMuacHandler = this.changeMuacHandler.bind(this);
+    this.changeGrowthStatusHandler = this.changeGrowthStatusHandler.bind(this);
+    this.changeDateHandler = this.changeDateHandler.bind(this);
+    this.changeOtherSymptomsHandler = this.changeOtherSymptomsHandler.bind(this);
 
     this.changeReligionHandler = this.changeReligionHandler.bind(this);
     this.changeCasteHandler = this.changeCasteHandler.bind(this);
@@ -47,19 +46,18 @@ class AddPatientComponent extends Component {
     this.changeGenderHandler = this.changeGenderHandler.bind(this);
     this.changeAddressHandler = this.changeAddressHandler.bind(this);
     this.changeRelationshipHandler = this.changeRelationshipHandler.bind(this);
-    this.changeHealthHandler = this.changeHealthHandler.bind(this);
+    this.changeHeightHandler = this.changeHeightHandler.bind(this);
     this.createPatient = this.createPatient.bind(this);
 }
 
-// step 3
 componentDidMount(){
-    console.log(this.state.UHID);
+    console.log(this.state.uhid);
     return;
 }
 createPatient = (e) => {
     e.preventDefault();
     let patient = {name: this.state.name, 
-        UHID: this.state.UHID,  // we are not changing UHID
+        uhid: this.state.uhid,  
         samId: this.state.SAM_ID, 
         rch_id: this.state.rch_id,
         dob: this.state.dob,          
@@ -68,19 +66,25 @@ createPatient = (e) => {
         address: this.state.address, religion: this.state.religion, caste: this.state.caste, 
         relationship: this.state.relationship, symptoms: this.state.symptoms, referred_by: this.state.referred_by,
         contact_no: this.state.contact_no,
-        // health_params: this.state.health_params
     };
-    console.log('Patient => ' + patient);
+
+    let hs = {height: this.state.height, weight: this.state.weight, admission: this.state.date,
+      muac: this.state.muac, growthStatus: this.state.growthStatus, otherSymptoms: this.state.otherSymptoms
+    };
+
+    console.log(patient, hs);
     PatientService.createPatient(patient).then(res =>{
-        console.log("INSIDE THEN");
+      HealthStatusService.createHealthStatus(this.state.samId, hs).then(res => {
         this.props.history.push('/view-patients');
+      })
     });
+    
 }
 
 changeNameHandler= (event) => { this.setState({name: event.target.value}); }
 changeRch_idHandler= (event) => { this.setState({rch_id: event.target.value}); }
 changeSamIdHandler= (event) => { this.setState({samId: event.target.value}); }
-changeUhidHandler= (event) => { this.setState({UHID: event.target.value}); }
+changeUhidHandler= (event) => { this.setState({uhid: event.target.value}); }
 
 changeDobHandler= (event) => { this.setState({dob: event.target.value}); }
 changeGenderHandler= (event) => { this.setState({gender: event.target.value}); }
@@ -93,9 +97,14 @@ changeReferred_byHandler= (event) => { this.setState({referred_by: event.target.
 changeSymptomsHandler= (event) => { this.setState({symptoms: event.target.value}); }
 changeBplHandler= (event) => { this.setState({bpl: event.target.value}); }
 changeRelationshipHandler= (event) => { this.setState({relationship: event.target.value}); }
-changeHealthHandler= (event) => { 
-    // this.setState({health_params: event.target.value});
-}
+
+changeHeightHandler= (event) => { this.setState({height: event.target.value}); }
+changeWeightHandler= (event) => { this.setState({weight: event.target.value}); }
+changeDateHandler= (event) => { this.setState({date: event.target.value}); }
+changeMuacHandler= (event) => { this.setState({muac: event.target.value}); }
+changeGrowthStatusHandler= (event) => { this.setState({growthStatus: event.target.value}); }
+changeOtherSymptomsHandler= (event) => { this.setState({otherSymptoms: event.target.value}); }
+
 changeContactHandler= (event) => { 
     this.setState({contact_no: event.target.value}); 
     console.log("CONTACT NUMBER....", this.state.contact_no);
@@ -136,7 +145,7 @@ cancel(){
                     <div class="form-group">
                       <label>Enter UHID ID</label>
                       <input placeholder="UHID" name="UHID" className="form-control" 
-                                                value={this.state.UHID} onChange={this.changeUhidHandler}/>            
+                                                value={this.state.uhid} onChange={this.changeUhidHandler}/>            
                     </div>
     
                     <div class="form-group">
@@ -197,22 +206,37 @@ cancel(){
                           </div>
                       </div>
       
-                      {/* <div class="form-group">
-                          <label>Weight on Date of Discharge (in kg)</label>
-                          <input class="form-control" type="text" />                  
+                      <div class="form-group">
+                          <label>Current Height</label>
+                          <input class="form-control" type="text" value={this.state.height} onChange={this.changeHeightHandler}/>                  
                         </div>
     
                         <div class="form-group">
-                            <label>Target Weight (in kg)</label>
-                            <input class="form-control" type="text" />                  
-                          </div> */}
+                            <label>Current Weight (in kg)</label>
+                            <input class="form-control" type="text" value={this.state.weight} onChange={this.changeWeightHandler}/>                  
+                          </div>
+                        
+                          <div class="form-group">
+                            <label>Middle Upper Arm Circumference</label>
+                            <input class="form-control" type="text" value={this.state.muac} onChange={this.changeMuacHandler}/>                  
+                          </div>
+
+                          <div class="form-group">
+                            <label>Growth Status</label>
+                            <input class="form-control" type="text" value={this.state.growthStatus} onChange={this.changeGrowthStatusHandler}/>                  
+                          </div>
+
+                          <div class="form-group">
+                            <label>Other Symtoms</label>
+                            <input class="form-control" type="text" value={this.state.otherSymptoms} onChange={this.changeOtherSymptomsHandler}/>                  
+                          </div>
     
                         <div class="form-group">
                             <label>Gender</label>
                             {/* <input placeholder="Referred By" name="referred by" className="form-control" 
                                                />     */}
                             <select class="form-control select2" style={{width: "100%"}}  value={this.state.gender} onChange={this.changeGenderHandler}>
-                              <option selected="selected">M</option>
+                              <option>M</option>
                               <option>F</option>
                               <option>Other</option>
                               
@@ -246,7 +270,7 @@ cancel(){
                           </div>
                         </div>
     
-                    <div class="form-group">
+                    {/* <div class="form-group">
                         <label>Treatment Protocol</label>
                         <input class="form-control" type="text" />                  
                     </div>
@@ -259,7 +283,7 @@ cancel(){
                                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                               </div>
                           </div>
-                      </div>
+                      </div> */}
    
                       
                   </div>

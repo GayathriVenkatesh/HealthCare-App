@@ -21,6 +21,7 @@ import UpdatePatientComponent from './components/UpdatePatientComponent';
 import ViewComponent from './components/ViewComponent';
 import ViewComponentReceptionist from './components/ViewComponentReceptionist';
 import ViewFollowUpDetails from './components/ViewFollowUpDetails';
+import UpdateFollowupComponent from './components/UpdateFollowupComponent';
 import ViewPatientComponent from './components/ViewPatientComponent';
 import UpdatePatientComponentReceptionist from './components/UpdatePatientComponentReceptionist'
 import ViewDischargeSummaryComponent from './components/ViewDischargeSummaryComponent'
@@ -58,6 +59,7 @@ function App() {
                           <Route path = "/followup-doctor" component = {FollowUpDoctor}></Route>
                           <Route path = "/followup-receptionist" component = {FollowUpReceptionist}></Route>
                           <Route path = "/view-followup" component = {ViewFollowUpDetails}></Route>
+                          <Route path = "/edit-followup/:samId/:followupId" component = {UpdateFollowupComponent}></Route>
                           <Route path = "/discharge-history" component = {DischargeDetails}></Route>
                           <Route path = "/view-discharge-summary" component = {ViewDischargeSummaryComponent}></Route>
                           <Route path = "/schedule-followup/:samId" component = {CreateFollowUp}></Route>

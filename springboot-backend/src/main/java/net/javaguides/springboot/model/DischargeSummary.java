@@ -12,6 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "discharge_summary")
 public class DischargeSummary implements Serializable {
@@ -26,29 +31,31 @@ public class DischargeSummary implements Serializable {
 	)
 	@Id
 	private Long dischargeId;
-	private String name;
+	// private String name;
 	private LocalDate admissionDate, dischargeDate;
 	private Double admissionWeight, targetWeight, dischargeWeight;
-	private String contactNo, outcome, treatmentProtocol;
+	private String outcome, treatmentProtocol;
 
+	@JsonBackReference
 	@ManyToOne
     @JoinColumn(name = "samId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Patient patient;
 
 	public DischargeSummary() {
 	}
 	
-	public DischargeSummary(Long dischargeId,String name, LocalDate admissionDate, LocalDate dischargeDate,
-			Double admissionWeight, Double targetWeight, Double dischargeWeight, String contactNo, String outcome,
+	public DischargeSummary(Long dischargeId, LocalDate admissionDate, LocalDate dischargeDate,
+			Double admissionWeight, Double targetWeight, Double dischargeWeight, String outcome,
 			String treatmentProtocol) {
 		this.dischargeId = dischargeId;
-		this.name = name;
+		// this.name = name;
 		this.admissionDate = admissionDate;
 		this.dischargeDate = dischargeDate;
 		this.admissionWeight = admissionWeight;
 		this.targetWeight = targetWeight;
 		this.dischargeWeight = dischargeWeight;
-		this.contactNo = contactNo;
+		// this.contactNo = contactNo;
 		this.outcome = outcome;
 		this.treatmentProtocol = treatmentProtocol;
 	}
@@ -58,12 +65,12 @@ public class DischargeSummary implements Serializable {
 	public void setDischargeId(Long dischargeId) {
 		this.dischargeId = dischargeId;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+	// public String getName() {
+	// 	return name;
+	// }
+	// public void setName(String name) {
+	// 	this.name = name;
+	// }
 	public LocalDate getAdmissionDate() {
 		return admissionDate;
 	}
@@ -94,12 +101,12 @@ public class DischargeSummary implements Serializable {
 	public void setDischargeWeight(Double dischargeWeight) {
 		this.dischargeWeight = dischargeWeight;
 	}
-	public String getContactNo() {
-		return contactNo;
-	}
-	public void setContactNo(String contactNo) {
-		this.contactNo = contactNo;
-	}
+	// public String getContactNo() {
+	// 	return contactNo;
+	// }
+	// public void setContactNo(String contactNo) {
+	// 	this.contactNo = contactNo;
+	// }
 	public String getOutcome() {
 		return outcome;
 	}
@@ -111,6 +118,14 @@ public class DischargeSummary implements Serializable {
 	}
 	public void setTreatmentProtocol(String treatmentProtocol) {
 		this.treatmentProtocol = treatmentProtocol;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
 

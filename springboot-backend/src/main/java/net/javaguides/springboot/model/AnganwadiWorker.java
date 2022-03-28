@@ -1,14 +1,18 @@
 package net.javaguides.springboot.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "anganwadi_worker")
@@ -27,6 +31,10 @@ public class AnganwadiWorker implements Serializable {
 	private String name;
 	private String contactNo, address, locality;
 
+	@JsonManagedReference(value = "worker-followup")
+    @OneToMany(mappedBy = "worker")
+    private List<Followup> followups = new ArrayList<Followup>();
+	
 	public AnganwadiWorker(String name, String contactNo, String address, String locality) {
 		this.name = name;
 		this.contactNo = contactNo;
@@ -66,6 +74,14 @@ public class AnganwadiWorker implements Serializable {
 	}
 	public void setLocality(String locality) {
 		this.locality = locality;
+	}
+
+	public List<Followup> getFollowups() {
+		return followups;
+	}
+
+	public void setFollowups(List<Followup> followups) {
+		this.followups = followups;
 	}
 
 }

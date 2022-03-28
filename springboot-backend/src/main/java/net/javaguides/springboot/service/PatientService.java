@@ -92,10 +92,6 @@ public class PatientService {
     }
 
     public void addPatient(Patient p) {
-        // Optional<Patient> optionalPatient = patientRepository.findByUHID(p.getUHId());
-        // if (optionalPatient.isPresent()) {
-        //     throw new IllegalStateException("UHID exists");
-        // }
         patientRepository.save(p);
     }
 }

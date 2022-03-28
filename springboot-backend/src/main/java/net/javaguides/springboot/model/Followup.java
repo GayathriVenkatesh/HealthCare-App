@@ -12,6 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "followup")
 public class Followup implements Serializable {
@@ -27,28 +32,37 @@ public class Followup implements Serializable {
 	@Id
 	private Long followupId;
 	// private Long samId;
-	private Long workerId;
+	// private Long workerId;
 	private LocalDate deadline, completedOn;
 	private Boolean completed;
 	private Double height, weight, muac;
-	private String growth;
+	private String growthStatus, location;
 	
+	@JsonBackReference
 	@ManyToOne
     @JoinColumn(name = "samId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Patient patient;
 
-	public Followup(Long followupId, Long samId, Long workerId, LocalDate deadline, LocalDate completedOn,
-			Boolean completed, Double height, Double weight, Double muac, String growth) {
+	@JsonBackReference(value = "worker-followup")
+	@ManyToOne
+    @JoinColumn(name = "workerId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private AnganwadiWorker worker;
+
+	public Followup(Long followupId, LocalDate deadline, String location, LocalDate completedOn,
+			Boolean completed, Double height, Double weight, Double muac, String growthStatus) {
 		this.followupId = followupId;
 		// this.samId = samId;
-		this.workerId = workerId;
+		// this.workerId = workerId;
 		this.deadline = deadline;
+		this.location = location;
 		this.completedOn = completedOn;
 		this.completed = completed;
 		this.height = height;
 		this.weight = weight;
 		this.muac = muac;
-		this.growth = growth;
+		this.growthStatus = growthStatus;
 	}
 
 	public Long getFollowupId() {
@@ -57,12 +71,25 @@ public class Followup implements Serializable {
 	public void setFollowupId(Long followupId) {
 		this.followupId = followupId;
 	}
-	public Long getWorkerId() {
-		return workerId;
+
+	// public Long getSamId() {
+	// 	return this.samId;
+	// }
+	// public void setSamId(Long samId) {
+	// 	this.samId = samId;
+	// }
+	public String getLocation() {
+		return this.location;
 	}
-	public void setWorkerId(Long workerId) {
-		this.workerId = workerId;
+	public void setLocation(String location) {
+		this.location = location;
 	}
+	// public Long getWorkerId() {
+	// 	return workerId;
+	// }
+	// public void setWorkerId(Long workerId) {
+	// 	this.workerId = workerId;
+	// }
 	public LocalDate getDeadline() {
 		return deadline;
 	}
@@ -81,13 +108,15 @@ public class Followup implements Serializable {
 	public void setCompleted(Boolean completed) {
 		this.completed = completed;
 	}
-	public Followup(Long followupId, Long workerId, LocalDate deadline, LocalDate completedOn,
+	public Followup(Long followupId, LocalDate deadline, String location, LocalDate completedOn,
 			Boolean completed) {
 		this.followupId = followupId;
-		this.workerId = workerId;
+		// this.samId = samId;
+		// this.workerId = workerId;
 		this.deadline = deadline;
 		this.completedOn = completedOn;
 		this.completed = completed;
+		this.location = location;
 	}
 	public Followup() {
 	}
@@ -109,11 +138,26 @@ public class Followup implements Serializable {
 	public void setMuac(Double muac) {
 		this.muac = muac;
 	}
-	public String getGrowth() {
-		return growth;
+	public String getGrowthStatus() {
+		return growthStatus;
 	}
-	public void setGrowth(String growth) {
-		this.growth = growth;
+	public void setGrowthStatus(String growthStatus) {
+		this.growthStatus = growthStatus;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+	public AnganwadiWorker getWorker() {
+		return worker;
+	}
+
+	public void setWorker(AnganwadiWorker worker) {
+		this.worker = worker;
 	}
 }
 

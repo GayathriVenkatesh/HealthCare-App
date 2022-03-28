@@ -21,7 +21,11 @@ public class AnganwadiWorkerConfig {
 				"Worker 2", "8977946264", "Chembur", "Mumbai"
 			);
 
-            repo.saveAll(List.of(d1, d2));
+            AnganwadiWorker d3 = new AnganwadiWorker(
+				"Worker 3", "8977946264", "Banerghatta", "Bangalore"
+			);
+
+            repo.saveAll(List.of(d1, d2, d3));
         };
     } 
 }

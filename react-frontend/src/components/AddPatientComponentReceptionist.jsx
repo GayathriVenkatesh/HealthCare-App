@@ -11,7 +11,7 @@ class AddPatientComponentReceptionist extends Component {
 
     this.state = {
         // step 2
-        UHID: 0,
+        uhid: 0,
         name: '',
         SAM_ID: 0, 
         rch_id: 0,
@@ -54,13 +54,12 @@ class AddPatientComponentReceptionist extends Component {
 
 // step 3
 componentDidMount(){
-    console.log(this.state.UHID);
     return;
 }
 createPatient = (e) => {
     e.preventDefault();
     let patient = {name: this.state.name, 
-        UHID: this.state.UHID,  // we are not changing UHID
+        uhid: this.state.uhid,  // we are not changing UHID
         samId: this.state.SAM_ID, 
         rch_id: this.state.rch_id,
         dob: this.state.dob,          
@@ -81,7 +80,7 @@ createPatient = (e) => {
 changeNameHandler= (event) => { this.setState({name: event.target.value}); }
 changeRch_idHandler= (event) => { this.setState({rch_id: event.target.value}); }
 changeSamIdHandler= (event) => { this.setState({samId: event.target.value}); }
-changeUhidHandler= (event) => { this.setState({UHID: event.target.value}); }
+changeUhidHandler= (event) => { this.setState({uhid: event.target.value}); }
 
 changeDobHandler= (event) => { this.setState({dob: event.target.value}); }
 changeGenderHandler= (event) => { this.setState({gender: event.target.value}); }
@@ -137,7 +136,7 @@ cancel(){
                     <div class="form-group">
                       <label>Enter UHID ID</label>
                       <input placeholder="UHID" name="UHID" className="form-control" 
-                                                value={this.state.UHID} onChange={this.changeUhidHandler}/>            
+                                                value={this.state.uhid} onChange={this.changeUhidHandler}/>            
                     </div>
     
                     <div class="form-group">

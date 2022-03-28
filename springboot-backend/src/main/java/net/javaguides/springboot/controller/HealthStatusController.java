@@ -31,9 +31,9 @@ public class HealthStatusController {
         this.healthStatusService = healthStatusService;
     }
 
-    @GetMapping("/view-healthStatuss")
-	public List<HealthStatus> getHealthStatuss() {
-		return healthStatusService.getHealthStatuss();
+    @GetMapping("/view-healthstatuses")
+	public List<HealthStatus> getHealthStatuses() {
+		return this.healthStatusService.getHealthStatuses();
 	}
 
     @GetMapping("/view-healthStatus/{hsId}")
@@ -42,13 +42,18 @@ public class HealthStatusController {
         return ResponseEntity.ok(p);			
 	}
 
-    @PostMapping("/healthStatus")
-	public void addHealthStatus(@RequestBody HealthStatus p) {
-		healthStatusService.addHealthStatus(p);
+    @GetMapping("/view-patient-healthstatus/{samId}")
+	public List<HealthStatus> getHealthStatusBySamId(@PathVariable Long samId) {
+		return healthStatusService.getHealthStatusBySamId(samId);	
 	}
 
-    @PutMapping("/edit-healthStatus/{hsId}")
-	public ResponseEntity<HealthStatus> updateHealthStatus(@PathVariable Long hsId, @RequestBody HealthStatus p) {
+    @PostMapping("/healthStatus/{samId}")
+	public void addHealthStatus(@PathVariable Long samId, @RequestBody HealthStatus p) {
+		healthStatusService.addHealthStatus(samId, p);
+	}
+
+    @PutMapping("/edit-healthStatus/{samId}/{hsId}")
+	public ResponseEntity<HealthStatus> updateHealthStatus(@PathVariable Long samId, @PathVariable Long hsId, @RequestBody HealthStatus p) {
         HealthStatus healthStatus = healthStatusService.getHealthStatusById(hsId);
         healthStatus.setHsId(p.getHsId());
         healthStatus.setHeight(p.getHeight());
@@ -57,7 +62,7 @@ public class HealthStatusController {
         healthStatus.setGrowthStatus(p.getGrowthStatus());
         healthStatus.setOtherSymptoms(p.getOtherSymptoms());
 
-        healthStatusService.addHealthStatus(healthStatus);
+        healthStatusService.addHealthStatus(samId, healthStatus);
         return ResponseEntity.ok(healthStatus);
     }
 
@@ -71,7 +76,7 @@ public class HealthStatusController {
 
     @GetMapping("/delete-healthStatus/{healthStatus_id}")
     public List<HealthStatus> deleteHealthStatus(@PathVariable Long healthStatus_id) { 
-        List<HealthStatus> p = healthStatusService.getHealthStatuss();
+        List<HealthStatus> p = healthStatusService.getHealthStatuses();
         List<HealthStatus> ans = new ArrayList<HealthStatus>();
         for (HealthStatus f: p) {
             if(f.getHsId() != healthStatus_id) {
