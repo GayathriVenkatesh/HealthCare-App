@@ -29,7 +29,7 @@ public class AnganwadiWorkerService {
     }
 
     public AnganwadiWorker getAnganwadiWorkerById(Long awwId) {
-        AnganwadiWorker d = this.anganwadiRepository.findByWorkerId(awwId).orElseThrow(
+        AnganwadiWorker d = this.anganwadiRepository.findByAwwId(awwId).orElseThrow(
             () -> new ResourceNotFoundException("No worker with given ID")
         );
         return d;
@@ -39,7 +39,7 @@ public class AnganwadiWorkerService {
     public void updateAnganwadiWorker(Long worker_id, String name, String contactNo, 
     String address, String locality) {
 
-        AnganwadiWorker d = anganwadiRepository.findByWorkerId(worker_id)
+        AnganwadiWorker d = anganwadiRepository.findByAwwId(worker_id)
             .orElseThrow(() -> new IllegalStateException(
                 "Discharge summary with ID " + worker_id + " does not exist"
             ));

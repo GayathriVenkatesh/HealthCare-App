@@ -14,7 +14,7 @@ import net.javaguides.springboot.model.AnganwadiWorker;
 
 public interface AnganwadiWorkerRepository extends JpaRepository<AnganwadiWorker, Long> {
     
-    Optional<AnganwadiWorker> findByWorkerId(Long awwId);
+    Optional<AnganwadiWorker> findByAwwId(Long awwId);
     
     @Query("SELECT p FROM AnganwadiWorker p WHERE p.address LIKE %?1% AND p.locality LIKE %?2%")
     public List<AnganwadiWorker> findByKeyword(String address, String locality);

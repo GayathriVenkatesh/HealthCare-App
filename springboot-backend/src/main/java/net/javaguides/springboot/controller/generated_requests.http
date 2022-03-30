@@ -80,10 +80,10 @@
 
 # {"samId": 1, "deadline_date": "2021-01-01", "location": "Banerghatta", "completed_date": "2021-01-01"    }
 
-PUT http://localhost:8080/api/v1/edit-followup/1/7
+PUT http://localhost:8080/api/v1/edit-followup/1/3
 Content-Type: application/json
 
-{"completed":"true", "location": "Banerghatta", "deadline_date": "2020-02-07", "completed_date": "2020-02-02", "height": 20, "weight": 30, "muac": 12.2, "growthStatus": "stunted"}
+{"completed":"true", "location": "Banerghatta", "deadline_date": "2020-02-07", "completed_date": "2020-02-02", "height": 20, "weight": 30, "muac": 12.2, "growthStatus": "normal"}
 
 # GET http://localhost:8080/api/v1/search-followup?samId=&awwId=&completed=false
 

@@ -35,7 +35,7 @@ public class FollowupService {
     }
 
     public List<Followup> getFollowupByWorkerId(Long awwId){
-        AnganwadiWorker w = this.anganwadiWorkerRepository.findByWorkerId(awwId).orElseThrow(
+        AnganwadiWorker w = this.anganwadiWorkerRepository.findByAwwId(awwId).orElseThrow(
             () -> new ResourceNotFoundException("No worker with given ID")
         );
         return w.getFollowups();
