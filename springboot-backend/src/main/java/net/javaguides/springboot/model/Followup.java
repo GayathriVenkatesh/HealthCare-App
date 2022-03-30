@@ -37,6 +37,7 @@ public class Followup implements Serializable {
 	private Boolean completed;
 	private Double height, weight, muac;
 	private String growthStatus, location;
+	private LocalDate created_date = LocalDate.now();
 	
 	@JsonBackReference
 	@ManyToOne
