@@ -63,7 +63,7 @@ public class FollowupService {
 
     @Transactional
     public void updateFollowup(Long followupId, Long awwId, String location,
-	LocalDate deadline_date, LocalDate completed_date, Boolean completed, Double height, Double weight, Double muac, String growthStatus) {
+	LocalDate deadline_date, LocalDate completed_date, Boolean completed, Double height, Double weight, Double muac, String growthStatus, LocalDate created_date) {
 
         Followup d = followupRepository.findByFollowupId(followupId)
             .orElseThrow(() -> new IllegalStateException(
