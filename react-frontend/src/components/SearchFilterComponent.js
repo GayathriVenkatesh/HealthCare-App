@@ -20,9 +20,9 @@ class SearchFilterComponent extends Component {
     }
 
     submit(){
-        // console.log("CURRENT UHID", uhid);
+        // console.log("CURRENT UHID", uhId);
         var val = document.querySelector('name').value;
-        this.props.history.push(`/name=${val}&address=&religion=&uhid=&rch=&sam=`);
+        this.props.history.push(`/name=${val}&address=&religion=&uhId=&rch=&sam=`);
     }
 
     clearSearch() {
@@ -38,7 +38,7 @@ class SearchFilterComponent extends Component {
                         <input type="text" name="name" id="name" size="50" placeholder="Name" className="col-lg-2" style={{paddingRight: "5px", marginRight: "5px"}}    />
                         <input type="text" name="address" id="address" size="50" placeholder='Address' className="col-lg-2" style={{paddingRight: "5px", marginRight: "5px"}} />
                         <input type="text" name="religion" id="religion" size="50" placeholder='Religion' className="col-lg-2" style={{paddingRight: "5px", marginRight: "5px"}} />
-                        <input type="text" name="uhid" id="uhid" size="50" placeholder='UHID' className="col-lg-2" style={{paddingRight: "5px", marginRight: "5px"}} />
+                        <input type="text" name="uhId" id="uhId" size="50" placeholder='UHID' className="col-lg-2" style={{paddingRight: "5px", marginRight: "5px"}} />
                         {/* <input type="text" name="rch" id="rch" size="50" placeholder='RCH ID' className="col-lg-2" style={{paddingRight: "5px", marginRight: "5px"}} /> */}
                         <input type="text" name="sam" id="sam" size="50" placeholder='SAM ID' className="col-lg-2" style={{paddingRight: "5px", marginRight: "5px"}} />
                         {/* <br></br> */}

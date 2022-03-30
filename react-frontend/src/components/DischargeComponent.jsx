@@ -33,7 +33,7 @@ class DischargeComponent extends Component {
 
     componentDidMount(){ 
       PatientService.getPatientById(this.state.samId).then((res) => {
-        this.setState({ name: res.data.name, contactNo: res.data.contact_no });
+        this.setState({ name: res.data.name, contactNo: res.data.contactNumber });
         console.log("PATIENT", res.data)
       }); 
       return;

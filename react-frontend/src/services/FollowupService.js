@@ -19,13 +19,13 @@ class FollowupService {
         return axios.get("http://localhost:8080/api/v1/view-patient-followup" + '/' + samId);
     }
 
-    getFollowupByWorkerId(workerId){
-        return axios.get("http://localhost:8080/api/v1/view-worker-followup" + '/' + workerId);
+    getFollowupByWorkerId(awwId){
+        return axios.get("http://localhost:8080/api/v1/view-worker-followup" + '/' + awwId);
     }
 
-    getByKeyword(workerId, completed){
+    getByKeyword(awwId, completed){
         // return axios.get("http://localhost:8080/api/v1/search" + '/' + keyword);
-        return axios.get("http://localhost:8080/api/v1/search-followup" + '?workerId=' + workerId + '&completed=' + completed);
+        return axios.get("http://localhost:8080/api/v1/search-followup" + '?awwId=' + awwId + '&completed=' + completed);
     }
 
     getHealthRecord(followupId){

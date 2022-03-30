@@ -49,11 +49,11 @@ class ListPatientComponentReceptionist extends Component {
         var name = urlParams.get('name')
         var address = urlParams.get('address')
         var religion = urlParams.get('religion')
-        var uhid = urlParams.get('uhid')
+        var uhId = urlParams.get('uhId')
         var rch = urlParams.get('rch')
         var sam = urlParams.get('sam')
 
-        if (!(name || address || religion || uhid || sam || rch)) {
+        if (!(name || address || religion || uhId || sam || rch)) {
             PatientService.getPatients().then((res) => {
                 this.setState({ patients: res.data});
                 console.log("NOW IS", res.data)
@@ -61,7 +61,7 @@ class ListPatientComponentReceptionist extends Component {
         }
         else{
             console.log("keyword", window.location.href);
-            PatientService.getByKeyword(name, address, religion, uhid, sam).then( res => {
+            PatientService.getByKeyword(name, address, religion, uhId, sam).then( res => {
                 this.setState({patients: res.data});
             })
         }
@@ -134,10 +134,10 @@ class ListPatientComponentReceptionist extends Component {
                             {/* // onClick={ () => this.viewPatient(patient.samId)} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover} style={linkStyle}>  */}
                             <td> {patient.samId}</td>
                             <td> {patient.name} </td>   
-                            <td> {patient.contact_no}</td>
-                            {/* <td> {patient.bpl}</td> */}
+                            <td> {patient.contactNumber}</td>
+                            {/* <td> {patient.BPL}</td> */}
 
-                            <td> {patient.uhid} </td> 
+                            <td> {patient.uhId} </td> 
                             <td> {patient.gender}</td>
                             {/* <td> {patient.caste}</td> */}
                             <td>

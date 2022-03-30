@@ -9,7 +9,7 @@ class FollowUpDoctor extends Component {
               followups: [],
               samId: window.location.pathname.split("/")[2]
           }
-          // this.state.patient.uhid = this.props.match.params.id
+          // this.state.patient.uhId = this.props.match.params.id
     }
 
     componentDidMount(){
@@ -65,8 +65,8 @@ class FollowUpDoctor extends Component {
                                 f => 
                                 <tr key = {f.followupId}>
                                 <td style={{width: "1%"}}>  </td>
-                                <td style={{width: "20%"}}> {f.deadline} </td>   
-                                <td style={{width: "20%"}}> {f.workerId}</td>
+                                <td style={{width: "20%"}}> {f.deadline_date} </td>   
+                                <td style={{width: "20%"}}> {f.awwId}</td>
                                 <td style={{width: "20%"}}> 8676296926 </td>
                                 <td className="project-state">
                                   <span style={{width: "35%"}} className={"badge badge-" + (f.completed ? 'success' : 'warning')}> {f.completed ? "Completed" : "Pending"}</span> 

@@ -34,8 +34,8 @@ public class FollowupService {
         return this.followupRepository.findAll();
     }
 
-    public List<Followup> getFollowupByWorkerId(Long workerId){
-        AnganwadiWorker w = this.anganwadiWorkerRepository.findByWorkerId(workerId).orElseThrow(
+    public List<Followup> getFollowupByWorkerId(Long awwId){
+        AnganwadiWorker w = this.anganwadiWorkerRepository.findByWorkerId(awwId).orElseThrow(
             () -> new ResourceNotFoundException("No worker with given ID")
         );
         return w.getFollowups();
@@ -62,22 +62,22 @@ public class FollowupService {
 
 
     @Transactional
-    public void updateFollowup(Long followupId, Long workerId, String location,
-	LocalDate deadline, LocalDate completedOn, Boolean completed, Double height, Double weight, Double muac, String growthStatus) {
+    public void updateFollowup(Long followupId, Long awwId, String location,
+	LocalDate deadline_date, LocalDate completed_date, Boolean completed, Double height, Double weight, Double muac, String growthStatus) {
 
         Followup d = followupRepository.findByFollowupId(followupId)
             .orElseThrow(() -> new IllegalStateException(
                 "Follow up with ID " + followupId + " does not exist"
             ));
         
-        // if (workerId != null && !workerId.equals(d.getWorkerId())) { d.setWorkerId(workerId); }
+        // if (awwId != null && !awwId.equals(d.getWorkerId())) { d.setWorkerId(awwId); }
         if (location != null && !location.equals(d.getLocation())) { 
             d.setLocation(location); 
             List<AnganwadiWorker> workers = this.anganwadiWorkerRepository.findByKeyword(location, "");
             d.setWorker(workers.get(0));
         }
-        if (deadline != null && !deadline.equals(d.getDeadline())) { d.setDeadline(deadline); }
-        if (completedOn != null && !completedOn.equals(d.getCompletedOn())) { d.setCompletedOn(completedOn); }       
+        if (deadline_date != null && !deadline_date.equals(d.getDeadline())) { d.setDeadline(deadline_date); }
+        if (completed_date != null && !completed_date.equals(d.getCompletedOn())) { d.setCompletedOn(completed_date); }       
         if (completed != null && !completed.equals(d.getCompleted())) { d.setCompleted(completed); }   
         if (height != null && !height.equals(d.getHeight())) { d.setHeight(height); }
         if (weight != null && !weight.equals(d.getWeight())) { d.setWeight(weight); }       

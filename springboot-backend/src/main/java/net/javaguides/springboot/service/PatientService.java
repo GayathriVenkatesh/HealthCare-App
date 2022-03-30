@@ -52,9 +52,9 @@ public class PatientService {
     }
 
     @Transactional
-    public void updatePatient(Long samId, String name, LocalDate dob, Long uhid,
-                Long rch_id, String contact_no, Character gender, Boolean bpl, 
-                String addr, String religion, String caste, String relationship, 
+    public void updatePatient(Long samId, String name, LocalDate dob, Long uhId,
+                Long rchId, String contactNumber, Character gender, Boolean BPL, 
+                String addr, String religion, String caste, String relationshipStatus, 
                 String symptoms, String refer) {
 
         Patient p = patientRepository.findBySamId(samId)
@@ -64,9 +64,9 @@ public class PatientService {
         
         if (name != null && name.length() > 0 && !name.equals(p.getName())) { p.setName(name); }
         if (dob != null && !dob.equals(p.getDob())) { p.setDob(dob); }
-        if (uhid != null && uhid != p.getUhid()) {  p.setUhid(uhid); }
-        if (rch_id != null && rch_id != p.getRch_id()) {  p.setRch_id(rch_id); }
-        if (contact_no != null && contact_no.length() > 0 && !contact_no.equals(p.getContact_no())) { p.setContact_no(contact_no); }
+        if (uhId != null && uhId != p.getUhid()) {  p.setUhid(uhId); }
+        if (rchId != null && rchId != p.getRch_id()) {  p.setRch_id(rchId); }
+        if (contactNumber != null && contactNumber.length() > 0 && !contactNumber.equals(p.getContact_no())) { p.setContact_no(contactNumber); }
         if (religion != null && religion.length() > 0 && !religion.equals(p.getReligion())) {
             p.setReligion(religion);
         }
@@ -74,8 +74,8 @@ public class PatientService {
             p.setCaste(caste);
         }
 
-        if (relationship != null && relationship.length() > 0 && !relationship.equals(p.getRelationship())) {
-            p.setRelationship(relationship);
+        if (relationshipStatus != null && relationshipStatus.length() > 0 && !relationshipStatus.equals(p.getRelationship())) {
+            p.setRelationship(relationshipStatus);
         }
         if (symptoms != null && symptoms.length() > 0 && !symptoms.equals(p.getSymptoms())) {
             p.setSymptoms(symptoms);
@@ -85,7 +85,7 @@ public class PatientService {
         }
 
         if (gender != null && gender != p.getGender()) {  p.setGender(gender); }
-        if (bpl != null && bpl != p.getBpl()) {  p.setBpl(bpl); }
+        if (BPL != null && BPL != p.getBpl()) {  p.setBpl(BPL); }
         // if (health != null && !health.equals(p.getHealth_params())) {
         //     p.setHealth_params(health);
         // }

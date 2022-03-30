@@ -18,6 +18,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     // @Query("SELECT p FROM Patient p WHERE p.UHID = ?1")
     Optional<Patient> findBySamId(Long samId);
 
-    @Query("SELECT p FROM Patient p WHERE p.name LIKE %?1% AND p.address LIKE %?2% AND p.religion LIKE %?3% AND str(p.uhid) LIKE %?4% AND str(p.samId) LIKE %?5%")
-    public List<Patient> findByKeyword(String name, String address, String religion, String uhid, String sam);
+    @Query("SELECT p FROM Patient p WHERE p.name LIKE %?1% AND p.address LIKE %?2% AND p.religion LIKE %?3% AND str(p.uhId) LIKE %?4% AND str(p.samId) LIKE %?5%")
+    public List<Patient> findByKeyword(String name, String address, String religion, String uhId, String sam);
 }

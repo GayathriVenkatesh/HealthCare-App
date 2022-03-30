@@ -37,15 +37,15 @@ public class Patient implements Serializable {
 	)
 	@Id
 	private Long samId;
-	private Long uhid, rch_id;
+	private Long uhId, rchId;
 	private String name;
 	private LocalDate dob;
 	@Transient  
 	private Integer age;
 	private Character gender;
-	private Boolean bpl;
-	private String address, religion, caste, relationship, symptoms, referred_by;
-	private String contact_no;
+	private Boolean BPL;
+	private String address, religion, caste, relationshipStatus, symptoms, referredBy;
+	private String contactNumber;
 
 	// private HashMap<String, Double> health_params = new HashMap<String, Double>();
 
@@ -61,63 +61,63 @@ public class Patient implements Serializable {
 
 	public Patient() {}
 	
-	public Patient(Long UHID, Long rch_id, String name, LocalDate dob, String contact_no,
-	Character gender, Boolean bpl, String addr, String religion, String caste, String relationship, 
+	public Patient(Long UHID, Long rchId, String name, LocalDate dob, String contactNumber,
+	Character gender, Boolean BPL, String addr, String religion, String caste, String relationshipStatus, 
 	String symptoms, String refer, Float height, Float weight, Float muac, String growthStatus, LocalDate admission, 
 	String other_symptoms) {
-		this.uhid = UHID;
+		this.uhId = UHID;
 		// this.samId = samId;
-		this.rch_id = rch_id;
-		this.bpl = bpl;
+		this.rchId = rchId;
+		this.BPL = BPL;
 		this.name = name;
 		this.dob = dob;
 		this.gender = gender;
-		this.contact_no = contact_no;
+		this.contactNumber = contactNumber;
 
 		this.address = addr;
-		this.relationship = relationship;
+		this.relationshipStatus = relationshipStatus;
 		this.caste = caste;
 		this.symptoms = symptoms;
-		this.referred_by = refer;
+		this.referredBy = refer;
 		this.religion = religion;
 
 		this.health_records.add(new HealthStatus(admission, height, weight, muac, growthStatus, other_symptoms));
 	}
 
-	public Patient(Long UHID, Long rch_id, String name, LocalDate dob, String contact_no,
-	Character gender, Boolean bpl, String addr, String religion, String symptoms, List<Double> health) {
-		this.uhid = UHID;
+	public Patient(Long UHID, Long rchId, String name, LocalDate dob, String contactNumber,
+	Character gender, Boolean BPL, String addr, String religion, String symptoms, List<Double> health) {
+		this.uhId = UHID;
 		// this.samId = samId;
-		this.rch_id = rch_id;
-		this.bpl = bpl;
+		this.rchId = rchId;
+		this.BPL = BPL;
 		this.name = name;
 		this.dob = dob;
 		this.gender = gender;
-		this.contact_no = contact_no;
+		this.contactNumber = contactNumber;
 		this.address = addr;
 		this.symptoms = symptoms;
 		this.religion = religion;
 	}
 
-	public Long getUhid() { return this.uhid; }
-	public void setUhid(Long id) { this.uhid = id; }
+	public Long getUhid() { return this.uhId; }
+	public void setUhid(Long id) { this.uhId = id; }
 	public Long getSamId() { return this.samId; }
 	public void setSamId(Long id) { this.samId = id; }
-	public Long getRch_id() { return this.rch_id; }
-	public void setRch_id(Long id) { this.rch_id = id; }
+	public Long getRch_id() { return this.rchId; }
+	public void setRch_id(Long id) { this.rchId = id; }
 
 	public Character getGender() { return this.gender; }
 	public void setGender(Character g) { this.gender = g; }
-	public String getContact_no() { return this.contact_no; }
-	public void setContact_no(String no) { this.contact_no = no; }
-	public Boolean getBpl() { return this.bpl; }
-	public void setBpl(Boolean bpl) { this.bpl = bpl; }
+	public String getContact_no() { return this.contactNumber; }
+	public void setContact_no(String no) { this.contactNumber = no; }
+	public Boolean getBpl() { return this.BPL; }
+	public void setBpl(Boolean BPL) { this.BPL = BPL; }
 
 	@Override
 	public String toString() {
 		return "Patient:" + "\nName: " + name + " " + health_records + 
 		"\nDOB:" + dob + "\nAge: " + age + 
-		"\nAddress: " + address + "\nRelation: " + relationship + ", referred by=" + referred_by
+		"\nAddress: " + address + "\nRelation: " + relationshipStatus + ", referred by=" + referredBy
 		+ ", symptoms=" + symptoms + ", religion=" + religion + ", caste=" + caste + '}';
 	}
 
@@ -162,11 +162,11 @@ public class Patient implements Serializable {
 	}
 
 	public String getReferred_by() {
-		return referred_by;
+		return referredBy;
 	}
 
-	public void setReferred_by(String referred_by) {
-		this.referred_by = referred_by;
+	public void setReferred_by(String referredBy) {
+		this.referredBy = referredBy;
 	}
 
 	public String getCaste() {
@@ -178,11 +178,11 @@ public class Patient implements Serializable {
 	}
 
 	public String getRelationship() {
-		return relationship;
+		return relationshipStatus;
 	}
 
-	public void setRelationship(String relationship) {
-		this.relationship = relationship;
+	public void setRelationship(String relationshipStatus) {
+		this.relationshipStatus = relationshipStatus;
 	}
 
 	public List<Followup> getFollowups() {

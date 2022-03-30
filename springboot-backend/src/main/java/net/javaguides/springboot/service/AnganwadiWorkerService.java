@@ -28,8 +28,8 @@ public class AnganwadiWorkerService {
         return this.anganwadiRepository.findByKeyword(address, locality);
     }
 
-    public AnganwadiWorker getAnganwadiWorkerById(Long workerId) {
-        AnganwadiWorker d = this.anganwadiRepository.findByWorkerId(workerId).orElseThrow(
+    public AnganwadiWorker getAnganwadiWorkerById(Long awwId) {
+        AnganwadiWorker d = this.anganwadiRepository.findByWorkerId(awwId).orElseThrow(
             () -> new ResourceNotFoundException("No worker with given ID")
         );
         return d;

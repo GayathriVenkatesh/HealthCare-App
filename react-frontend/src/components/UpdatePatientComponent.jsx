@@ -9,14 +9,14 @@ class UpdatePatientComponent extends Component {
             // UHID: this.props.match.params.id,
             samId: window.location.pathname.split("/")[2],
             name: '',
-            uhid: 0, 
-            rch_id: 0,
+            uhId: 0, 
+            rchId: 0,
             dob: "2021-01-01",          
             age: 0,
             gender: 'M',
-            bpl: true,
-            address: "", religion: "", caste: "", relationship: "", symptoms: "", referred_by: "",
-            contact_no: "",
+            BPL: true,
+            address: "", religion: "", caste: "", relationshipStatus: "", symptoms: "", referredBy: "",
+            contactNumber: "",
             // health_params: [
             //     { "height": 0.0 },
             //     { "weight": 0.0 },
@@ -48,15 +48,15 @@ class UpdatePatientComponent extends Component {
             let patient = res.data;
                 this.setState({
                     name: patient.name,
-                    uhid: patient.uhid, 
+                    uhId: patient.uhId, 
                     SAM_ID: this.state.samId, 
-                    rch_id: patient.rch_id,
+                    rchId: patient.rchId,
                     dob: patient.dob,          
                     gender: patient.gender,
-                    bpl: patient.bpl,
+                    BPL: patient.BPL,
                     address: patient.address, religion: patient.religion, caste: patient.caste, 
-                    relationship: patient.relationship, symptoms: patient.symptoms, referred_by: patient.referred_by,
-                    contact_no: patient.contact_no,
+                    relationshipStatus: patient.relationshipStatus, symptoms: patient.symptoms, referredBy: patient.referredBy,
+                    contactNumber: patient.contactNumber,
                     // health_params: patient.health_params
                 });
             });
@@ -65,14 +65,14 @@ class UpdatePatientComponent extends Component {
     updatePatient = (e) => {
         e.preventDefault();
         let patient = {name: this.state.name, 
-            uhid: this.state.uhid,  // we are not changing UHID
-            rch_id: this.state.rch_id,
+            uhId: this.state.uhId,  // we are not changing UHID
+            rchId: this.state.rchId,
             dob: this.state.dob,          
             gender: this.state.gender,
-            bpl: this.state.bpl,
+            BPL: this.state.BPL,
             address: this.state.address, religion: this.state.religion, caste: this.state.caste, 
-            relationship: this.state.relationship, symptoms: this.state.symptoms, referred_by: this.state.referred_by,
-            contact_no: this.state.contact_no,
+            relationshipStatus: this.state.relationshipStatus, symptoms: this.state.symptoms, referredBy: this.state.referredBy,
+            contactNumber: this.state.contactNumber,
             // health_params: this.state.health_params
           };
         
@@ -85,9 +85,9 @@ class UpdatePatientComponent extends Component {
     }
     
     changeNameHandler= (event) => { this.setState({name: event.target.value}); }
-    changeRCHHandler= (event) => { this.setState({rch_id: event.target.value}); }
+    changeRCHHandler= (event) => { this.setState({rchId: event.target.value}); }
     changeSAMHandler= (event) => { this.setState({samId: event.target.value}); }
-    changeUhidHandler= (event) => { this.setState({uhid: event.target.value}); }
+    changeUhidHandler= (event) => { this.setState({uhId: event.target.value}); }
 
     changeDOBHandler= (event) => { this.setState({dob: event.target.value}); }
     changeGenderHandler= (event) => { this.setState({gender: event.target.value}); }
@@ -95,17 +95,17 @@ class UpdatePatientComponent extends Component {
 
     changeCasteHandler= (event) => { this.setState({caste: event.target.value}); }
     changeAddressHandler= (event) => { this.setState({address: event.target.value}); }
-    changeReferredByHandler= (event) => { this.setState({referred_by: event.target.value}); }
+    changeReferredByHandler= (event) => { this.setState({referredBy: event.target.value}); }
 
     changeSymptomsHandler= (event) => { this.setState({symptoms: event.target.value}); }
-    changeBplHandler= (event) => { this.setState({bpl: event.target.value}); 
-console.log("BPL IS", this.state.bpl)}
-    changeRelationshipHandler= (event) => { this.setState({relationship: event.target.value}); }
+    changeBplHandler= (event) => { this.setState({BPL: event.target.value}); 
+console.log("BPL IS", this.state.BPL)}
+    changeRelationshipHandler= (event) => { this.setState({relationshipStatus: event.target.value}); }
     // changeHealthHandler= (event) => { this.setState({health_params: event.target.value}); }
     changeContactNoHandler= (event) => { 
         console.log("NUMBER", event.target.value)
-        this.setState({contact_no: event.target.value}); 
-        console.log("STATE", this.state.contact_no)
+        this.setState({contactNumber: event.target.value}); 
+        console.log("STATE", this.state.contactNumber)
     }
 
     cancel(){
@@ -143,13 +143,13 @@ console.log("BPL IS", this.state.bpl)}
                     <div class="form-group">
                       <label>Enter UHID</label>
                       <input placeholder="UHID" name="UHID" className="form-control" 
-                                                value={this.state.uhid} onChange={this.changeUhidHandler}/>            
+                                                value={this.state.uhId} onChange={this.changeUhidHandler}/>            
                     </div>
     
                     <div class="form-group">
                       <label>Enter RCH ID</label>
-                      <input placeholder="rch_id" name="rch_id" className="form-control" 
-                                                value={this.state.rch_id} onChange={this.changeRch_idHandler}/>                 
+                      <input placeholder="rchId" name="rchId" className="form-control" 
+                                                value={this.state.rchId} onChange={this.changeRch_idHandler}/>                 
                     </div>
     
                     <div class="form-group">
@@ -172,8 +172,8 @@ console.log("BPL IS", this.state.bpl)}
     
                     <div class="form-group">
                       <label>Contact Number</label>
-                      <input placeholder="Contact No" name="contact_no" className="form-control" 
-                                                value={this.state.contact_no} onChange={this.changeContactNoHandler}/>              
+                      <input placeholder="Contact No" name="contactNumber" className="form-control" 
+                                                value={this.state.contactNumber} onChange={this.changeContactNoHandler}/>              
                     </div>
     
                     <div class="form-group">
@@ -184,14 +184,14 @@ console.log("BPL IS", this.state.bpl)}
                     
                       <div class="form-group">
                         <label>Relationship Details</label>
-                        <input placeholder="Relationship" name="relationship" className="form-control" 
-                                                value={this.state.relationship} onChange={this.changeRelationshipHandler}/>           
+                        <input placeholder="Relationship" name="relationshipStatus" className="form-control" 
+                                                value={this.state.relationshipStatus} onChange={this.changeRelationshipHandler}/>           
                       </div>
     
                       <div class="form-group">
                         <label>Referred By</label>
                         <input placeholder="Referred By" name="referred by" className="form-control" 
-                                                value={this.state.referred_by} onChange={this.changeReferred_byHandler}/>            
+                                                value={this.state.referredBy} onChange={this.changeReferred_byHandler}/>            
                       </div>
     
                       <div class="form-group">
@@ -248,7 +248,7 @@ console.log("BPL IS", this.state.bpl)}
                         
                           <div class="form-group">
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" value={this.state.bpl} onChange={this.changeBplHandler}/>
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1" value={this.state.BPL} onChange={this.changeBplHandler}/>
                             <label >BPL</label>
                           </div>
                         </div>

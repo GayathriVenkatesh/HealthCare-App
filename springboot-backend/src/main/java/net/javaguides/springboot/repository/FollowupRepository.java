@@ -16,8 +16,8 @@ public interface FollowupRepository extends JpaRepository<Followup, Long> {
     
     Optional<Followup> findByFollowupId(Long followupId);
 
-    // @Query("SELECT p FROM Followup p WHERE str(p.workerId) LIKE %?1% AND str(p.completed) LIKE %?2%")
-    // public List<Followup> findByKeyword(String workerId, String completed);
+    // @Query("SELECT p FROM Followup p WHERE str(p.awwId) LIKE %?1% AND str(p.completed) LIKE %?2%")
+    // public List<Followup> findByKeyword(String awwId, String completed);
 
     // @Query("SELECT p FROM Followup p WHERE str(p.patient) NOT NULL")
     // public List<Followup> findBySamId(Long samId);

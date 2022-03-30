@@ -62,11 +62,11 @@ public class PatientController {
     public List<Patient> search(@RequestParam("name") String name, 
                                 @RequestParam("address") String address,
                                 @RequestParam("religion") String religion,
-                                @RequestParam("uhid") String uhid,
+                                @RequestParam("uhId") String uhId,
                                 // @RequestParam("rch") String rch,
                                 @RequestParam("sam") String sam
                             ) {
-        List<Patient> p = patientService.getByKeyword(name, address, religion, uhid, sam);    
+        List<Patient> p = patientService.getByKeyword(name, address, religion, uhId, sam);    
         return p; 
     }
 
@@ -103,28 +103,28 @@ public class PatientController {
         return ResponseEntity.ok(patient);
     }
 
-//  @PutMapping("/edit-patient/{uhid}")
+//  @PutMapping("/edit-patient/{uhId}")
 // 	public void updatePatient(
-//             @PathVariable("uhid") Long uhid,
+//             @PathVariable("uhId") Long uhId,
 //             @RequestParam(required = false) String name,
 //             @RequestParam(required = false) LocalDate dob,
 //             @RequestParam(required = false) Long SAM_ID,
 //             @RequestParam(required = false) Long RCH_ID,
-//             @RequestParam(required = false) String contact_no,
+//             @RequestParam(required = false) String contactNumber,
 //             @RequestParam(required = false) Character gender,
-//             @RequestParam(required = false) Boolean bpl,
+//             @RequestParam(required = false) Boolean BPL,
 
 //             @RequestParam(required = false) String addr,
 //             @RequestParam(required = false) String religion,
 //             @RequestParam(required = false) String caste,
-//             @RequestParam(required = false) String relationship,
+//             @RequestParam(required = false) String relationshipStatus,
 //             @RequestParam(required = false) String symptoms,
 //             @RequestParam(required = false) String refer
             
 //             // @RequestParam(required = false) HashMap<String, Double> health
 //         ) {
-// 		patientService.updatePatient(uhid, name, dob, SAM_ID,
-//          RCH_ID, contact_no, gender, bpl, addr, religion,
-//         caste, relationship, symptoms, refer);
+// 		patientService.updatePatient(uhId, name, dob, SAM_ID,
+//          RCH_ID, contactNumber, gender, BPL, addr, religion,
+//         caste, relationshipStatus, symptoms, refer);
 // 	}
 }

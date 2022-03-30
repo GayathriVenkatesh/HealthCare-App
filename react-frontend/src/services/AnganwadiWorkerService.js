@@ -10,8 +10,8 @@ class AnganwadiWorkerService {
         return axios.post("http://localhost:8080/api/v1/anganwadi-worker", summary);
     }
 
-    getAnganwadiWorkerById(workerId){
-        return axios.get("http://localhost:8080/api/v1/view-anganwadi-worker" + '/' + workerId);
+    getAnganwadiWorkerById(awwId){
+        return axios.get("http://localhost:8080/api/v1/view-anganwadi-worker" + '/' + awwId);
     }
 
     getByKeyword(address, locality){
@@ -19,12 +19,12 @@ class AnganwadiWorkerService {
         return axios.get("http://localhost:8080/api/v1/search-worker" + '?address=' + address + '&locality=' + locality);
     }
 
-    updateAnganwadiWorker(worker, workerId){
-        return axios.put("http://localhost:8080/api/v1/edit-anganwadi-worker" + '/' + workerId, worker);
+    updateAnganwadiWorker(worker, awwId){
+        return axios.put("http://localhost:8080/api/v1/edit-anganwadi-worker" + '/' + awwId, worker);
     }
 
-    deleteAnganwadiWorker(workerId){
-        return axios.delete("http://localhost:8080/api/v1/delete-anganwadi-worker" + '/' + workerId);
+    deleteAnganwadiWorker(awwId){
+        return axios.delete("http://localhost:8080/api/v1/delete-anganwadi-worker" + '/' + awwId);
     }
 }
 

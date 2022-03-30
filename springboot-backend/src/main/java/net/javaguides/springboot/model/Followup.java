@@ -32,8 +32,8 @@ public class Followup implements Serializable {
 	@Id
 	private Long followupId;
 	// private Long samId;
-	// private Long workerId;
-	private LocalDate deadline, completedOn;
+	// private Long awwId;
+	private LocalDate deadline_date, completed_date;
 	private Boolean completed;
 	private Double height, weight, muac;
 	private String growthStatus, location;
@@ -46,18 +46,18 @@ public class Followup implements Serializable {
 
 	@JsonBackReference(value = "worker-followup")
 	@ManyToOne
-    @JoinColumn(name = "workerId")
+    @JoinColumn(name = "awwId")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private AnganwadiWorker worker;
 
-	public Followup(Long followupId, LocalDate deadline, String location, LocalDate completedOn,
+	public Followup(Long followupId, LocalDate deadline_date, String location, LocalDate completed_date,
 			Boolean completed, Double height, Double weight, Double muac, String growthStatus) {
 		this.followupId = followupId;
 		// this.samId = samId;
-		// this.workerId = workerId;
-		this.deadline = deadline;
+		// this.awwId = awwId;
+		this.deadline_date = deadline_date;
 		this.location = location;
-		this.completedOn = completedOn;
+		this.completed_date = completed_date;
 		this.completed = completed;
 		this.height = height;
 		this.weight = weight;
@@ -85,22 +85,22 @@ public class Followup implements Serializable {
 		this.location = location;
 	}
 	// public Long getWorkerId() {
-	// 	return workerId;
+	// 	return awwId;
 	// }
-	// public void setWorkerId(Long workerId) {
-	// 	this.workerId = workerId;
+	// public void setWorkerId(Long awwId) {
+	// 	this.awwId = awwId;
 	// }
 	public LocalDate getDeadline() {
-		return deadline;
+		return deadline_date;
 	}
-	public void setDeadline(LocalDate deadline) {
-		this.deadline = deadline;
+	public void setDeadline(LocalDate deadline_date) {
+		this.deadline_date = deadline_date;
 	}
 	public LocalDate getCompletedOn() {
-		return completedOn;
+		return completed_date;
 	}
-	public void setCompletedOn(LocalDate completedOn) {
-		this.completedOn = completedOn;
+	public void setCompletedOn(LocalDate completed_date) {
+		this.completed_date = completed_date;
 	}
 	public Boolean getCompleted() {
 		return completed;
@@ -108,13 +108,13 @@ public class Followup implements Serializable {
 	public void setCompleted(Boolean completed) {
 		this.completed = completed;
 	}
-	public Followup(Long followupId, LocalDate deadline, String location, LocalDate completedOn,
+	public Followup(Long followupId, LocalDate deadline_date, String location, LocalDate completed_date,
 			Boolean completed) {
 		this.followupId = followupId;
 		// this.samId = samId;
-		// this.workerId = workerId;
-		this.deadline = deadline;
-		this.completedOn = completedOn;
+		// this.awwId = awwId;
+		this.deadline_date = deadline_date;
+		this.completed_date = completed_date;
 		this.completed = completed;
 		this.location = location;
 	}

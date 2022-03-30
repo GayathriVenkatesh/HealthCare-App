@@ -27,7 +27,7 @@ public class AnganwadiWorker implements Serializable {
 		generator = "anganwadi_worker_sequence"
 	)
 	@Id
-	private Long workerId;
+	private Long awwId;
 	private String name;
 	private String contactNo, address, locality;
 
@@ -46,10 +46,10 @@ public class AnganwadiWorker implements Serializable {
 	}
 
 	public Long getWorkerId() {
-		return workerId;
+		return awwId;
 	}
-	public void setWorkerId(Long workerId) {
-		this.workerId = workerId;
+	public void setWorkerId(Long awwId) {
+		this.awwId = awwId;
 	}
 	public String getName() {
 		return name;

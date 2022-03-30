@@ -14,7 +14,7 @@ class FollowUpReceptionist extends Component {
             followups: [],
             samId: window.location.pathname.split("/")[2]
         }
-        // this.state.patient.uhid = this.props.match.params.id
+        // this.state.patient.uhId = this.props.match.params.id
     }
 
     editFollowup(samId, followupId){
@@ -82,7 +82,7 @@ class FollowUpReceptionist extends Component {
                                 f => 
                                 <tr key = {f.followupId}>
                                 {/* <td style={{width: "1%"}}>  </td> */}
-                                <td > {f.deadline} </td>  
+                                <td > {f.deadline_date} </td>  
                                 <td > {f.location} </td>   
                                 <td > {f.worker}</td>
                                 <td > 8676296926 </td>

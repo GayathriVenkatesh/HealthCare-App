@@ -15,9 +15,9 @@ class CreateFollowUp extends Component {
         this.state = {
           followupId: 0,
           samId: window.location.pathname.split("/")[2],
-          workerId: 0,
-          deadline: "2021-01-01", 
-          completedOn: "2021-01-01",
+          awwId: 0,
+          deadline_date: "2021-01-01", 
+          completed_date: "2021-01-01",
           completed: false,
           height: 0,
           weight: 0,
@@ -54,16 +54,16 @@ class CreateFollowUp extends Component {
     createFollowUp = (e) => {
       e.preventDefault();
       let f = {samId: this.state.samId,
-        // workerId: this.state.workerId,
-        deadline: this.state.deadline, 
+        // awwId: this.state.awwId,
+        deadline_date: this.state.deadline_date, 
         location: this.state.location,
-        completedOn: this.state.completedOn,
+        completed_date: this.state.completed_date,
         completed: this.state.completed
       };
       AnganwadiWorkerService.getByKeyword(f.location, "").then(res => {
-        f.workerId = res.data.workerId;
+        f.awwId = res.data.awwId;
         f.workerName = res.data.name;
-        // this.state.workerId = res.data.workerId;
+        // this.state.awwId = res.data.awwId;
       });
       
       FollowupService.createFollowup(this.state.samId, f).then(res =>{
@@ -74,13 +74,13 @@ class CreateFollowUp extends Component {
 
   changeSamIdHandler = (event) => { this.setState({samId: event.target.value}); }
   changeWorkerIdHandler = (event) => { 
-    this.setState({workerId: event.target.value}); 
-    console.log("WORKER", this.state.workerId)
+    this.setState({awwId: event.target.value}); 
+    console.log("WORKER", this.state.awwId)
   }
-  changeDeadlineHandler = (event) => { this.setState({deadline: event.target.value}); 
-    console.log("WORKER", this.state.deadline)
+  changeDeadlineHandler = (event) => { this.setState({deadline_date: event.target.value}); 
+    console.log("WORKER", this.state.deadline_date)
   }
-  changeCompletedOnHandler = (event) => { this.setState({completedOn: event.target.value}); }
+  changeCompletedOnHandler = (event) => { this.setState({completed_date: event.target.value}); }
   changeCompletedHandler = (event) => { this.setState({completed: event.target.value}); 
     console.log("WORKER", this.state.completed)
   }
@@ -115,7 +115,7 @@ class CreateFollowUp extends Component {
                       <div className="form-group">
                         <label>Date:</label>
                           <div className="input-group date" id="reservationdate" data-target-input="nearest">
-                              <input type="text" className="form-control datetimepicker-input" data-target="#reservationdate" value={this.state.deadline} onChange={this.changeDeadlineHandler}/>
+                              <input type="text" className="form-control datetimepicker-input" data-target="#reservationdate" value={this.state.deadline_date} onChange={this.changeDeadlineHandler}/>
                               <div className="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                   <div className="input-group-text"><i className="fa fa-calendar"></i></div>
                               </div>
@@ -148,7 +148,7 @@ class CreateFollowUp extends Component {
                         {/* <div className="form-group">
                           <label>Anganwadi Worker</label>
                             <Select className="form-control select2" style={{width: "100%"}} 
-                            value={this.state.workerId} onChange={this.changeWorkerIdHandler} options={options}>
+                            value={this.state.awwId} onChange={this.changeWorkerIdHandler} options={options}>
                             {Data.map(this.state.workers)}
                             
                             <option>Washington</option>

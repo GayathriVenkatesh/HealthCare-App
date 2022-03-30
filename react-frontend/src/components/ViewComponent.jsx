@@ -59,7 +59,7 @@ class ViewComponent extends Component {
                           </tr>
                           <tr>
                             <td>UHID</td>
-                            <td>{ this.state.patient.uhid }</td>
+                            <td>{ this.state.patient.uhId }</td>
                           </tr>
                           <tr>
                             <td>SAM ID</td>
@@ -67,7 +67,7 @@ class ViewComponent extends Component {
                           </tr>
                           <tr>
                             <td>RCH ID</td>
-                            <td>{ this.state.patient.rch_id }</td>
+                            <td>{ this.state.patient.rchId }</td>
                           </tr>
                           <tr>
                             <td>Address</td>
@@ -84,7 +84,7 @@ class ViewComponent extends Component {
                           </tr>
                           <tr>
                             <td>Referred By</td>
-                            <td>{ this.state.patient.referred_by }</td>
+                            <td>{ this.state.patient.referredBy }</td>
                           </tr>
                         </tbody>
                       </table>

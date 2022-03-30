@@ -47,9 +47,9 @@ public class FollowupController {
 		return followupService.getFollowupBySamId(samId);	
 	}
 
-    @GetMapping("/view-worker-followup/{workerId}")
-	public List<Followup> getFollowupByWorkerId(@PathVariable Long workerId) {
-		return followupService.getFollowupByWorkerId(workerId);	
+    @GetMapping("/view-worker-followup/{awwId}")
+	public List<Followup> getFollowupByWorkerId(@PathVariable Long awwId) {
+		return followupService.getFollowupByWorkerId(awwId);	
 	}
 
     @GetMapping("/view-health-record/{followupId}")
@@ -81,10 +81,10 @@ public class FollowupController {
 
     // @RequestMapping(value = "/search-followup")
     // @ResponseBody
-    // public List<Followup> search(@RequestParam("workerId") String workerId,
+    // public List<Followup> search(@RequestParam("awwId") String awwId,
     //                             @RequestParam("completed") String completed
     //                         ) {
-    //     List<Followup> p = followupService.getByKeyword(workerId, completed);    
+    //     List<Followup> p = followupService.getByKeyword(awwId, completed);    
     //     return p; 
     // }
 

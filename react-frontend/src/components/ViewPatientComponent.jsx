@@ -6,16 +6,16 @@ class ViewPatientComponent extends Component {
         super(props)
 
         this.state = {
-            // uhid: this.props.match.params.id,  // change this to 1, otherwise uhid will be treated as an automatically generated key
-            // uhid: this.props.route.id,
+            // uhId: this.props.match.params.id,  // change this to 1, otherwise uhId will be treated as an automatically generated key
+            // uhId: this.props.route.id,
             samId: window.location.pathname.split("/")[2],
             patient: {}
         }
-        // this.state.patient.uhid = this.props.match.params.id
+        // this.state.patient.uhId = this.props.match.params.id
     }
 
     componentDidMount(){
-        // console.log("UHID NOW", this.state.patient.uhid)
+        // console.log("UHID NOW", this.state.patient.uhId)
         PatientService.getPatientById(this.state.samId).then( res => {
             console.log("dataa", res.data)
             console.log("PATH", window.location.pathname.split("/")[2])
@@ -41,11 +41,11 @@ class ViewPatientComponent extends Component {
                         </div>
                         <div className = "row">
                             <label> UHID: </label>
-                            <div> { this.state.patient.uhid }</div>
+                            <div> { this.state.patient.uhId }</div>
                         </div>
                         <div className = "row">
                             <label> Contact Number: </label>
-                            <div> { this.state.patient.contact_no }</div>
+                            <div> { this.state.patient.contactNumber }</div>
                         </div>
                         <div className = "row">
                             <label> Address: </label>
@@ -61,7 +61,7 @@ class ViewPatientComponent extends Component {
                         </div>
                         <div className = "row">
                             <label> BPL: </label>
-                            <div> { this.state.patient.bpl }</div>
+                            <div> { this.state.patient.BPL }</div>
                         </div>
                         <div className = "row">
                             <label> Date of Birth: </label>
