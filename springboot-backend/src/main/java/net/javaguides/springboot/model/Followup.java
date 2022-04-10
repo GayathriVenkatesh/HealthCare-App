@@ -50,6 +50,9 @@ public class Followup implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private AnganwadiWorker worker;
 
+	@OneToOne(mappedBy = "followupId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private HealthStatus healthStatus;
+
 	public Followup(Long followupId, LocalDate deadline_date, String location, LocalDate completed_date,
 			Boolean completed) {
 		this.followupId = followupId;
