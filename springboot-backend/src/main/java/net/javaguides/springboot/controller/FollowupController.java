@@ -71,10 +71,6 @@ public class FollowupController {
         followup.setCompletedOn(p.getCompletedOn());
         followup.setCompleted(p.getCompleted());
         followup.setLocation(p.getLocation());
-        followup.setHeight(p.getHeight());
-        followup.setWeight(p.getWeight());
-        followup.setMuac(p.getMuac());
-        followup.setGrowthStatus(p.getGrowthStatus());
         followupService.addFollowup(samId, followup);
         return ResponseEntity.ok(followup);
     }

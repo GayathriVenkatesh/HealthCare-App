@@ -63,7 +63,7 @@ public class FollowupService {
 
     @Transactional
     public void updateFollowup(Long followupId, Long awwId, String location,
-	LocalDate deadline_date, LocalDate completed_date, Boolean completed, Double height, Double weight, Double muac, String growthStatus, LocalDate created_date) {
+	LocalDate deadline_date, LocalDate completed_date, Boolean completed, LocalDate created_date) {
 
         Followup d = followupRepository.findByFollowupId(followupId)
             .orElseThrow(() -> new IllegalStateException(
@@ -78,11 +78,7 @@ public class FollowupService {
         }
         if (deadline_date != null && !deadline_date.equals(d.getDeadline())) { d.setDeadline(deadline_date); }
         if (completed_date != null && !completed_date.equals(d.getCompletedOn())) { d.setCompletedOn(completed_date); }       
-        if (completed != null && !completed.equals(d.getCompleted())) { d.setCompleted(completed); }   
-        if (height != null && !height.equals(d.getHeight())) { d.setHeight(height); }
-        if (weight != null && !weight.equals(d.getWeight())) { d.setWeight(weight); }       
-        if (growthStatus != null && !growthStatus.equals(d.getGrowthStatus())) { d.setGrowthStatus(growthStatus); }       
-        if (muac != null && !muac.equals(d.getMuac())) { d.setMuac(muac); }       
+        if (completed != null && !completed.equals(d.getCompleted())) { d.setCompleted(completed); }    
     }
 
     public Followup addFollowup(Long samId, Followup followup) {

@@ -35,8 +35,7 @@ public class Followup implements Serializable {
 	// private Long awwId;
 	private LocalDate deadline_date, completed_date;
 	private Boolean completed;
-	private Double height, weight, muac;
-	private String growthStatus, location;
+	private String location;
 	private LocalDate created_date = LocalDate.now();
 	
 	@JsonBackReference
@@ -52,7 +51,7 @@ public class Followup implements Serializable {
     private AnganwadiWorker worker;
 
 	public Followup(Long followupId, LocalDate deadline_date, String location, LocalDate completed_date,
-			Boolean completed, Double height, Double weight, Double muac, String growthStatus) {
+			Boolean completed) {
 		this.followupId = followupId;
 		// this.samId = samId;
 		// this.awwId = awwId;
@@ -60,10 +59,6 @@ public class Followup implements Serializable {
 		this.location = location;
 		this.completed_date = completed_date;
 		this.completed = completed;
-		this.height = height;
-		this.weight = weight;
-		this.muac = muac;
-		this.growthStatus = growthStatus;
 	}
 
 	public Long getFollowupId() {
@@ -120,30 +115,6 @@ public class Followup implements Serializable {
 		this.location = location;
 	}
 	public Followup() {
-	}
-	public Double getHeight() {
-		return height;
-	}
-	public void setHeight(Double height) {
-		this.height = height;
-	}
-	public Double getWeight() {
-		return weight;
-	}
-	public void setWeight(Double weight) {
-		this.weight = weight;
-	}
-	public Double getMuac() {
-		return muac;
-	}
-	public void setMuac(Double muac) {
-		this.muac = muac;
-	}
-	public String getGrowthStatus() {
-		return growthStatus;
-	}
-	public void setGrowthStatus(String growthStatus) {
-		this.growthStatus = growthStatus;
 	}
 
 	public Patient getPatient() {
