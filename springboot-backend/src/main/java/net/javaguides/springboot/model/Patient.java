@@ -46,6 +46,7 @@ public class Patient implements Serializable {
 	private Boolean BPL;
 	private String address, religion, caste, relationshipStatus, symptoms, referredBy;
 	private String contactNumber;
+	private LocalDate lastUpdated;
 
 	// private HashMap<String, Double> health_params = new HashMap<String, Double>();
 
