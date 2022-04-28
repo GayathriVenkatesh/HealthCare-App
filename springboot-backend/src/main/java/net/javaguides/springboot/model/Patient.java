@@ -45,8 +45,7 @@ public class Patient implements Serializable {
 	private Character gender;
 	private Boolean BPL;
 	private String address, religion, caste, relationshipStatus, symptoms, referredBy;
-	private String contactNumber;
-	private LocalDate lastUpdated;
+	private String contactNumber, nrcContact;
 
 	// private HashMap<String, Double> health_params = new HashMap<String, Double>();
 
@@ -65,7 +64,7 @@ public class Patient implements Serializable {
 	public Patient(Long UHID, Long rchId, String name, LocalDate dob, String contactNumber,
 	Character gender, Boolean BPL, String addr, String religion, String caste, String relationshipStatus, 
 	String symptoms, String refer, Float height, Float weight, Float muac, String growthStatus, LocalDate admission, 
-	String other_symptoms) {
+	String other_symptoms, String nrcContact) {
 		this.uhId = UHID;
 		// this.samId = samId;
 		this.rchId = rchId;
@@ -74,14 +73,13 @@ public class Patient implements Serializable {
 		this.dob = dob;
 		this.gender = gender;
 		this.contactNumber = contactNumber;
-
 		this.address = addr;
 		this.relationshipStatus = relationshipStatus;
 		this.caste = caste;
 		this.symptoms = symptoms;
 		this.referredBy = refer;
 		this.religion = religion;
-
+		this.nrcContact = nrcContact;
 		this.health_records.add(new HealthStatus(admission, height, weight, muac, growthStatus, other_symptoms));
 	}
 
@@ -100,8 +98,8 @@ public class Patient implements Serializable {
 		this.religion = religion;
 	}
 
-	public Long getUhid() { return this.uhId; }
-	public void setUhid(Long id) { this.uhId = id; }
+	public Long getUhId() { return this.uhId; }
+	public void setUhId(Long id) { this.uhId = id; }
 	public Long getSamId() { return this.samId; }
 	public void setSamId(Long id) { this.samId = id; }
 	public Long getRch_id() { return this.rchId; }
@@ -109,8 +107,8 @@ public class Patient implements Serializable {
 
 	public Character getGender() { return this.gender; }
 	public void setGender(Character g) { this.gender = g; }
-	public String getContact_no() { return this.contactNumber; }
-	public void setContact_no(String no) { this.contactNumber = no; }
+	public String getContactNumber() { return this.contactNumber; }
+	public void setContactNumber(String no) { this.contactNumber = no; }
 	public Boolean getBpl() { return this.BPL; }
 	public void setBpl(Boolean BPL) { this.BPL = BPL; }
 
