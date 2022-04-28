@@ -44,6 +44,12 @@ public class HealthStatus implements Serializable {
     @JoinColumn(name = "samId")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Patient patient;
+
+	@JsonBackReference
+	@OneToOne
+    @JoinColumn(name = "followupId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Followup followup;
 	
 	public Long getHsId() {
 		return hsId;

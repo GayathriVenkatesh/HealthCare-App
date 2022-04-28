@@ -55,7 +55,7 @@ public class PatientService {
     public void updatePatient(Long samId, String name, LocalDate dob, Long uhId,
                 Long rchId, String contactNumber, Character gender, Boolean BPL, 
                 String addr, String religion, String caste, String relationshipStatus, 
-                String symptoms, String refer) {
+                String symptoms, String refer, LocalDate lastUpdated) {
 
         Patient p = patientRepository.findBySamId(samId)
             .orElseThrow(() -> new IllegalStateException(
