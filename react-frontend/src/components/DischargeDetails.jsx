@@ -20,10 +20,10 @@ class DischargeDetails extends Component {
         DischargeSummaryService.getDischargeSummaryBySamId(this.state.samId).then((res) => {
             this.setState({ summaries: res.data});
         });
-        HealthStatusService.getHealthStatusBySamId(this.state.samId).then((res) => {
-            this.setState({ admissions: res.data })
-            console.log("HERE ADMISSION", this.state.admissions)
-        })
+        // HealthStatusService.getHealthStatusBySamId(this.state.samId).then((res) => {
+        //     this.setState({ admissions: res.data })
+        //     console.log("HERE ADMISSION", this.state.admissions)
+        // })
         this.state.summaries.concat(this.state.admissions)
         // console.log("HERE I AM", this.state.summaries, this.state.samId)
     }

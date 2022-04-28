@@ -65,7 +65,7 @@ class FollowUpDoctor extends Component {
                                 f => 
                                 <tr key = {f.followupId}>
                                 <td style={{width: "1%"}}>  </td>
-                                <td style={{width: "20%"}}> {f.deadline_date} </td>   
+                                <td style={{width: "20%"}}> {f.deadlineDate} </td>   
                                 <td style={{width: "20%"}}> {f.awwId}</td>
                                 <td style={{width: "20%"}}> 8676296926 </td>
                                 <td className="project-state">

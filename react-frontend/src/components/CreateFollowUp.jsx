@@ -16,7 +16,7 @@ class CreateFollowUp extends Component {
           followupId: 0,
           samId: window.location.pathname.split("/")[2],
           awwId: 0,
-          deadline_date: "2021-01-01", 
+          deadlineDate: "2021-01-01", 
           completed_date: "2021-01-01",
           completed: false,
           height: 0,
@@ -29,7 +29,7 @@ class CreateFollowUp extends Component {
         }
         this.changeSamIdHandler = this.changeSamIdHandler.bind(this);
         this.changeWorkerIdHandler = this.changeWorkerIdHandler.bind(this);
-        this.changeDeadlineHandler = this.changeDeadlineHandler.bind(this);
+        this.changeDeadlineDateHandler = this.changeDeadlineDateHandler.bind(this);
         this.changeCompletedOnHandler = this.changeCompletedOnHandler.bind(this);
         this.changeCompletedHandler = this.changeCompletedHandler.bind(this);
         this.changeLocationHandler = this.changeLocationHandler.bind(this);
@@ -55,7 +55,7 @@ class CreateFollowUp extends Component {
       e.preventDefault();
       let f = {samId: this.state.samId,
         // awwId: this.state.awwId,
-        deadline_date: this.state.deadline_date, 
+        deadlineDate: this.state.deadlineDate, 
         location: this.state.location,
         completed_date: this.state.completed_date,
         completed: this.state.completed
@@ -67,7 +67,7 @@ class CreateFollowUp extends Component {
       });
       
       FollowupService.createFollowup(this.state.samId, f).then(res =>{
-          this.props.history.push('/followup-receptionist/1');
+          this.props.history.push('/followup-receptionist/' + this.state.samId);
           console.log("THE FOLLOWUP IS", res.data)
       });
   }
@@ -77,8 +77,8 @@ class CreateFollowUp extends Component {
     this.setState({awwId: event.target.value}); 
     console.log("WORKER", this.state.awwId)
   }
-  changeDeadlineHandler = (event) => { this.setState({deadline_date: event.target.value}); 
-    console.log("WORKER", this.state.deadline_date)
+  changeDeadlineDateHandler = (event) => { this.setState({deadlineDate: event.target.value}); 
+    console.log("WORKER", this.state.deadlineDate)
   }
   changeCompletedOnHandler = (event) => { this.setState({completed_date: event.target.value}); }
   changeCompletedHandler = (event) => { this.setState({completed: event.target.value}); 
@@ -115,7 +115,7 @@ class CreateFollowUp extends Component {
                       <div className="form-group">
                         <label>Date:</label>
                           <div className="input-group date" id="reservationdate" data-target-input="nearest">
-                              <input type="text" className="form-control datetimepicker-input" data-target="#reservationdate" value={this.state.deadline_date} onChange={this.changeDeadlineHandler}/>
+                              <input type="text" className="form-control datetimepicker-input" data-target="#reservationdate" value={this.state.deadlineDate} onChange={this.changeDeadlineDateHandler}/>
                               <div className="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                   <div className="input-group-text"><i className="fa fa-calendar"></i></div>
                               </div>

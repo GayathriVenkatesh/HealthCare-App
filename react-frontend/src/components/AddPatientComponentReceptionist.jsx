@@ -35,7 +35,7 @@ class AddPatientComponentReceptionist extends Component {
     this.changeNameHandler = this.changeNameHandler.bind(this);
     this.changeRch_idHandler = this.changeRch_idHandler.bind(this);
     this.changeSamIdHandler = this.changeSamIdHandler.bind(this);
-    this.changeUhidHandler = this.changeUhidHandler.bind(this);
+    this.changeUhIdHandler = this.changeUhIdHandler.bind(this);
     this.changeDobHandler = this.changeDobHandler.bind(this);
     this.changeBplHandler = this.changeBplHandler.bind(this);
 
@@ -80,7 +80,7 @@ createPatient = (e) => {
 changeNameHandler= (event) => { this.setState({name: event.target.value}); }
 changeRch_idHandler= (event) => { this.setState({rchId: event.target.value}); }
 changeSamIdHandler= (event) => { this.setState({samId: event.target.value}); }
-changeUhidHandler= (event) => { this.setState({uhId: event.target.value}); }
+changeUhIdHandler= (event) => { this.setState({uhId: event.target.value}); }
 
 changeDobHandler= (event) => { this.setState({dob: event.target.value}); }
 changeGenderHandler= (event) => { this.setState({gender: event.target.value}); }
@@ -136,7 +136,7 @@ cancel(){
                     <div class="form-group">
                       <label>Enter UHID ID</label>
                       <input placeholder="UHID" name="UHID" className="form-control" 
-                                                value={this.state.uhId} onChange={this.changeUhidHandler}/>            
+                                                value={this.state.uhId} onChange={this.changeUhIdHandler}/>            
                     </div>
     
                     <div class="form-group">

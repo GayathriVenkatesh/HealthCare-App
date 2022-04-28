@@ -13,11 +13,13 @@ class DischargeComponent extends Component {
           samId: window.location.pathname.split("/")[2],
           name: '',
           admissionDate: "2021-01-01",  
-          dischargeDate: "2021-01-01",  
+          dischargeDate: new Date().toISOString().split('T')[0],
+          // "2021-01-01",
+          // new Date().toLocaleString().split(",")[0].replace("/", "-").split("").reverse().join("")   + "",  
           admissionWeight: 0.0,
           targetWeight: 0.0,
           dischargeWeight: 0.0,
-          contactNo: "",
+          contactNumber: "",
           outcome: "Improved",
           treatmentProtocol: ""
         }
@@ -33,7 +35,7 @@ class DischargeComponent extends Component {
 
     componentDidMount(){ 
       PatientService.getPatientById(this.state.samId).then((res) => {
-        this.setState({ name: res.data.name, contactNo: res.data.contactNumber });
+        this.setState({ name: res.data.name, contactNumber: res.data.contactNumber });
         console.log("PATIENT", res.data)
       }); 
       return;

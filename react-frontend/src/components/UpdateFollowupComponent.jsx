@@ -11,10 +11,10 @@ class UpdateFollowupComponent extends Component {
             // UHID: this.props.match.params.id,
             samId: window.location.pathname.split("/")[2],
             followupId: window.location.pathname.split("/")[3],
-            deadline_date: "2021-01-01",          
+            deadlineDate: "2021-01-01",          
             location: ""
         }
-        this.changeDeadlineHandler = this.changeDeadlineHandler.bind(this);
+        this.changeDeadlineDateHandler = this.changeDeadlineDateHandler.bind(this);
         this.changeLocationHandler = this.changeLocationHandler.bind(this);        
         this.updateFollowup = this.updateFollowup.bind(this);
     }
@@ -23,7 +23,7 @@ class UpdateFollowupComponent extends Component {
         FollowupService.getFollowupById(this.state.followupId).then( (res) => {
             let followup = res.data;
                 this.setState({
-                    deadline_date: followup.deadline_date,
+                    deadlineDate: followup.deadlineDate,
                     location: followup.location, 
                 });
             });
@@ -34,7 +34,7 @@ class UpdateFollowupComponent extends Component {
     updateFollowup = (e) => {
         console.log("INSIDE UPDATE")
         e.preventDefault();
-        let f = {deadline_date: this.state.deadline_date, 
+        let f = {deadlineDate: this.state.deadlineDate, 
             location: this.state.location,  
           };
         console.log('patient => ' + JSON.stringify(f));
@@ -44,7 +44,7 @@ class UpdateFollowupComponent extends Component {
         });
     }
     
-    changeDeadlineHandler= (event) => { this.setState({deadline_date: event.target.value}); }
+    changeDeadlineDateHandler= (event) => { this.setState({deadlineDate: event.target.value}); }
     changeLocationHandler= (event) => { this.setState({location: event.target.value}); }
 
     cancel(){
@@ -75,7 +75,7 @@ class UpdateFollowupComponent extends Component {
                         <div className="form-group">
                           <label>Date:</label>
                             <div className="input-group date" id="reservationdate" data-target-input="nearest">
-                                <input type="text" className="form-control datetimepicker-input" data-target="#reservationdate" value={this.state.deadline_date} onChange={this.changeDeadlineHandler}/>
+                                <input type="text" className="form-control datetimepicker-input" data-target="#reservationdate" value={this.state.deadlineDate} onChange={this.changeDeadlineDateHandler}/>
                                 <div className="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                     <div className="input-group-text"><i className="fa fa-calendar"></i></div>
                                 </div>

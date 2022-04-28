@@ -19,6 +19,7 @@ class AddPatientComponent extends Component {
         age: 0,
         gender: 'M',
         BPL: true,
+        city: "",
         address: "", religion: "", caste: "", relationshipStatus: "", symptoms: "", referredBy: "",
         contactNumber: "",
         height: 0.0, weight: 0.0, muac: 0.0, growthStatus: "", otherSymptoms: "", date: new Date()
@@ -26,7 +27,7 @@ class AddPatientComponent extends Component {
     this.changeNameHandler = this.changeNameHandler.bind(this);
     this.changeRch_idHandler = this.changeRch_idHandler.bind(this);
     this.changeSamIdHandler = this.changeSamIdHandler.bind(this);
-    this.changeUhidHandler = this.changeUhidHandler.bind(this);
+    this.changeUhIdHandler = this.changeUhIdHandler.bind(this);
     this.changeDobHandler = this.changeDobHandler.bind(this);
     this.changeBplHandler = this.changeBplHandler.bind(this);
 
@@ -45,6 +46,7 @@ class AddPatientComponent extends Component {
 
     this.changeGenderHandler = this.changeGenderHandler.bind(this);
     this.changeAddressHandler = this.changeAddressHandler.bind(this);
+    this.changeCityHandler = this.changeCityHandler.bind(this);
     this.changeRelationshipHandler = this.changeRelationshipHandler.bind(this);
     this.changeHeightHandler = this.changeHeightHandler.bind(this);
     this.createPatient = this.createPatient.bind(this);
@@ -63,7 +65,8 @@ createPatient = (e) => {
         dob: this.state.dob,          
         gender: this.state.gender,
         bpl: this.state.BPL,
-        address: this.state.address, religion: this.state.religion, caste: this.state.caste, 
+        address: this.state.address, city: this.state.city,
+        religion: this.state.religion, caste: this.state.caste, 
         relationshipStatus: this.state.relationshipStatus, symptoms: this.state.symptoms, referredBy: this.state.referredBy,
         contactNumber: this.state.contactNumber,
     };
@@ -84,7 +87,7 @@ createPatient = (e) => {
 changeNameHandler= (event) => { this.setState({name: event.target.value}); }
 changeRch_idHandler= (event) => { this.setState({rchId: event.target.value}); }
 changeSamIdHandler= (event) => { this.setState({samId: event.target.value}); }
-changeUhidHandler= (event) => { this.setState({uhId: event.target.value}); }
+changeUhIdHandler= (event) => { this.setState({uhId: event.target.value}); }
 
 changeDobHandler= (event) => { this.setState({dob: event.target.value}); }
 changeGenderHandler= (event) => { this.setState({gender: event.target.value}); }
@@ -92,6 +95,7 @@ changeReligionHandler= (event) => { this.setState({religion: event.target.value}
 
 changeCasteHandler= (event) => { this.setState({caste: event.target.value}); }
 changeAddressHandler= (event) => { this.setState({address: event.target.value}); }
+changeCityHandler= (event) => { this.setState({city: event.target.value}); }
 changeReferred_byHandler= (event) => { this.setState({referredBy: event.target.value}); }
 
 changeSymptomsHandler= (event) => { this.setState({symptoms: event.target.value}); }
@@ -145,7 +149,7 @@ cancel(){
                     <div class="form-group">
                       <label>Enter UHID ID</label>
                       <input placeholder="UHID" name="UHID" className="form-control" 
-                                                value={this.state.uhId} onChange={this.changeUhidHandler}/>            
+                                                value={this.state.uhId} onChange={this.changeUhIdHandler}/>            
                     </div>
     
                     <div class="form-group">
@@ -179,9 +183,15 @@ cancel(){
                     </div>
     
                     <div class="form-group">
-                        <label>Address</label>
-                        <input placeholder="Address" name="address" className="form-control" 
+                        <label>Taluk Name</label>
+                        <input placeholder="Taluk Name" name="address" className="form-control" 
                                                 value={this.state.address} onChange={this.changeAddressHandler}/>             
+                      </div>
+
+                      <div class="form-group">
+                        <label>City</label>
+                        <input placeholder="City name" name="address" className="form-control" 
+                                                value={this.state.city} onChange={this.changeCityHandler}/>             
                       </div>
                     
                       <div class="form-group">

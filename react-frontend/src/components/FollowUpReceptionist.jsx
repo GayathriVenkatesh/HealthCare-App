@@ -82,7 +82,7 @@ class FollowUpReceptionist extends Component {
                                 f => 
                                 <tr key = {f.followupId}>
                                 {/* <td style={{width: "1%"}}>  </td> */}
-                                <td > {f.deadline_date} </td>  
+                                <td > {f.deadlineDate} </td>  
                                 <td > {f.location} </td>   
                                 <td > {f.worker}</td>
                                 <td > 8676296926 </td>
