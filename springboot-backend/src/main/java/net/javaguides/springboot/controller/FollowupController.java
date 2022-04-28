@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.javaguides.springboot.model.Followup;
+import net.javaguides.springboot.model.HealthStatus;
 import net.javaguides.springboot.service.FollowupService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -67,14 +68,15 @@ public class FollowupController {
 	public ResponseEntity<Followup> updateFollowup(@PathVariable Long samId, @PathVariable Long followupId, @RequestBody Followup p) {
         Followup followup = followupService.getFollowupById(followupId);
         // followup.setWorkerId(p.getWorkerId());
-        followup.setDeadline(p.getDeadline());
+        followup.setDeadlineDate(p.getDeadlineDate());
         followup.setCompletedOn(p.getCompletedOn());
         followup.setCompleted(p.getCompleted());
         followup.setLocation(p.getLocation());
-        followup.setHeight(p.getHeight());
-        followup.setWeight(p.getWeight());
-        followup.setMuac(p.getMuac());
-        followup.setGrowthStatus(p.getGrowthStatus());
+        // followup.setHeight(p.getHeight());
+        // followup.setWeight(p.getWeight());
+        // followup.setMuac(p.getMuac());
+        // followup.setGrowthStatus(p.getGrowthStatus());
+        followup.setHealthStatus(p.getHealthStatus());
         followupService.addFollowup(samId, followup);
         return ResponseEntity.ok(followup);
     }

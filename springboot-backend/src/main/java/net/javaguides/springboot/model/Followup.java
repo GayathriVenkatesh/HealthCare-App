@@ -3,12 +3,15 @@ package net.javaguides.springboot.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -33,11 +36,12 @@ public class Followup implements Serializable {
 	private Long followupId;
 	// private Long samId;
 	// private Long awwId;
-	private LocalDate deadline_date, completed_date;
+	private LocalDate deadlineDate, completed_date;
 	private Boolean completed;
-	private Double height, weight, muac;
-	private String growthStatus, location;
-	private LocalDate created_date = LocalDate.now();
+	// private Double height, weight, muac;
+	// private String growthStatus;
+	private String location;
+	private LocalDate createdDate = LocalDate.now();
 	
 	@JsonBackReference
 	@ManyToOne
@@ -51,19 +55,28 @@ public class Followup implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private AnganwadiWorker worker;
 
-	public Followup(Long followupId, LocalDate deadline_date, String location, LocalDate completed_date,
-			Boolean completed, Double height, Double weight, Double muac, String growthStatus) {
+	// @JsonManagedReference
+	// @OneToOne
+    // @JoinColumn(name = "hs_id")
+    // private HealthStatus healthStatus;
+
+	@OneToOne(mappedBy = "followupId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private HealthStatus healthStatus;
+
+	public Followup(Long followupId, LocalDate deadlineDate, String location, LocalDate completed_date,
+			Boolean completed, Float height, Float weight, Float muac, String growthStatus) {
 		this.followupId = followupId;
 		// this.samId = samId;
 		// this.awwId = awwId;
-		this.deadline_date = deadline_date;
+		this.deadlineDate = deadlineDate;
 		this.location = location;
 		this.completed_date = completed_date;
 		this.completed = completed;
-		this.height = height;
-		this.weight = weight;
-		this.muac = muac;
-		this.growthStatus = growthStatus;
+		// this.height = height;
+		// this.weight = weight;
+		// this.muac = muac;
+		// this.growthStatus = growthStatus;
+		this.healthStatus = new HealthStatus(completed_date, height, weight, muac, growthStatus, "");
 	}
 
 	public Long getFollowupId() {
@@ -91,11 +104,11 @@ public class Followup implements Serializable {
 	// public void setWorkerId(Long awwId) {
 	// 	this.awwId = awwId;
 	// }
-	public LocalDate getDeadline() {
-		return deadline_date;
+	public LocalDate getDeadlineDate() {
+		return deadlineDate;
 	}
-	public void setDeadline(LocalDate deadline_date) {
-		this.deadline_date = deadline_date;
+	public void setDeadlineDate(LocalDate deadlineDate) {
+		this.deadlineDate = deadlineDate;
 	}
 	public LocalDate getCompletedOn() {
 		return completed_date;
@@ -109,41 +122,24 @@ public class Followup implements Serializable {
 	public void setCompleted(Boolean completed) {
 		this.completed = completed;
 	}
-	public Followup(Long followupId, LocalDate deadline_date, String location, LocalDate completed_date,
+	public Followup(Long followupId, LocalDate deadlineDate, String location, LocalDate completed_date,
 			Boolean completed) {
 		this.followupId = followupId;
 		// this.samId = samId;
 		// this.awwId = awwId;
-		this.deadline_date = deadline_date;
+		this.deadlineDate = deadlineDate;
 		this.completed_date = completed_date;
 		this.completed = completed;
 		this.location = location;
 	}
 	public Followup() {
 	}
-	public Double getHeight() {
-		return height;
+	
+	public HealthStatus getHealthStatus() {
+		return this.healthStatus;
 	}
-	public void setHeight(Double height) {
-		this.height = height;
-	}
-	public Double getWeight() {
-		return weight;
-	}
-	public void setWeight(Double weight) {
-		this.weight = weight;
-	}
-	public Double getMuac() {
-		return muac;
-	}
-	public void setMuac(Double muac) {
-		this.muac = muac;
-	}
-	public String getGrowthStatus() {
-		return growthStatus;
-	}
-	public void setGrowthStatus(String growthStatus) {
-		this.growthStatus = growthStatus;
+	public void setHealthStatus(HealthStatus healthStatus) {
+		this.healthStatus = healthStatus;
 	}
 
 	public Patient getPatient() {
@@ -161,4 +157,3 @@ public class Followup implements Serializable {
 		this.worker = worker;
 	}
 }
-
