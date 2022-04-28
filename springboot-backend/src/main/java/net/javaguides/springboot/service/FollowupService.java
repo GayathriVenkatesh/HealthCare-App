@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import net.javaguides.springboot.exception.ResourceNotFoundException;
 import net.javaguides.springboot.model.Followup;
+import net.javaguides.springboot.model.HealthStatus;
 import net.javaguides.springboot.model.Patient;
 import net.javaguides.springboot.model.AnganwadiWorker;
 import net.javaguides.springboot.repository.FollowupRepository;
@@ -79,10 +80,12 @@ public class FollowupService {
         if (deadlineDate != null && !deadlineDate.equals(d.getDeadlineDate())) { d.setDeadlineDate(deadlineDate); }
         if (completed_date != null && !completed_date.equals(d.getCompletedOn())) { d.setCompletedOn(completed_date); }       
         if (completed != null && !completed.equals(d.getCompleted())) { d.setCompleted(completed); }   
-        if (height != null && !height.equals(d.getHealthStatus().getHeight())) { d.getHealthStatus().setHeight(height); }
-        if (weight != null && !weight.equals(d.getHealthStatus().getWeight())) { d.getHealthStatus().setWeight(weight); }       
-        if (growthStatus != null && !growthStatus.equals(d.getHealthStatus().getGrowthStatus())) { d.getHealthStatus().setGrowthStatus(growthStatus); }       
-        if (muac != null && !muac.equals(d.getHealthStatus().getMuac())) { d.getHealthStatus().setMuac(muac); }       
+        HealthStatus hs = new HealthStatus(completed_date, height, weight, muac, growthStatus, "");
+        d.setHealthStatus(hs);
+        // if (height != null && !height.equals(d.getHealthStatus().getHeight())) { d.getHealthStatus().setHeight(height); }
+        // if (weight != null && !weight.equals(d.getHealthStatus().getWeight())) { d.getHealthStatus().setWeight(weight); }       
+        // if (growthStatus != null && !growthStatus.equals(d.getHealthStatus().getGrowthStatus())) { d.getHealthStatus().setGrowthStatus(growthStatus); }       
+        // if (muac != null && !muac.equals(d.getHealthStatus().getMuac())) { d.getHealthStatus().setMuac(muac); }       
     }
 
     public Followup addFollowup(Long samId, Followup followup) {

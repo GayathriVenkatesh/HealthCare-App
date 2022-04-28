@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -45,10 +46,12 @@ public class HealthStatus implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Patient patient;
 
-	@JsonBackReference
-	@OneToOne
-    @JoinColumn(name = "followupId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+	// @JsonBackReference
+	// @OneToOne
+    // @JoinColumn(name = "followupId")
+    // @OnDelete(action = OnDeleteAction.CASCADE)
+    
+	@OneToOne(mappedBy = "healthStatus")
     private Followup followup;
 	
 	public Long getHsId() {

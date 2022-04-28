@@ -37,7 +37,7 @@ public class PatientService {
         Patient p = this.patientRepository.findBySamId(samId).orElseThrow(
             () -> new ResourceNotFoundException("No Patient with given SAM ID")
         );
-        System.out.println("NEW PATIENT " + p.getName() + " " + p.getSamId() + " " + p.getContact_no());
+        System.out.println("NEW PATIENT " + p.getName() + " " + p.getSamId() + " " + p.getContactNumber());
         return p;
     }
 
@@ -64,9 +64,9 @@ public class PatientService {
         
         if (name != null && name.length() > 0 && !name.equals(p.getName())) { p.setName(name); }
         if (dob != null && !dob.equals(p.getDob())) { p.setDob(dob); }
-        if (uhId != null && uhId != p.getUhid()) {  p.setUhid(uhId); }
+        if (uhId != null && uhId != p.getUhId()) {  p.setUhId(uhId); }
         if (rchId != null && rchId != p.getRch_id()) {  p.setRch_id(rchId); }
-        if (contactNumber != null && contactNumber.length() > 0 && !contactNumber.equals(p.getContact_no())) { p.setContact_no(contactNumber); }
+        if (contactNumber != null && contactNumber.length() > 0 && !contactNumber.equals(p.getContactNumber())) { p.setContactNumber(contactNumber); }
         if (religion != null && religion.length() > 0 && !religion.equals(p.getReligion())) {
             p.setReligion(religion);
         }

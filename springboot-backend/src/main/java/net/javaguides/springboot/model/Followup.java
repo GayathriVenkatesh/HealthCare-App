@@ -60,7 +60,8 @@ public class Followup implements Serializable {
     // @JoinColumn(name = "hs_id")
     // private HealthStatus healthStatus;
 
-	@OneToOne(mappedBy = "followupId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "hsId")
     private HealthStatus healthStatus;
 
 	public Followup(Long followupId, LocalDate deadlineDate, String location, LocalDate completed_date,

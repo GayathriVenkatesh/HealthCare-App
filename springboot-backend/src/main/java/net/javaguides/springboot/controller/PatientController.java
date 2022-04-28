@@ -95,7 +95,7 @@ public class PatientController {
         patient.setGender(p.getGender());
         patient.setCaste(p.getCaste());
         patient.setRch_id(p.getRch_id());
-        patient.setUhid(p.getUhid());
+        patient.setUhId(p.getUhId());
         patient.setAddress(p.getAddress());
         // LIKE THIS WRITE FOR ALL
 

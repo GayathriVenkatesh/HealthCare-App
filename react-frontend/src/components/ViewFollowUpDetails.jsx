@@ -20,8 +20,8 @@ class ViewFollowUpDetails extends Component {
     componentDidMount(){
         console.log("UHID NOW", this.state.followupId)
         FollowupService.getFollowupById(this.state.followupId).then( res => {
-            console.log("IUBKNION", res.data)
-            this.setState({height: res.data.height, weight: res.data.weight, muac: res.data.muac, growthStatus: res.data.growthStatus});
+            console.log("IUBKNION", res.data, res.data.healthStatus)
+            this.setState({height: res.data.healthStatus.height, weight: res.data.healthStatus.weight, muac: res.data.healthStatus.muac, growthStatus: res.data.healthStatus.growthStatus});
         })
     }
 
