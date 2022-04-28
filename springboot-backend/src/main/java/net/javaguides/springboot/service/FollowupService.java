@@ -63,7 +63,7 @@ public class FollowupService {
 
     @Transactional
     public void updateFollowup(Long followupId, Long awwId, String location,
-	LocalDate deadline_date, LocalDate completed_date, Boolean completed, LocalDate created_date) {
+	LocalDate deadlineDate, LocalDate completed_date, Boolean completed, Float height, Float weight, Float muac, String growthStatus, LocalDate createdDate) {
 
         Followup d = followupRepository.findByFollowupId(followupId)
             .orElseThrow(() -> new IllegalStateException(
@@ -76,9 +76,13 @@ public class FollowupService {
             List<AnganwadiWorker> workers = this.anganwadiWorkerRepository.findByKeyword(location, "");
             d.setWorker(workers.get(0));
         }
-        if (deadline_date != null && !deadline_date.equals(d.getDeadline())) { d.setDeadline(deadline_date); }
+        if (deadlineDate != null && !deadlineDate.equals(d.getDeadlineDate())) { d.setDeadlineDate(deadlineDate); }
         if (completed_date != null && !completed_date.equals(d.getCompletedOn())) { d.setCompletedOn(completed_date); }       
-        if (completed != null && !completed.equals(d.getCompleted())) { d.setCompleted(completed); }    
+        if (completed != null && !completed.equals(d.getCompleted())) { d.setCompleted(completed); }   
+        if (height != null && !height.equals(d.getHealthStatus().getHeight())) { d.getHealthStatus().setHeight(height); }
+        if (weight != null && !weight.equals(d.getHealthStatus().getWeight())) { d.getHealthStatus().setWeight(weight); }       
+        if (growthStatus != null && !growthStatus.equals(d.getHealthStatus().getGrowthStatus())) { d.getHealthStatus().setGrowthStatus(growthStatus); }       
+        if (muac != null && !muac.equals(d.getHealthStatus().getMuac())) { d.getHealthStatus().setMuac(muac); }       
     }
 
     public Followup addFollowup(Long samId, Followup followup) {
