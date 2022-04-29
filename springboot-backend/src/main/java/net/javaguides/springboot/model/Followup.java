@@ -2,10 +2,10 @@ package net.javaguides.springboot.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,7 +41,7 @@ public class Followup implements Serializable {
 	// private Double height, weight, muac;
 	// private String growthStatus;
 	private String location;
-	private LocalDate createdDate = LocalDate.now();
+	private LocalDateTime createdDate;
 	
 	@JsonBackReference
 	@ManyToOne
@@ -73,6 +73,7 @@ public class Followup implements Serializable {
 		this.location = location;
 		this.completed_date = completed_date;
 		this.completed = completed;
+		this.createdDate = LocalDateTime.now();
 		// this.height = height;
 		// this.weight = weight;
 		// this.muac = muac;

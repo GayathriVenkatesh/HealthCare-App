@@ -60,6 +60,7 @@ public class DischargeSummary implements Serializable {
 		// this.contactNo = contactNo;
 		this.outcome = outcome;
 		this.treatmentProtocol = treatmentProtocol;
+		this.createdDate = LocalDateTime.now();
 	}
 	public Long getDischargeId() {
 		return dischargeId;

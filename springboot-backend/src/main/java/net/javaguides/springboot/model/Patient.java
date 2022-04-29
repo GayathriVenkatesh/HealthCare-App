@@ -45,7 +45,7 @@ public class Patient implements Serializable {
 	private Character gender;
 	private Boolean BPL;
 	private String address, religion, caste, relationshipStatus, symptoms, referredBy;
-	private String contactNumber, nrcContact;
+	private String contactNumber, nrcContact, nrcName;
 
 	// private HashMap<String, Double> health_params = new HashMap<String, Double>();
 
@@ -64,7 +64,7 @@ public class Patient implements Serializable {
 	public Patient(Long UHID, Long rchId, String name, LocalDate dob, String contactNumber,
 	Character gender, Boolean BPL, String addr, String religion, String caste, String relationshipStatus, 
 	String symptoms, String refer, Float height, Float weight, Float muac, String growthStatus, LocalDate admission, 
-	String other_symptoms, String nrcContact) {
+	String other_symptoms, String nrcContact, String nrcName) {
 		this.uhId = UHID;
 		// this.samId = samId;
 		this.rchId = rchId;
@@ -79,6 +79,7 @@ public class Patient implements Serializable {
 		this.symptoms = symptoms;
 		this.referredBy = refer;
 		this.religion = religion;
+		this.nrcName = nrcName;
 		this.nrcContact = nrcContact;
 		this.health_records.add(new HealthStatus(admission, height, weight, muac, growthStatus, other_symptoms));
 	}
