@@ -60,6 +60,7 @@ public class AuthController {
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
+				
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
@@ -68,6 +69,7 @@ public class AuthController {
 	}
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+		System.out.println("USERDTLS"+signUpRequest);
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 			return ResponseEntity
 					.badRequest()
@@ -83,6 +85,7 @@ public class AuthController {
 							 signUpRequest.getEmail(),
 							 encoder.encode(signUpRequest.getPassword()));
 		Set<String> strRoles = signUpRequest.getRole();
+		System.out.print("HELLO"+ signUpRequest.getRole()+"##");
 		Set<Role> roles = new HashSet<>();
 		if (strRoles == null) {
 			Role userRole = roleRepository.findByName(ERole.ROLE_USER)

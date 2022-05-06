@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,38 +34,45 @@ public class FollowupController {
     }
 
     @GetMapping("/view-followups")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public List<Followup> getFollowups() {
 		return followupService.getFollowups();
 	}
 
     @GetMapping("/view-followup/{followupId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<Followup> getFollowupById(@PathVariable Long followupId) {
 		Followup p = followupService.getFollowupById(followupId);	
         return ResponseEntity.ok(p);			
 	}
 
     @GetMapping("/view-patient-followup/{samId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public List<Followup> getFollowupBySamId(@PathVariable Long samId) {
 		return followupService.getFollowupBySamId(samId);	
 	}
 
     @GetMapping("/view-worker-followup/{awwId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public List<Followup> getFollowupByWorkerId(@PathVariable Long awwId) {
 		return followupService.getFollowupByWorkerId(awwId);	
 	}
 
     @GetMapping("/view-health-record/{followupId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<Object> getHealthRecord(@PathVariable Long followupId) {
 		Object p = followupService.getHealthRecord(followupId);	
         return ResponseEntity.ok(p);			
 	}
 
     @PostMapping("/followup/{samId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public Followup addFollowup(@PathVariable Long samId, @RequestBody Followup p) {
 		return followupService.addFollowup(samId, p);
 	}
     
     @PutMapping("/edit-followup/{samId}/{followupId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<Followup> updateFollowup(@PathVariable Long samId, @PathVariable Long followupId, @RequestBody Followup p) {
         Followup followup = followupService.getFollowupById(followupId);
         // followup.setWorkerId(p.getWorkerId());
@@ -91,6 +99,7 @@ public class FollowupController {
     // }
 
     @GetMapping("/delete-followup/{followup_id}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<Followup> deleteFollowup(@PathVariable Long followup_id) { 
         List<Followup> p = followupService.getFollowups();
         List<Followup> ans = new ArrayList<Followup>();

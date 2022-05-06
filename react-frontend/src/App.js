@@ -25,6 +25,9 @@ import UpdateFollowupComponent from './components/UpdateFollowupComponent';
 import ViewPatientComponent from './components/ViewPatientComponent';
 import UpdatePatientComponentReceptionist from './components/UpdatePatientComponentReceptionist'
 import ViewDischargeSummaryComponent from './components/ViewDischargeSummaryComponent'
+import Login from './components/LoginComponent';
+import Register from './components/Register.component';
+import Profile from './components/profile.component';
 
 function App() {
   return (
@@ -37,6 +40,9 @@ function App() {
                     <Route path = "/dashboard" exact component = {DashboardComponent}></Route>
                     {/* <Route path = "/dashboard-receptionist" exact component = {DashboardComponentReceptionist}></Route> */}
                     <Route path = "/" exact component = {LoginAsComponent}></Route>
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/register" component={Register} />
+            <Route exact path="/profile" component={Profile} />
                           <Route path = "/dashboard-receptionist" exact component = {DashboardComponentReceptionist}></Route>
                           <Route path = "/search" component = {ListPatientComponent}></Route>
                           <Route path = "/register" component = {RegisterComponent}></Route>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,27 +33,32 @@ public class HealthStatusController {
     }
 
     @GetMapping("/view-healthstatuses")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public List<HealthStatus> getHealthStatuses() {
 		return this.healthStatusService.getHealthStatuses();
 	}
 
     @GetMapping("/view-healthStatus/{hsId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<HealthStatus> getHealthStatusById(@PathVariable Long hsId) {
 		HealthStatus p = healthStatusService.getHealthStatusById(hsId);	
         return ResponseEntity.ok(p);			
 	}
 
     @GetMapping("/view-patient-healthstatus/{samId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public List<HealthStatus> getHealthStatusBySamId(@PathVariable Long samId) {
 		return healthStatusService.getHealthStatusBySamId(samId);	
 	}
 
     @PostMapping("/healthStatus/{samId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public void addHealthStatus(@PathVariable Long samId, @RequestBody HealthStatus p) {
 		healthStatusService.addHealthStatus(samId, p);
 	}
 
     @PutMapping("/edit-healthStatus/{samId}/{hsId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<HealthStatus> updateHealthStatus(@PathVariable Long samId, @PathVariable Long hsId, @RequestBody HealthStatus p) {
         HealthStatus healthStatus = healthStatusService.getHealthStatusById(hsId);
         healthStatus.setHsId(p.getHsId());
@@ -67,6 +73,7 @@ public class HealthStatusController {
     }
 
     @RequestMapping(value = "/search-healthStatus")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @ResponseBody
     public List<HealthStatus> search(@RequestParam("hsId") String hsId
                             ) {
@@ -75,6 +82,7 @@ public class HealthStatusController {
     }
 
     @GetMapping("/delete-healthStatus/{healthStatus_id}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<HealthStatus> deleteHealthStatus(@PathVariable Long healthStatus_id) { 
         List<HealthStatus> p = healthStatusService.getHealthStatuses();
         List<HealthStatus> ans = new ArrayList<HealthStatus>();

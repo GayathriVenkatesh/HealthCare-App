@@ -49,6 +49,7 @@ public class SignupRequest {
   }
 
   public void setRole(Set<String> role) {
+    System.out.println("ROLE"+role);
     this.role = role;
   }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,17 +31,20 @@ public class DischargeSummaryController {
     }
 
     @GetMapping("/view-discharge-summaries")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<DischargeSummary> getDischargeSummaries() { 
         System.out.print("INSIDE THIS FUNC"); 
         return dischargeService.getDischargeSummaries();
     }
 
     @GetMapping("/view-discharge-summary-patient/{samId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public List<DischargeSummary> getDischargeSummaryBySamId(@PathVariable Long samId) {
 		return dischargeService.getDischargeSummaryBySamId(samId);	
 	}
 
     @GetMapping("/delete-discharge-summary/{discharge_id}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<DischargeSummary> deleteDischargeSummary(@PathVariable Long discharge_id) { 
         List<DischargeSummary> p = dischargeService.getDischargeSummaries();
         List<DischargeSummary> ans = new ArrayList<DischargeSummary>();
@@ -64,17 +68,20 @@ public class DischargeSummaryController {
     // }
 
     @GetMapping("/view-discharge-summary/{discharge_id}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<DischargeSummary> getDischargeSummaryById(@PathVariable Long discharge_id) {
 		DischargeSummary d = dischargeService.getDischargeSummaryById(discharge_id);	
         return ResponseEntity.ok(d);			
 	}
 
     @PostMapping("/discharge-summary/{samId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public void addDischargeSummary(@PathVariable Long samId, @RequestBody DischargeSummary d) {
 		dischargeService.addDischargeSummary(samId, d);
 	}
 
     @PutMapping("/edit-discharge-summary/{samId}/{discharge_id}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<DischargeSummary> updateDischargeSummary(@PathVariable Long samId, @PathVariable Long discharge_id, @RequestBody DischargeSummary d) {
         DischargeSummary discharge = dischargeService.getDischargeSummaryById(discharge_id);
         // discharge.setName(d.getName());

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,12 +34,14 @@ public class PatientController {
     }
 
     @GetMapping("/view-patients")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<Patient> getPatients() { 
         System.out.print("INSIDE THIS FUNC"); 
         return patientService.getPatients();
     }
 
     @GetMapping("/delete-patient/{samId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<Patient> deletePatient(@PathVariable Long samId) { 
         System.out.print("INSIDE THIS FUNC"); 
         List<Patient> p = patientService.getPatients();
@@ -59,6 +62,7 @@ public class PatientController {
 
     @RequestMapping(value = "/search-patient")
     @ResponseBody
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<Patient> search(@RequestParam("name") String name, 
                                 @RequestParam("address") String address,
                                 @RequestParam("religion") String religion,
@@ -71,6 +75,7 @@ public class PatientController {
     }
 
     @GetMapping("/view-patient/{samId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<Patient> getPatientById(@PathVariable Long samId) {
         System.out.print("ID PASSED ........" + samId + "\n");
 		Patient p = patientService.getPatientById(samId);	
@@ -79,6 +84,7 @@ public class PatientController {
 	}
 
     @PostMapping("/view-patients")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public void addPatient(@RequestBody Patient p) {
         System.out.println("PATEINT IS " + p);
 		patientService.addPatient(p);
@@ -87,6 +93,7 @@ public class PatientController {
 	}
 
     @PutMapping("/edit-patient/{samId}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<Patient> updatePatient(@PathVariable Long samId, @RequestBody Patient p) {
         Patient patient = patientService.getPatientById(samId);
         patient.setName(p.getName());
